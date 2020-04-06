@@ -7,21 +7,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-colors-metro.css">
-    <link href="tabulator_4.5/dist/css/tabulator_midnight.min.css" rel="stylesheet">
+    <link href="css/tabulator_midnight.min.css" rel="stylesheet">
 </head>
 
   <body class="w3-metro-darken">
     <div class="w3-panel w3-metro-darken w3-margin-bottom w3-margin-top w3-bottombar w3-border-red ">
         <h2>Covid-19 Global informations</h2>
         <p>
-            Actual state of the spread of covid-19 by region. Updated every half hour.<br/>
+            Actual state of the spread of covid-19 by region. Updated every half hour. 
             Data fetched from : <a href="https://www.notion.so/What-are-our-sources-4f3f962953f1418da96eae1b5fe06039" target="_blank">Coronavirus app</a>
         </p>
         <b>
             Due to the difficulty of identification and biological confirmation of all COVID-19 cases, 
-            the data presented underestimate the actual number of cases.
-        </b><br/>
-        <b>Current day stats may be incomplete until countries submit their data.</b>
+            the data presented underestimate the actual number of cases. <br/>
+            Current day stats may be incomplete until countries submit their data.
+        </b>
+     
         <div class="w3-bar w3-margin-top">
             <a href="index.html" class="w3-bar-item w3-button w3-black w3-margin-right" id="tableCoronaInf"> Covid-19 Data Table</a>
             <a href="graphs.html" class="w3-bar-item w3-button w3-black w3-margin-right" id="graphsCoronaInf"> Covid-19 Graphs history</a>
@@ -295,37 +296,37 @@
                 <option value="ZM">Zambia</option>
                 <option value="ZW">Zimbabwe</option>
             </select>
-
             <button id="filter-clear" class="w3-button w3-bar-item w3-dark-grey w3-margin-left w3-margin-right ">Clear Search Filters</button>
             <button class="w3-button w3-bar-item w3-dark-grey w3-margin-right w3-right" id="clearData" >Reload Table Data</button>
             <button class="w3-button w3-blue w3-bar-item w3-right w3-margin-right" id="pdfDownload" >Export PDF</button>
             <button class="w3-button w3-green w3-bar-item w3-right w3-margin-right" id="xlsxDownload" >Export Excel</button>
-           
+
         </div>
 
-        
     </div>
-
 
     <div id="covTable"></div>
 
-
     <script src="js/jquery-3.4.1.min.js"></script>
     <script src="js/moment-with-locales.min.js"></script>
-    <script src="tabulator_4.5/dist/js/tabulator.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.5/jspdf.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.0.5/jspdf.plugin.autotable.js"></script>
-    <script type="text/javascript" src="https://oss.sheetjs.com/sheetjs/xlsx.full.min.js"></script>
-
-    <script> 
+    <script src="js/tabulator.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.5/jspdf.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.0.5/jspdf.plugin.autotable.js"></script>
+    <script src="https://oss.sheetjs.com/sheetjs/xlsx.full.min.js"></script>
+    <script> // Moment JS Init
        moment.locale('en');
     </script>
-    <script>
-                     // Actual Date & Time
-                    document.getElementById("dateToday").innerHTML =  moment().format("dddd DD MMMM YYYY - HH:mm");
-    </script>
+    
+    <script> // Actual Date & Time
+        document.getElementById("dateToday").innerHTML =  moment().format("dddd DD MMMM YYYY - HH:mm"); 
+    </script> 
+    <script> //Custom functions for Tabulator cells + columns
 
-    <script>
+                    function paramLookup(cell){
+                        var value = cell.getElement().classList.add("w3-metro-darken");
+                        return value;
+                    }
+
                     var cellFormatterConfirm =function(cell, formatterParams){ 
                         var value = cell.getValue();
                         if(value > 0 && value <= 99){
@@ -372,17 +373,20 @@
                     
                     var cellFormatterMorts = function(cell, formatterParams){
                         var value = cell.getValue();
-                        if(value >= 1000 && value <= 10000){
-                            cell.getElement().classList.add("w3-black");
+                        if(value > 0 && value <= 99){
+                            cell.getElement().classList.add("w3-orange");
                             return value;
-                        }else if (value >= 500 && value <= 999) {
-                            cell.getElement().classList.add("w3-red");
-                            return value;
-                        }else if (value >= 100 && value <= 499) {
+                        }else if (value >= 100 && value <= 999) {
                             cell.getElement().classList.add("w3-deep-orange");
                             return value;
-                        }else if (value > 0 && value <= 99) {
-                            cell.getElement().classList.add("w3-orange");
+                        }else if (value >= 1000 && value <= 9999) {
+                            cell.getElement().classList.add("w3-red");
+                            return value;
+                        }else if (value >= 10000 && value <= 99999) {
+                            cell.getElement().classList.add("w3-metro-red");
+                            return value;
+                        }else if (value >= 100000 && value <= 500000) {
+                            cell.getElement().classList.add("w3-black");
                             return value;
                         }else {
                             return value;
@@ -391,14 +395,20 @@
 
                     var cellFormatterGuerisons = function(cell, formatterParams){
                         var value = cell.getValue();
-                        if(value >= 1000 && value <= 100000){
-                            cell.getElement().classList.add("w3-green");
+                        if(value > 0 && value <= 99){
+                            cell.getElement().classList.add("w3-sand");
                             return value;
-                        }else if (value > 100 && value <= 999) {
-                            cell.getElement().classList.add("w3-light-green");
-                            return value;
-                        }else if (value > 0 && value <= 99) {
+                        }else if (value >= 100 && value <= 999) {
                             cell.getElement().classList.add("w3-lime");
+                            return value;
+                        }else if (value >= 1000 && value <= 9999) {
+                            cell.getElement().classList.add("w3-metro-light-green");
+                            return value;
+                        }else if (value >= 10000 && value <= 99999) {
+                            cell.getElement().classList.add("w3-metro-green");
+                            return value;
+                        }else if (value >= 100000 && value <= 500000) {
+                            cell.getElement().classList.add("w3-metro-dark-green");
                             return value;
                         }else {
                             return value;
@@ -409,7 +419,7 @@
                         var celldateValue = cell.getValue();
                         return moment(celldateValue).format("MM/DD/YYYY HH:mm");
                     };
-</script>
+    </script>
 
 <script>
      $(document).ready(function() {
@@ -431,11 +441,11 @@
                             {title:"Total Confirmed",
                                 columns: [
                                     {title:"Confirmed", field:"infected", align:"center", sorter:"number", topCalc:"sum", formatter:cellFormatterConfirm},
-                                    {title:"Progression", field:"infected", align:"left", sorter:"number", download:false, formatter:"progress", 
+                                    {title:"Progression", field:"infected", align:"left", sorter:"number",topCalc:"sum", topCalcFormatter:"color", topCalcFormatterParams:paramLookup, download:false, formatter:"progress", 
                                         formatterParams:{
                                             min:0,
                                             max:100000,
-                                            color:"#f44336",
+                                            color:"#f44336"
                                         }
                                     },
                                 ]
@@ -443,7 +453,7 @@
                             {title:"Total Sick",
                                 columns: [
                                     {title:"Sick", field:"sick", align:"center", sorter:"number", topCalc:"sum", formatter:cellFormatterMalades},
-                                    {title:"Progression", field:"sick", align:"left", sorter:"number", download:false, formatter:"progress", 
+                                    {title:"Progression", field:"sick", align:"left", sorter:"number", topCalc:"sum", topCalcFormatter:"color", topCalcFormatterParams:paramLookup, download:false, formatter:"progress", 
                                         formatterParams:{
                                             min:0,
                                             max:100000,
@@ -455,7 +465,7 @@
                             {title:"Total Deaths",
                                 columns: [
                                     {title:"Deaths", field:"dead", align:"center", sorter:"number", topCalc:"sum", formatter:cellFormatterMorts},
-                                    {title:"Progression", field:"dead", align:"left", sorter:"number", download:false, formatter:"progress", 
+                                    {title:"Progression", field:"dead", align:"left", sorter:"number", topCalc:"sum", topCalcFormatter:"color", topCalcFormatterParams:paramLookup, download:false, formatter:"progress", 
                                         formatterParams:{
                                             min:0,
                                             max:20000,
@@ -467,7 +477,7 @@
                             {title:"Total Recovered",
                                 columns: [
                                     {title:"Recovered", field:"recovered", align:"center", sorter:"number", topCalc:"sum", formatter:cellFormatterGuerisons},
-                                    {title:"Progression", field:"recovered", align:"left", sorter:"number", download:false, formatter:"progress", 
+                                    {title:"Progression", field:"recovered", align:"left", sorter:"number", topCalc:"sum", topCalcFormatter:"color", topCalcFormatterParams:paramLookup, download:false, formatter:"progress", 
                                         formatterParams:{
                                             min:0,
                                             max:100000,
@@ -476,7 +486,12 @@
                                     },
                                 ]
                             },
-                            {title:"Population", field:"pop", align:"center", sorter:"number"},
+                            {title:"Population", field:"pop", align:"center", sorter:"number", formatter: "money",
+                                formatterParams:{
+                                    thousand:" ",
+                                    precision:false,
+                                }
+                            },
                             {title:"Last Updated", field:"lastUpdated", align:"center", sorter:"string", formatter:displayDate,
                                 accessorDownload : function (value, data, type, params, column) {
                                         var dateFormat = moment().format('MM/DD/YYYY - hh:mm');
@@ -486,17 +501,13 @@
                         ],
                     });
 
-                
 
+                    var proxy = "https://cors-anywhere.herokuapp.com/"; //Using proxy to avoid Cors multi-origins error. 
+                    var covData ="https://raw.githubusercontent.com/l-portet/coronavirus-data/master/data/map.json";
 
-                       var proxy = "https://cors-anywhere.herokuapp.com/";
-                       var covData ="https://raw.githubusercontent.com/l-portet/coronavirus-data/master/data/map.json";
+                    covTable.setData(proxy + covData);
 
-                       covTable.setData(proxy + covData);
-
-
-                 
-                     $("#filterField").change(function(){
+                    $("#filterField").change(function(){
                         covTable.setFilter("country", "like", $(this).val());
                     });
 
@@ -519,10 +530,7 @@
                         localStorage.clear();
                         location.reload();
                     });
-                        
-
-            });
-                   
+            });  
     </script>
 
     <footer class="w3-metro-darken w3-small w3-left">
