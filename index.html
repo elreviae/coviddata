@@ -342,7 +342,8 @@
                             cell.getElement().classList.add("w3-red");
                             return value;
                         }else if (value >= 100000 && value <= 500000) {
-                            cell.getElement().classList.add("w3-black");
+                            cell.getElement().classList.add("w3-black", "w3-text-red");
+                            cell.getElement().style.fontWeight = "900";
                             return value;
                         }else {
                             return value;
@@ -360,11 +361,15 @@
                         }else if (value >= 1000 && value <= 9999) {
                             cell.getElement().classList.add("w3-blue");
                             return value;
-                        }else if (value >= 10000 && value <= 99999) {
+                        }else if (value >= 10000 && value <= 49999) {
+                            cell.getElement().classList.add("w3-indigo");
+                            return value;
+                        }else if (value >= 50000 && value <= 99999) {
                             cell.getElement().classList.add("w3-indigo");
                             return value;
                         }else if (value >= 100000 && value <= 500000) {
-                            cell.getElement().classList.add("w3-black");
+                            cell.getElement().classList.add("w3-black", "w3-text-red");
+                            cell.getElement().style.fontWeight = "900";
                             return value;
                         }else {
                             return value;
@@ -382,11 +387,13 @@
                         }else if (value >= 1000 && value <= 9999) {
                             cell.getElement().classList.add("w3-red");
                             return value;
-                        }else if (value >= 10000 && value <= 99999) {
-                            cell.getElement().classList.add("w3-metro-red");
+                        }else if (value >= 10000 && value <= 49999) {
+                            cell.getElement().classList.add("w3-black", "w3-text-red");
+                            cell.getElement().style.fontWeight = "900";
                             return value;
-                        }else if (value >= 100000 && value <= 500000) {
-                            cell.getElement().classList.add("w3-black");
+                        }else if (value >= 50000 && value <= 100000) {
+                            cell.getElement().classList.add("w3-black", "w3-text-red");
+                            cell.getElement().style.fontWeight = "900";
                             return value;
                         }else {
                             return value;
@@ -406,9 +413,11 @@
                             return value;
                         }else if (value >= 10000 && value <= 99999) {
                             cell.getElement().classList.add("w3-metro-green");
+                            cell.getElement().style.fontWeight = "900";
                             return value;
                         }else if (value >= 100000 && value <= 500000) {
-                            cell.getElement().classList.add("w3-metro-dark-green");
+                            cell.getElement().classList.add("w3-metro-dark-green", "w3-text-yellow");
+                            cell.getElement().style.fontWeight = "900";
                             return value;
                         }else {
                             return value;
