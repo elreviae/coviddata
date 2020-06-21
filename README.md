@@ -13,7 +13,10 @@ This dashboard shows :
 ----------------------
 Resources :
 
-- Tabulator :
-- Canvas JS :
-- Moment JS :
-- W3 School CSS : 
+- Tabulator : https://github.com/olifolkerd/tabulator
+- Canvas JS : https://canvasjs.com/
+- Moment JS : https://github.com/moment/moment
+- JSPDF : https://github.com/MrRio/jsPDF
+- JSPDF-AutoTable : https://github.com/simonbengtsson/jsPDF-AutoTable
+- SheetJS : https://github.com/SheetJS/sheetjs
+- W3 School CSS : https://www.w3schools.com/w3css/default.asp
