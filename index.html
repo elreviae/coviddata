@@ -512,9 +512,8 @@
 
 
                     var proxy = "https://cors-anywhere.herokuapp.com/"; //Using proxy to avoid Cors multi-origins error. 
-                    // var covData ="https://raw.githubusercontent.com/l-portet/coronavirus-data/master/data/map.json";
-                    var covData ="https://raw.githubusercontent.com/l-portet/coronavirus-data/7cc30a3126ada6735ac0169c4627e10c1b6a8025/data/map.json"; // Last updated file - 11/05/2020
-
+                    var covData ="https://raw.githubusercontent.com/l-portet/coronavirus-data/master/data/map.json";
+               
                     covTable.setData(proxy + covData);
 
                     $("#filterField").change(function(){
