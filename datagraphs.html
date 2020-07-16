@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <title>CovidData - Covid-19 Pandemic informations</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="stylesheet" href="css/w3.css">
+        <link rel="stylesheet" href="css/w3-colors-metro.css">
+        <link href="css/customcss.css" rel="stylesheet">
+    </head>
+    <body class="w3-metro-darken">
+        <div class="w3-bar w3-black">
+            <a href="index.html" class="w3-bar-item w3-button w3-text-red menutitle">CovidData</a>
+            <a href="datagraphs.html" class="w3-bar-item w3-button w3-hide-small">Charts</a>
+            <a href="datamapregions.html" class="w3-bar-item w3-button w3-hide-small">World Map Regions</a>
+            <a href="datamapcountries.html" class="w3-bar-item w3-button w3-hide-small">World Map Countries</a>
+            <a href="about.html" class="w3-bar-item w3-button w3-hide-small">About</a>
+            <a href="javascript:void(0)" class="w3-bar-item w3-button w3-right w3-hide-large w3-hide-medium" onclick="menuFunction()">&#9776;</a>
+          </div>
+          <div id="respMenu" class="w3-bar-block w3-black w3-hide w3-hide-large w3-hide-medium">
+            <a href="datagraphs.html" class="w3-bar-item w3-button">Charts</a>
+            <a href="datamapregions.html" class="w3-bar-item w3-button">World Map Regions</a>
+            <a href="datamapcountries.html" class="w3-bar-item w3-button">World Map Countries</a>
+            <a href="about.html" class="w3-bar-item w3-button">About</a>
+          </div>
+    
+        <div class="w3-row w3-padding-16">
+            <div class="w3-half w3-container">
+                <p class="w3-medium">Charts of global summed Covid-19 time series data since the pandemic began.</p>
+            </div>
+            <div class="w3-half w3-container">
+                    <button id="clearData" class="w3-button w3-mobile w3-black w3-hover-grey w3-right">Reload Charts Data</button>
+            </div>
+        </div> 
+        
+        <div class="w3-container w3-margin-top w3-center">
+            <div id="chartPercentsActive" class="w3-mobile chartsBlock1"></div>
+            <div id="chartPercentsCases" class="w3-mobile chartsBlock1"></div>
+            <div class="w3-container w3-padding-large"></div>
+            <div id="chartContainerConfirmed" class="w3-margin-top w3-center w3-mobile chartsBlock2"></div>
+            <div class="w3-container w3-padding-large"></div>
+            <div id="chartContainerBars" class="w3-margin-top w3-center w3-mobile chartsBlock2"></div>
+        </div>
+            
+            <footer class="w3-metro-darken w3-small w3-center">
+                <p class="w3-text-dark-grey w3-margin">
+                    Created by Maxime DES TOUCHES - 2020 . <a href="https://github.com/elreviae" target="_blank">Github</a>
+                </p>
+            </footer>
+            <script src="js/jquery-3.4.1.min.js"></script>
+            <script src="js/moment-with-locales.min.js"></script>
+            <script src="js/jquery.canvasjs.min.js"></script>
+            <script src="js/customfunctions.js"></script>
+            <script src="js/customcanvasjs.min.js"></script>
+            <script>
+                $("#clearData").click(function(){
+                    localStorage.clear();
+                    location.reload();
+                });
+            </script>
+    </body>
+</html>

@@ -1,0 +1,7 @@
+.tabulator-cell{font-weight: bold;}
+.tabulator .tabulator-header .tabulator-col .tabulator-col-content .tabulator-col-title {white-space: normal;}
+.tabulator-col .tabulator-sortable {height: 50px;}
+.chartsBlock1 {width:45%;height:400px;display:inline-block;}
+.chartsBlock2{width:80%;height:500px;display:inline-block;}
+#containerMap{width:100%;height:800px;margin:0;padding:0;}
+.menutitle{font-weight: bold;}

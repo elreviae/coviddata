@@ -1,17 +1,23 @@
 # Covid-19 Data dashboard (Table & Charts)
 Simple HTML / Javascript dashboard about the evolution of the Covid-19 in the world.
 
-Web application hosted on my own web server :
+Web application hosted on my own web server : 
 http://elreviae.com/coviddata/
 
-This dashboard shows :
-- The actual state of the spread of covid-19 by region. Updated every half hour.
-
-- The informations about the evolution of the situation on the basis of the last days. Updated every half hour.
-
+#  This dashboard shows :
+- Data Table : Reported daily and global Cases, Deaths and Recovered by Country, Territory or Conveyance.
+- Charts : Charts of global summed Covid-19 time series data since the pandemic began.
+- World Maps : 
+    - World map of reported cumulative Global Cases, Deaths and Recovered by Country, Province or County.
+    - World map of reported cumulative Global Active Cases, Deaths and Recovered by Country.
 
 ----------------------
-Resources :
+# Official API
+
+disease.sh - Open Disease Data:  https://disease.sh/
+about-corona.net: https://about-corona.net/
+----------------------
+# Resources :
 
 - Tabulator : https://github.com/olifolkerd/tabulator
 - Canvas JS : https://canvasjs.com/
