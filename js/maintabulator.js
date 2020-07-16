@@ -40,7 +40,7 @@ var covTable = new Tabulator("#covTable", {
         {title:"Population", field:"population", hozAlign:"center", sorter:"number", formatter: cellFormatterToLocString},
         {title:"Last Update", field:"updated", hozAlign:"center", sorter:"string", formatter:displayDate,
             accessorDownload: function(value){
-                    return moment(value).format("MM/DD/YY-h:mm A");
+                return moment(value).format("MM/DD/YY-h:mm A");
             }
         }
     ],

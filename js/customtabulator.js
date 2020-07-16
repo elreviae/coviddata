@@ -55,4 +55,3 @@ var displayDate=function(cell){
     var celldateValue = cell.getValue();
     return moment(celldateValue).format("MM/DD/YY-h:mm A");
 };
-

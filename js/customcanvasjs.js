@@ -1,6 +1,5 @@
 var jsonData = 'https://corona-api.com/timeline';
 var covApiData = 'https://disease.sh/v3/covid-19/continents';
-
 // Covid-19 percent new confirmed, recovered, deaths
 var dataDoughnut1 = [];
 var optionsDoughnut1 =  {

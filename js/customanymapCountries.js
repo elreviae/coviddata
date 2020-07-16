@@ -1,7 +1,7 @@
 anychart.onDocumentReady(function () {
     anychart.theme('darkEarth');
     anychart.data.loadJsonFile('https://disease.sh/v3/covid-19/countries', function (data) {
-  
+
         var arrayCovidInfos = data;
             arrayCovidInfos.forEach(o => {
               Object.assign(o, 
