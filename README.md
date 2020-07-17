@@ -4,7 +4,10 @@ Simple HTML / Javascript dashboard about the evolution of the Covid-19 in the wo
 Web application hosted on my own web server : 
 http://elreviae.com/coviddata/
 
+----------------------
+
 #  This dashboard shows :
+
 - Data Table : Reported daily and global Cases, Deaths and Recovered by Country, Territory or Conveyance.
 - Charts : Charts of global summed Covid-19 time series data since the pandemic began.
 - World Maps : 
@@ -12,11 +15,14 @@ http://elreviae.com/coviddata/
     - World map of reported cumulative Global Active Cases, Deaths and Recovered by Country.
 
 ----------------------
-# Official API
 
-disease.sh - Open Disease Data:  https://disease.sh/
-about-corona.net: https://about-corona.net/
+# Official APIs
+
+- disease.sh - Open Disease Data:  https://disease.sh/
+- about-corona.net: https://about-corona.net/
+
 ----------------------
+
 # Resources :
 
 - Tabulator : https://github.com/olifolkerd/tabulator
