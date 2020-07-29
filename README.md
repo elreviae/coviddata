@@ -27,6 +27,7 @@ http://elreviae.com/coviddata/
 
 - Tabulator : https://github.com/olifolkerd/tabulator
 - Canvas JS : https://canvasjs.com/
+- AnyCharts : https://www.anychart.com/
 - Moment JS : https://github.com/moment/moment
 - JSPDF : https://github.com/MrRio/jsPDF
 - JSPDF-AutoTable : https://github.com/simonbengtsson/jsPDF-AutoTable
