@@ -24,7 +24,7 @@ var covTable = new Tabulator("#covTable", {
         },
         {title:"Country Codes", field:"countryInfo.iso2", hozAlign:"center", sorter:"string", headerFilter:"input", headerFilterPlaceholder:"Search"},
         {title:"Country name", field:"country", hozAlign:"center", sorter:"string", headerFilter:"input", headerFilterPlaceholder:"Search"},
-        {title:"Today Cases",
+        {title:"Latest Cases",
             columns: [
                 {title:"New cases", field:"todayCases", hozAlign:"center", sorter:"number",topCalc:"sum", formatter:cellFormatNewCases},
                 {title:"New deaths", field:"todayDeaths", hozAlign:"center", sorter:"number", topCalc:"sum", formatter:cellFormatNewDeaths},
@@ -46,5 +46,5 @@ var covTable = new Tabulator("#covTable", {
     ],
 });
 // var proxy = "https://cors-anywhere.herokuapp.com/"; //Using proxy to avoid Cors multi-origins error. 
-var covApi = 'https://disease.sh/v3/covid-19/countries';
+var covApi = 'https://disease.sh/v3/covid-19/countries?yesterday=true';
 covTable.setData(covApi);
