@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+    <title>Covid-19 Dashboard Tracker</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/w3.css">
+    <link rel="stylesheet" href="css/w3-colors-metro.css">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&display=swap" rel="stylesheet"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css">
+    <link href="css/tabulator_midnight.min.css" rel="stylesheet">
+    <link href="css/customcss.css" rel="stylesheet">
+
+    <body class="bg-dashboard">
+
+        <!-- Top container -->
+        <div class="w3-bar w3-top w3-large navbar-custom">
+            <button class="w3-bar-item w3-button w3-hide-large w3-hover-none w3-hover-text-light-grey" onclick="w3_open();"><i class="fa fa-bars"></i>  Menu</button>
+            <span class="w3-bar-item w3-left w3-text-amber w3-xlarge"><i class="fas fa-circle-notch"></i> CovidData</span>
+        </div>
+
+         <!-- Sidebar/menu -->
+         <nav class="w3-sidebar w3-collapse sidebar-custom w3-animate-left" id="dashSidebar">
+            <div class="w3-container w3-margin-top">
+                <h5 class="dashboardTitle">Covid Data Dashboard</h5>
+            </div>
+            <div class="w3-bar-block">
+                <a href="#" class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i>  Close Menu</a>
+                <a href="index.html" class="w3-bar-item w3-button w3-padding w3-hover-amber"><i class="fas fa-pills"></i> Data Overview</a>
+                <a href="covidworldmaps.html" class="w3-bar-item w3-button w3-padding w3-hover-pink"><i class="fas fa-globe-europe"></i> World Maps</a>
+                <a href="covidchartsdata.html" class="w3-bar-item w3-button w3-padding w3-hover-light-green"><i class="fas fa-chart-bar"></i>  Data Charts</a>
+                <a href="covidfrance.html" class="w3-bar-item w3-button w3-padding w3-hover-blue"><i class="fas fa-flag"></i> Data France</a>
+                <!-- <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-diamond fa-fw"></i>  News</a> -->
+                <a href="about.html" class="w3-bar-item w3-button w3-padding w3-hover-red"><i class="fas fa-info-circle"></i>  About</a>
+            </div>
+        </nav>
+
+        <!-- Overlay effect when opening sidebar on small screens -->
+        <div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
+
+        <!-- !PAGE CONTENT! -->
+        <div class="w3-main main-custom">
+            <!-- Header -->
+            <header class="w3-container ">
+                <h5 class="w3-large"><i class="fas fa-chart-line"></i> Data charts of new cases and time series data since the Covid-19 pandemic began.</h5>
+            </header>
+     
+            <div class="w3-row-padding w3-margin-bottom">
+                <div class="w3-half w3-margin-bottom">
+                    <div class="w3-container w3-padding-16 dark-element">
+                        <div id="chartPercentsActive" class="chartsBlock1"></div>
+                   </div>
+                </div>
+
+                <div class="w3-half">
+                    <div class="w3-container w3-padding-16 dark-element">
+                        <div id="chartPercentsCases" class="chartsBlock1"></div>
+                   </div>
+                </div>
+            </div>
+            <div class="w3-row-padding w3-margin-bottom">
+                <div class="w3-col">
+                    <div class="w3-container w3-padding-16 dark-element">
+                        <div id="chartContainerConfirmed" class="chartsBlock2"></div>
+                   </div>
+                </div>
+            </div>
+
+            <div class="w3-row-padding w3-margin-bottom">
+                <div class="w3-col">
+                    <div class="w3-container w3-padding-16 dark-element">
+                        <div id="chartContainerBars" class="chartsBlock2"></div>
+                   </div>
+                </div>
+            </div> 
+
+            <!-- Footer -->
+            <footer class="w3-container w3-padding-16 footer-custom">
+                <h4>CREDITS</h4>
+                <p>Created by Maxime DES TOUCHES - 2020 . <a href="https://github.com/elreviae" target="_blank">Github</a></p>
+            </footer>
+
+        <!-- End page content -->
+        </div>
+
+        <script src="js/jquery-3.4.1.min.js"></script>
+        <script src="js/moment-with-locales.min.js"></script>
+        <script src="js/jquery.canvasjs.min.js"></script>
+        <script src="js/customcanvasjs.js"></script>        
+        <script>
+            // Get the Sidebar
+            var Sidebar = document.getElementById("dashSidebar");
+            // Get the DIV with overlay effect
+            var overlayBg = document.getElementById("myOverlay");
+            // Toggle between showing and hiding the sidebar, and add overlay effect
+            function w3_open() {
+            if (Sidebar.style.display === 'block') {
+                Sidebar.style.display = 'none';
+                overlayBg.style.display = "none";
+            } else {
+                Sidebar.style.display = 'block';
+                overlayBg.style.display = "block";
+            }
+            }
+            // Close the sidebar with the close button
+            function w3_close() {
+                Sidebar.style.display = "none";
+                overlayBg.style.display = "none";
+            }
+        </script>
+    </body>
+</html>

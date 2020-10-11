@@ -1,128 +1,204 @@
-<!doctype html>
-    <html lang="en"> 
-    <head>
-        <title>CovidData - Covid-19 Pandemic informations</title>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <link rel="stylesheet" href="css/w3.css">
-        <link rel="stylesheet" href="css/w3-colors-metro.css">
-        <link href="css/tabulator_midnight.min.css" rel="stylesheet">
-        <link href="css/customcss.css" rel="stylesheet">
-    </head>
+<!DOCTYPE html>
+<html>
+    <title>Covid-19 Dashboard Tracker</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/w3.css">
+    <link rel="stylesheet" href="css/w3-colors-metro.css">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&display=swap" rel="stylesheet"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css">
+    <link href="css/tabulator_midnight.min.css" rel="stylesheet">
+    <link href="css/customcss.css" rel="stylesheet">
 
-    <body class="w3-metro-darken">
-          <div class="w3-bar w3-black">
-            <a href="index.html" class="w3-bar-item w3-button w3-text-red menutitle">CovidData</a>
-            <a href="datagraphs.html" class="w3-bar-item w3-button w3-hide-small">Charts</a>
-            <a href="datamapregions.html" class="w3-bar-item w3-button w3-hide-small">World Map Regions</a>
-            <a href="datamapcountries.html" class="w3-bar-item w3-button w3-hide-small">World Map Countries</a>
-            <a href="about.html" class="w3-bar-item w3-button w3-hide-small">About</a>
-            <a href="javascript:void(0)" class="w3-bar-item w3-button w3-right w3-hide-large w3-hide-medium" onclick="menuFunction()">&#9776;</a>
-          </div>
-          <div id="respMenu" class="w3-bar-block w3-black w3-hide w3-hide-large w3-hide-medium">
-            <a href="datagraphs.html" class="w3-bar-item w3-button">Charts</a>
-            <a href="datamapregions.html" class="w3-bar-item w3-button">World Map Regions</a>
-            <a href="datamapcountries.html" class="w3-bar-item w3-button">World Map Countries</a>
-            <a href="about.html" class="w3-bar-item w3-button">About</a>
-          </div>
+    <body class="bg-dashboard">
 
-            <div class="w3-container">
-                <p class="w3-medium">Data reported from the day before. Global Cases, Active, Deaths, Recovered by Country, Territory or Conveyance.</p>
+        <!-- Top container -->
+        <div class="w3-bar w3-top w3-large navbar-custom">
+            <button class="w3-bar-item w3-button w3-hide-large w3-hover-none w3-hover-text-light-grey" onclick="w3_open();"><i class="fa fa-bars"></i>  Menu</button>
+            <span class="w3-bar-item w3-left w3-text-amber w3-xlarge"><i class="fas fa-circle-notch"></i> CovidData</span>
+        </div>
+
+          <!-- Sidebar/menu -->
+          <nav class="w3-sidebar w3-collapse sidebar-custom w3-animate-left" id="dashSidebar">
+            <div class="w3-container w3-margin-top">
+                <h5 class="dashboardTitle">Covid Data Dashboard</h5>
             </div>
+            <div class="w3-bar-block">
+                <a href="#" class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i>  Close Menu</a>
+                <a href="index.html" class="w3-bar-item w3-button w3-padding w3-hover-amber"><i class="fas fa-pills"></i> Data Overview</a>
+                <a href="covidworldmaps.html" class="w3-bar-item w3-button w3-padding w3-hover-pink"><i class="fas fa-globe-europe"></i> World Maps</a>
+                <a href="covidchartsdata.html" class="w3-bar-item w3-button w3-padding w3-hover-light-green"><i class="fas fa-chart-bar"></i>  Data Charts</a>
+                <a href="covidfrance.html" class="w3-bar-item w3-button w3-padding w3-hover-blue"><i class="fas fa-flag"></i> Data France</a>
+                <a href="covidnews.html" class="w3-bar-item w3-button w3-padding w3-hover-cyan"><i class="fas fa-newspaper"></i>  News about Covid</a>
+                <a href="about.html" class="w3-bar-item w3-button w3-padding w3-hover-red"><i class="fas fa-info-circle"></i>  About</a>
+            </div>
+        </nav>
 
-            <div class="w3-row w3-padding-16">
-                <div class="w3-half w3-container">
-                    <select id="filterField" class="w3-select w3-border w3-left"> </select>
+
+        <!-- Overlay effect when opening sidebar on small screens -->
+        <div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
+
+        <!-- !PAGE CONTENT! -->
+        <div class="w3-main main-custom">
+
+            <!-- Header -->
+            <header class="w3-container">
+                <h5 class="w3-large"><i class="fas fa-chart-line w3-text-amber"></i> Cumulative & Actual World cases COVID-19 Coronavirus Pandemic. Last update: <span id="latestUpdate" class="w3-text-amber"></span></h5>
+            </header>
+
+        <div class="w3-row-padding w3-margin-bottom">
+            <div class="w3-quarter">
+                <div class="w3-container w3-padding-16 dark-element">
+                    <h4 class="w3-large">Curently Active</h4>
+                    <!-- <div class="w3-left"><i class="fa fa-comment w3-xxxlarge"></i></div> -->
+                    <div class="w3-right">
+                        <h3 class="w3-xlarge w3-text-blue" id="active"></h3>
+                    </div>
+                    <div class="w3-clear"></div>
                 </div>
-                <div class="w3-half w3-container">
+                
+            </div>
+            <div class="w3-quarter">
+                <div class="w3-container w3-padding-16 dark-element">
+                    <h4 class="w3-large">Total Confirmed</h4>
+                    <!-- <div class="w3-left"><i class="fa fa-eye w3-xxxlarge"></i></div> -->
+                    <div class="w3-right">
+                        <h3 class="w3-xlarge w3-text-amber" id="confirmed"></h3>
+                    </div>
+                    <div class="w3-clear"></div>
+                    
+                </div>
+            </div>
+            <div class="w3-quarter">
+                <div class="w3-container w3-padding-16 dark-element">
+                    <h4 class="w3-large">Recovered</h4>
+                    <!-- <div class="w3-left"><i class="fa fa-share-alt w3-xxxlarge"></i></div> -->
+                    <div class="w3-right">
+                        <h3 class="w3-xlarge w3-text-light-green" id="recovered"></h3>
+                    </div>
+                    <div class="w3-clear"></div>
+                </div>
+            </div>
+            <div class="w3-quarter">
+                <div class="w3-container w3-padding-16 dark-element">
+                    <h4 class="w3-large">Deaths</h4>
+                    <!-- <div class="w3-left"><i class="fa fa-users w3-xxxlarge"></i></div> -->
+                    <div class="w3-right">
+                        <h3 class="w3-xlarge w3-text-red" id="deaths"></h3>
+                    </div>
+                    <div class="w3-clear"></div>
+                </div>
+            </div>
+        </div>
+
+            <div class="w3-panel">
+                <div class="w3-container" style="margin:0 -16px" >
+                    <h5 class="w3-large"><i class="fas fa-table w3-text-amber"></i> Reported Cases by Country, Territory, or Conveyance</h5>
                     <div class="w3-bar">
-                        <button id="filter-clear" class="w3-bar-item w3-button w3-mobile w3-hover-grey w3-black">Clear Filters</button>
-                        <button id="pdfDownload" class="w3-bar-item w3-button w3-mobile w3-hover-red w3-black"  >Export PDF</button>
-                        <button id="xlsxDownload" class="w3-bar-item w3-button w3-mobile w3-hover-green w3-black"  >Export Excel</button>
-                        <button id="clearData" class="w3-bar-item w3-button w3-mobile w3-hover-grey w3-black"  >Reload Table Data</button>
+                        <select id="filterField" class="w3-bar-item w3-mobile w3-select dark-element-withfont w3-round w3-margin-right"></select>
+                        <button id="filter-clear" class="w3-bar-item w3-button w3-round w3-mobile w3-hover-aqua w3-border w3-border-aqua w3-margin-right">Clear Filters</button>
+                        <button id="pdfDownload" class="w3-bar-item w3-button w3-round w3-mobile w3-hover-red w3-border w3-border-red w3-margin-right">Generate PDF</button>
+                        <button id="xlsxDownload" class="w3-bar-item w3-button w3-round w3-mobile w3-hover-green w3-border w3-border-green">Generate Excel</button>
+                    </div>
+                    <div class="w3-row w3-padding-16 ">
+                        <div id="covTable" class="w3-col"></div>
                     </div>
                 </div>
             </div>
 
-            <div class="w3-row">
-                <div id="covTable" class="w3-small w3-col w3-center"></div>
-              </div> 
-
-            <footer class="w3-metro-darken w3-small w3-center">
-                <p class="w3-text-dark-grey w3-margin">
-                    Created by Maxime DES TOUCHES - 2020 . <a href="https://github.com/elreviae" target="_blank">Github</a>
-                </p>
+            <!-- Footer -->
+            <footer class="w3-container w3-padding-16 footer-custom">
+                <h4>CREDITS</h4>
+                <p>Created by Maxime DES TOUCHES - 2020 . <a href="https://github.com/elreviae" target="_blank">Github</a></p>
             </footer>
-            <script src="js/jquery-3.4.1.min.js"></script>
-            <script src="js/moment-with-locales.min.js"></script>
-            <script src="js/tabulator.min.js"></script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.5/jspdf.min.js"></script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.0.5/jspdf.plugin.autotable.js"></script>
-            <script src="https://oss.sheetjs.com/sheetjs/xlsx.full.min.js"></script>
-            <script src="js/customfunctions.js"></script>
-            <script src="js/customtabulator.min.js"></script>
-            <script src="js/maintabulator.min.js"></script>
-            <script>
-                $.getJSON(covApi, function(json){
-                    $('#filterField').empty();
-                    $('#filterField').append($('<option disabled selected>').text("Select a country"));
-                    $.each(json, function(i, obj){
-                        $('#filterField').append($('<option>').text(obj.country).attr('value', obj.countryInfo.iso2));
-                    });
-                });
-                $("#filterField").change(function(){
-                    covTable.setFilter("countryInfo.iso2", "like", $(this).val());
-                });
-                // Clear filters on click
-                $("#filter-clear").click(function(){
-                    $("#filterField").val("");
-                    covTable.clearFilter();
-                    covTable.clearHeaderFilter();
-                });
-                window.addEventListener('resize', function(){
-                covTable.redraw();
-                });
-                $("#pdfDownload").click(function(){
-                    covTable.downloadToTab("pdf", "CovidData.pdf", {
-                    orientation:"landscape",
-                    autoTable:function(doc){
-                        doc.text("CovidData Report", 5, 15);
-                        //return the autoTable config options object
-                        return {
-                            theme: 'striped',
-                            tableWidth: 'auto',
-                            pageBreak: 'auto',
-                            rowPageBreak: 'auto',
-                            styles: {
-                                cellPadding: 0.5, 
-                                fontSize: 8,
-                            },
-                            headStyles: {
-                                fillColor: [26, 26, 26],
-                            },
-                            footStyles: {
-                                fillColor: [26, 26, 26],
-                            },
-                            bodyStyles: {
-                                fillColor: [102, 102, 102],
-                                textColor: 255,
-                            },
-                            alternateRowStyles: {
-                                fillColor: [68, 68, 68],
-                            },
-                            margin: {top: 20, bottom:20, left:10, right:10},
-                        };
-                    },
+
+        <!-- End page content -->
+        </div>
+
+        <script src="js/jquery-3.4.1.min.js"></script>
+        <script src="js/moment-with-locales.min.js"></script>
+        <script src="js/tabulator.min.js"></script>
+        <script src="js/jspdf.min.js"></script>
+        <script src="js/autotable.js"></script>
+        <script src="js/xlsx.full.min.js"></script>
+        <script src="js/maintabulator.min.js"></script>
+        <script src="js/sidebar.js"></script>
+        <script>
+          var worldCovid = 'https://disease.sh/v3/covid-19/all';
+          $.getJSON(worldCovid, function(worldjson){
+            var noData = 'Not Available ...';
+            let latestUpdate = moment(worldjson.updated).format('MMMM Do YYYY - h:mm a');
+            let active = worldjson.active;
+            let cases = worldjson.cases;
+            let recovered = worldjson.recovered;
+            let deaths = worldjson.deaths;
+            if(latestUpdate==null){ $('#latestUpdate').html(noData)}else{ $('#latestUpdate').html(latestUpdate)}
+            if(active==null){ $('#active').html(noData)}else{ $('#active').html(active.toLocaleString()) }
+            if(cases==null){ $('#confirmed').html(noData)}else{ $('#confirmed').html(cases.toLocaleString()) }
+            if(recovered==null){ $('#recovered').html(noData)}else{ $('#recovered').html(recovered.toLocaleString()) }
+            if(deaths==null){ $('#deaths').html(noData)}else{ $('#deaths').html(deaths.toLocaleString()) }
+        });
+        </script>
+        
+        <script>
+            $.getJSON(covApi, function(json){
+                $('#filterField').empty();
+                $('#filterField').append($('<option disabled selected>').text("Select Country or Other"));
+                $.each(json, function(i, obj){
+                    $('#filterField').append($('<option>').text(obj.country).attr('value', obj.countryInfo.iso2));
                 });
             });
-            $("#xlsxDownload").click(function(){
-                covTable.download("xlsx", "covidData2020.xlsx", {sheetName:"covid-19 Data"});
+            $("#filterField").change(function(){
+                covTable.setFilter("countryInfo.iso2", "like", $(this).val());
             });
-           
-            $("#clearData").click(function(){
-                localStorage.clear();
-                location.reload();
+            // Clear filters on click
+            $("#filter-clear").click(function(){
+                $("#filterField").val("");
+                covTable.clearFilter();
+                covTable.clearHeaderFilter();
             });
-            </script>
+            
+            window.addEventListener('resize', function(){
+                covTable.redraw(true);
+            });
+
+            $("#pdfDownload").click(function(){
+                covTable.downloadToTab("pdf", "CovidData.pdf", {
+                orientation:"landscape",
+                autoTable:function(doc){
+                    doc.text("CovidData Report", 5, 15);
+                    //return the autoTable config options object
+                    return {
+                        theme: 'striped',
+                        tableWidth: 'auto',
+                        pageBreak: 'auto',
+                        rowPageBreak: 'auto',
+                        styles: {
+                            cellPadding: 0.5, 
+                            fontSize: 8,
+                        },
+                        headStyles: {
+                            fillColor: [26, 26, 26],
+                        },
+                        footStyles: {
+                            fillColor: [26, 26, 26],
+                        },
+                        bodyStyles: {
+                            fillColor: [102, 102, 102],
+                            textColor: 255,
+                        },
+                        alternateRowStyles: {
+                            fillColor: [68, 68, 68],
+                        },
+                        margin: {top: 20, bottom:20, left:10, right:10},
+                    };
+                },
+            });
+        });
+        $("#xlsxDownload").click(function(){
+            covTable.download("xlsx", "covidData2020.xlsx", {sheetName:"covid-19 Data"});
+        });
+        </script>
+
     </body>
 </html>

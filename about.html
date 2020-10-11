@@ -1,77 +1,118 @@
-<!doctype html>
-    <html lang="en"> 
-    <head>
-        <title>CovidData - Covid-19 Pandemic informations</title>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <link rel="stylesheet" href="css/w3.css">
-        <link rel="stylesheet" href="css/w3-colors-metro.css">
-        <link href="css/tabulator_midnight.min.css" rel="stylesheet">
-        <link href="css/customcss.css" rel="stylesheet">
-    </head>
+<!DOCTYPE html>
+<html>
+    <title>Covid-19 Dashboard Tracker</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/w3.css">
+    <link rel="stylesheet" href="css/w3-colors-metro.css">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&display=swap" rel="stylesheet"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css">
+    <link href="css/customcss.css" rel="stylesheet">
 
-    <body class="w3-metro-darken">
-        <div class="w3-bar w3-black">
-            <a href="index.html" class="w3-bar-item w3-button w3-text-red menutitle">CovidData</a>
-            <a href="datagraphs.html" class="w3-bar-item w3-button w3-hide-small">Charts</a>
-            <a href="datamapregions.html" class="w3-bar-item w3-button w3-hide-small">World Map Regions</a>
-            <a href="datamapcountries.html" class="w3-bar-item w3-button w3-hide-small">World Map Countries</a>
-            <a href="about.html" class="w3-bar-item w3-button w3-hide-small">About</a>
-            <a href="javascript:void(0)" class="w3-bar-item w3-button w3-right w3-hide-large w3-hide-medium" onclick="menuFunction()">&#9776;</a>
-          </div>
-          <div id="respMenu" class="w3-bar-block w3-black w3-hide w3-hide-large w3-hide-medium">
-            <a href="datagraphs.html" class="w3-bar-item w3-button">Charts</a>
-            <a href="datamapregions.html" class="w3-bar-item w3-button">World Map Regions</a>
-            <a href="datamapcountries.html" class="w3-bar-item w3-button">World Map Countries</a>
-            <a href="about.html" class="w3-bar-item w3-button">About</a>
-          </div>
+    <body class="bg-dashboard">
+        <!-- Top container -->
+        <div class="w3-bar w3-top w3-large navbar-custom">
+            <button class="w3-bar-item w3-button w3-hide-large w3-hover-none w3-hover-text-light-grey" onclick="w3_open();"><i class="fa fa-bars"></i>  Menu</button>
+            <span class="w3-bar-item w3-left w3-text-amber w3-xlarge"><i class="fas fa-circle-notch"></i> CovidData</span>
+        </div>
+
+          <!-- Sidebar/menu -->
+          <nav class="w3-sidebar w3-collapse sidebar-custom w3-animate-left" id="dashSidebar">
+            <div class="w3-container w3-margin-top">
+                <h5 class="dashboardTitle">Covid Data Dashboard</h5>
+            </div>
+            <div class="w3-bar-block">
+                <a href="#" class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i>  Close Menu</a>
+                <a href="index.html" class="w3-bar-item w3-button w3-padding w3-hover-amber"><i class="fas fa-pills"></i> Data Overview</a>
+                <a href="covidworldmaps.html" class="w3-bar-item w3-button w3-padding w3-hover-pink"><i class="fas fa-globe-europe"></i> World Maps</a>
+                <a href="covidchartsdata.html" class="w3-bar-item w3-button w3-padding w3-hover-light-green"><i class="fas fa-chart-bar"></i>  Data Charts</a>
+                <a href="covidfrance.html" class="w3-bar-item w3-button w3-padding w3-hover-blue"><i class="fas fa-flag"></i> Data France</a>
+                <a href="covidnews.html" class="w3-bar-item w3-button w3-padding w3-hover-cyan"><i class="fas fa-newspaper"></i>  News about Covid</a>
+                <a href="about.html" class="w3-bar-item w3-button w3-padding w3-hover-red"><i class="fas fa-info-circle"></i>  About</a>
+            </div>
+        </nav>
 
 
-            <div class="w3-content w3-justify w3-text-grey w3-padding-32 w3-center">
+        <!-- Overlay effect when opening sidebar on small screens -->
+        <div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
+        
+        <!-- !PAGE CONTENT! -->
+        <div class="w3-main main-custom">
 
-                <h2 class="w3-text-red">About Me</h2>
-                <p>
-                    Web site created by Maxime DES TOUCHES. <br/>
-                    I am actually student at the ENI School of Niort (France) learning Web development.<br/>
-                    <a href="https://github.com/elreviae" target="_blank" class="w3-button">Github</a>
-                    <a href="https://www.linkedin.com/in/mdestouches" target="_blank" class="w3-button">LinkedIn</a>
-                </p>
-            
-                <h2 class="w3-padding-16 w3-text-red">Data Sources</h2>
+            <div class="w3-row-padding w3-margin-bottom">
+                <div class="w3-col">
+                    <h2 class="w3-large"><i class="fas fa-user w3-text-red"></i> About Me</h2>
+                    <div class="w3-container w3-padding-16 dark-element">
+                        <p>
+                            Web site created by Maxime DES TOUCHES. I am actually student at the ENI School of Niort (France) learning Web development.<br/>
+                            <a href="https://github.com/elreviae" target="_blank" class="w3-button w3-round w3-hover-aqua w3-border w3-border-aqua w3-margin">Github</a> 
+                            <a href="https://www.linkedin.com/in/mdestouches" target="_blank" class="w3-button w3-round w3-hover-blue w3-border w3-border-blue w3-margin">LinkedIn</a>
+                        </p>
+                   </div>
+                </div>
+            </div>
+
+            <div class="w3-row-padding w3-margin-bottom">
+                <div class="w3-col">
+                    <h2 class="w3-large"><i class="fas fa-server w3-text-red"></i> Data Sources</h2>
+                    <div class="w3-container w3-padding-16 dark-element">
+                        <h3>API Data</h3>
+                        <p>
+                            <a href="https://disease.sh/" target="_blank" class="w3-button w3-round w3-hover-pink w3-border w3-border-pink w3-margin">disease.sh - Open Disease Data</a>
+                            <a href="https://about-corona.net/" target="_blank" class="w3-button w3-round w3-hover-indigo w3-border w3-border-indigo w3-margin">about-corona.net</a>
+                            <a href="https://github.com/florianzemma/CoronavirusAPI-France" target="_blank" class="w3-button w3-round w3-hover-cyan w3-border w3-border-cyan w3-margin">coronavirusAPI-France</a>
+                            <a href="https://github.com/opencovid19-fr/data" target="_blank" class="w3-button w3-round w3-hover-white w3-border w3-border-white w3-margin">Opencovid19-fr</a>
+                            <a href="https://newsapi.org" target="_blank" class="w3-button w3-round w3-hover-yellow w3-border w3-border-yellow w3-margin">newsapi.org</a>
+                        </p>
                 
-                   <h3>API Data</h3>
-                <p>
-                    <a href="https://disease.sh/" target="_blank" class="w3-button">disease.sh - Open Disease Data</a> <br/>
-                    <a href="https://about-corona.net/" target="_blank" class="w3-button">about-corona.net</a>
-                </p>
-                
-                    <h3>Original Data Sources</h3>
-                <p>
-                    <a href="https://www.who.int/emergencies/diseases/novel-coronavirus-2019/situation-reports" target="_blank" class="w3-button">World Health Organization Situation Reports</a> <br/>
-                    <a href="https://systems.jhu.edu/" target="_blank" class="w3-button">Johns Hopkins CSSE</a><br/>
-                    <a href="https://www.worldometers.info/coronavirus/" target="_blank" class="w3-button">Worldometers</a>
-                </p>
+                        <h3>Original Data Sources</h3>
+                        <p>
+                            <a href="https://www.who.int/emergencies/diseases/novel-coronavirus-2019/situation-reports" target="_blank" class="w3-button w3-round w3-hover-teal w3-border w3-border-teal w3-margin">World Health Organization</a>
+                            <a href="https://systems.jhu.edu/" target="_blank" class="w3-button w3-round w3-hover-orange w3-border w3-border-orange w3-margin">Johns Hopkins CSSE</a>
+                            <a href="https://www.worldometers.info/coronavirus/" target="_blank" class="w3-button w3-round w3-hover-lime w3-border w3-border-lime w3-margin">Worldometers</a>
+                            <a href=" https://www.santepubliquefrance.fr/dossiers/coronavirus-covid-19/coronavirus-chiffres-cles-et-evolution-de-la-covid-19-en-france-et-dans-le-monde" target="_blank" class="w3-button w3-round w3-hover-light-blue w3-border w3-border-light-blue w3-margin">Santé Publique France</a>
+                          
+                        </p>
 
-                <h2 class="w3-padding-16 w3-text-red">Web Technologies</h2>
-                    <h3>Web site created with</h3>
-                <p>
-                    <a href="http://tabulator.info/" target="_blank" class="w3-button">Tabulator</a><br/>
-                    <a href="https://canvasjs.com/" target="_blank" class="w3-button">canvasJS</a><br/>
-                    <a href="https://www.anychart.com/" target="_blank" class="w3-button">Anychart</a><br/>
-                    <a href="https://www.w3schools.com/w3css/default.asp" target="_blank" class="w3-button">W3.CSS Framework</a><br/>
+                   </div>
+                </div>
+            </div>
+               
+            <div class="w3-row-padding w3-margin-bottom">
+                <div class="w3-col">
+                    <h2 class="w3-large"><i class="fas fa-code w3-text-red"></i> Web Technologies</h2>
+                    <div class="w3-container w3-padding-16 dark-element">
+                        <h3>Web site created with</h3>
+                        <p>
+                            <a href="https://jquery.com/" target="_blank" class="w3-button w3-round w3-hover-indigo w3-border w3-border-indigo w3-margin">JQuery</a>
+                            <a href="http://tabulator.info/" target="_blank" class="w3-button w3-round w3-hover-green w3-border w3-border-green w3-margin">Tabulator</a>
+                            <a href="https://www.anychart.com/" target="_blank" class="w3-button w3-round w3-hover-deep-orange w3-border w3-border-deep-orange w3-margin">AnyChart</a>
+                            <a href="https://www.w3schools.com/w3css/default.asp" target="_blank" class="w3-button w3-round w3-hover-blue-grey w3-border w3-border-blue-grey w3-margin">W3.CSS Framework</a>
+                            <a href="https://momentjs.com/" target="_blank" class="w3-button w3-round w3-hover-sand w3-border w3-border-sand w3-margin">MomentJS</a>
+                            <a href="https://github.com/MrRio/jsPDF" target="_blank" class="w3-button w3-round w3-hover-purple w3-border w3-border-purple w3-margin">JSPDF</a>
+                            <a href="https://github.com/simonbengtsson/jsPDF-AutoTable" target="_blank" class="w3-button w3-round w3-hover-red w3-border w3-border-red w3-margin">JSPDF-AutoTable</a>
+                            <a href="https://github.com/SheetJS/sheetjs" target="_blank" class="w3-button w3-round w3-hover-pale-red w3-border w3-border-pale-red w3-margin">SheetJS</a>
+                            <a href="https://fontawesome.com/" target="_blank" class="w3-button w3-round w3-hover-light-green w3-border w3-border-light-green w3-margin">Fontawesome.com</a>
+                        </p>
+                   </div>
+                </div>
 
-                    <a href="https://momentjs.com/" target="_blank" class="w3-button">MomentJS</a><br/>
-                    <a href="https://github.com/MrRio/jsPDF" target="_blank" class="w3-button">JSPDF</a><br/>
-                    <a href="https://github.com/simonbengtsson/jsPDF-AutoTable" target="_blank" class="w3-button">JSPDF-AutoTable</a><br/>
-                    <a href="https://github.com/SheetJS/sheetjs" target="_blank" class="w3-button">SheetJS</a>
-                </p>
-             
-            <footer class="w3-metro-darken w3-small w3-center">
-                <p class="w3-text-dark-grey w3-margin">
-                    Created by Maxime DES TOUCHES - 2020 . <a href="https://github.com/elreviae" target="_blank">Github</a>
-                </p>
+            </div>
+ 
+
+            <!-- Footer -->
+            <footer class="w3-container w3-padding-16 footer-custom">
+                <h4>CREDITS</h4>
+                <p>Created by Maxime DES TOUCHES - 2020 . <a href="https://github.com/elreviae" target="_blank">Github</a></p>
             </footer>
-            <script src="js/jquery-3.4.1.min.js"></script>
-            <script src="js/customfunctions.js"></script>
+
+        <!-- End page content -->
+        </div>
+
+        <script src="js/jquery-3.4.1.min.js"></script>
+        <script src="js/moment-with-locales.min.js"></script>
+        <script src="js/sidebar.js"></script>
     </body>
 </html>
+             
+          

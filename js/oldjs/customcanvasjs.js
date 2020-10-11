@@ -3,10 +3,11 @@ var covApiData = 'https://disease.sh/v3/covid-19/continents';
 // Covid-19 percent new confirmed, recovered, deaths
 var dataDoughnut1 = [];
 var optionsDoughnut1 =  {
-        backgroundColor: "#1d1d1d",
+        backgroundColor: "#212529",
+        height:400,
         exportEnabled: true,
         animationEnabled: true,
-        animationDuration: 2000,
+        animationDuration: 1000,
         theme: "dark1",
         title: {
             text: "Percentages of New Cases",
@@ -14,6 +15,8 @@ var optionsDoughnut1 =  {
             fontFamily: "tahoma",
         },
         legend:{
+            horizontalAlign: "center", // "center" , "right"
+            verticalAlign: "top",  // "top" , "bottom"
             cursor: "pointer",
             itemclick: explodePie
         },
@@ -40,10 +43,11 @@ $.getJSON(jsonData, addDataDoughnut1);
 // Covid-19 percent deaths, recovered, active
 var dataDoughnut2 = [];
 var optionsDoughnut2 =  {
-        backgroundColor: "#1d1d1d",
+        backgroundColor: "#212529",
+        height:400,
         exportEnabled: true,
         animationEnabled: true,
-        animationDuration: 2000,
+        animationDuration: 1000,
         theme: "dark1",
         title: {
             text: "Percentages of Global Cases",
@@ -51,6 +55,8 @@ var optionsDoughnut2 =  {
             fontFamily: "tahoma",
         },
         legend:{
+            horizontalAlign: "center", // "center" , "right"
+            verticalAlign: "top",  // "top" , "bottom"
             cursor: "pointer",
             itemclick: explodePie
         },
@@ -88,37 +94,41 @@ var dataPoints1= [];
 var dataPoints2 = [];
 var dataPoints3 = [];
 var optionsPoints =  {
-        backgroundColor: "#1d1d1d",
+        backgroundColor: "#212529",
+        height:400,
         exportEnabled: true,
         zoomEnabled:true,
         animationEnabled: true,
-        animationDuration: 2000,
+        animationDuration: 1000,
         theme: "dark1",
         title: {
-            text: "Overall Evolution of Cases",
+            text: "Overall evolution of cases since the pandemic began.",
             fontSize: 16,
             fontFamily: "arial",
         },
-        subtitles: [{
-            text: "Active + Deaths + Recovered",
-            fontSize: 14,
-            fontFamily: "arial",
-        }],
+        // subtitles: [{
+        //     text: "Active + Deaths + Recovered",
+        //     fontSize: 14,
+        //     fontFamily: "arial",
+        // }],
         toolTip: {
             shared: true
         },
         axisY: {
             includeZero: false,
-            title: "Confirmed Cases",
-            titleFontSize: 14,
-            lineThickness: 5,
+            title: "Number of Cases",
+            titleFontSize: 13,
+            lineThickness: 1,
             valueFormatString: "#,###,,.##M",
+            gridColor: "#495057"
         },
         axisX: {
             valueFormatString: "MM/DD/YY",
             labelAutoFit: true,
         },
         legend: {
+                    horizontalAlign: "center", // "center" , "right"
+                    verticalAlign: "top",  // "top" , "bottom"
                     cursor: "pointer",
                     itemclick: function (e) {
                         if (typeof (e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
@@ -183,11 +193,12 @@ $.getJSON(jsonData, addData);
 var dataPoints4= [];
 var dataPoints5= [];
 var optionsBars =  {
-        backgroundColor: "#1d1d1d",
+        backgroundColor: "#212529",
+        height:400,
         exportEnabled: true,
         zoomEnabled:true,
         animationEnabled: true,
-        animationDuration: 2000,
+        animationDuration: 1000,
         theme: "dark1",
         title: {
             text: "Number of Tests & Confirmed cases per Continent",
@@ -198,15 +209,18 @@ var optionsBars =  {
             content: "{name}: {y}"
         },
         axisY: {
+            gridColor: "#495057",
             includeZero: true,
             titleFontSize: 14,
             valueFormatString: "#,###,,.##M",
         },
         axisX: {
             interval: 1,
-            labelAutoFit: true,
+            labelAutoFit: true
         },
         legend: {
+                horizontalAlign: "center", // "center" , "right"
+                verticalAlign: "top",  // "top" , "bottom"
                 cursor: "pointer",
                 itemclick: function (e) {
                     if (typeof (e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
@@ -252,3 +266,5 @@ function addData2(data2) {
         $("#chartContainerBars").CanvasJSChart(optionsBars);
 }
 $.getJSON(covApiData, addData2);
+
+
