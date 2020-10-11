@@ -1,7 +1,7 @@
 # Covid-19 Data dashboard
 Simple & optimised dashboard about the actual situation and the evolution of the Covid-19 in the world.
 
-# Web application available online : http://elreviae.com/coviddata/
+## Web application available online : https://elreviae.github.io/coviddata/
 
 ----------------------
 
