@@ -44,6 +44,8 @@ var displayDate=function(cell){
     return moment(celldateValue).format("MM/DD/YY-h:mm A");
 };
 
+var proxy = "https://cors-anywhere.herokuapp.com/"; //Using proxy to avoid Cors multi-origins error. 
+var covApiFr = 'https://coronavirusapi-france.now.sh/AllLiveData';
 
 var covFranceTable = new Tabulator("#covidTableFrance", {
     // ajaxURL: proxy + covApiFr, //ajax URL
@@ -51,10 +53,8 @@ var covFranceTable = new Tabulator("#covidTableFrance", {
     //     //url - the URL of the request
     //     //params - the parameters passed with the request
     //     //response - the JSON object returned in the body of the response.
-    //     var franceData101 = response.allLiveFranceData[101];
-    //     var franceData102 = response.allLiveFranceData[102];
-    //     if(franceData101.code=='FRA'){delete response.allLiveFranceData[101];}else{return response.allLiveFranceData};
-    //     if(franceData102.code=='FRA'){delete response.allLiveFranceData[102];}else{return response.allLiveFranceData};
+    //     if(response.allLiveFranceData[101].code=='FRA'){delete response.allLiveFranceData[101];}else{return response.allLiveFranceData};
+    //     if(response.allLiveFranceData[102].code=='FRA'){delete response.allLiveFranceData[102];}else{return response.allLiveFranceData};
     //     // delete response.allLiveFranceData[102];
     //      //return the tableData property of a response json object
     // },
@@ -102,18 +102,19 @@ var covFranceTable = new Tabulator("#covidTableFrance", {
 });
 // covFranceTable.setFilter("code", "keywords", "REG- DEP-");
 
-// var proxy = "https://cors-anywhere.herokuapp.com/"; //Using proxy to avoid Cors multi-origins error. 
-var covApiFr = 'https://coronavirusapi-france.now.sh/AllLiveData';
 $.getJSON(covApiFr, function(response){
     var jsonData = response.allLiveFranceData;
+    // covFranceTable.setData(jsonData)
     if(response.allLiveFranceData[101].code=='FRA'){
         delete response.allLiveFranceData[101];
+        covFranceTable.setData(jsonData);
     }else{
-        return covFranceTable.setData(jsonData);
+        covFranceTable.setData(jsonData);
     };
     if(response.allLiveFranceData[102].code=='FRA'){
         delete response.allLiveFranceData[102];
+        covFranceTable.setData(jsonData);
     }else{
-        return covFranceTable.setData(jsonData);
+        covFranceTable.setData(jsonData);
     };
  });
