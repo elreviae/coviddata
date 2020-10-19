@@ -61,10 +61,10 @@
         <script src="js/sidebar.js"></script>
         <script>
           var proxy = "https://cors-anywhere.herokuapp.com/"; //Using proxy to avoid Cors multi-origins error. 
-          var covidNews = 'http://newsapi.org/v2/everything?q=coronavirus&language=en&apiKey=17ce54c9b99b4e2a9f98c1dfbf692a6f&sortBy=publishedAt';
-       
+          //var covidNews = 'http://newsapi.org/v2/everything?q=coronavirus&language=en&apiKey=17ce54c9b99b4e2a9f98c1dfbf692a6f&sortBy=publishedAt';
+            var covidNews = 'https://gnews.io/api/v4/search?q=covid&sortby=publishedAt&lang=en&token=a73c5492ee7efd45a7e5819a507e4135'
           
-          $.getJSON(proxy + covidNews, function(data){
+          $.getJSON(covidNews, function(data){
             var noData = 'Not Available ...';
             $.each(data.articles, function( key, val ) {
                 $('#articles').append(
@@ -72,10 +72,9 @@
                         +'<a href='+ val.url + ' target="_blank" class="w3-hover-cyan">'
                                 +'<div class="w3-container w3-padding-16 dark-element">' 
                                         + '<h3 class="w3-large w3-text-cyan">'+ val.title + '</h3>' 
-                                        + '<img src=' + val.urlToImage + '>'
+                                        + '<img src=' + val.image + '>'
                                         + '<p>'+ val.description +'</p>'
-                                        + '<p class="newsItalic w3-text-blue-grey">Source: '+ val.source.name +'</p>'
-                                        + '<p class="newsItalic w3-text-blue-grey">by '+ val.author + ' / ' + moment(val.publishedAt).format('LLL') + '</p>'
+                                        + '<p class="newsItalic w3-text-blue-grey">Source: '+ val.source.name + val.source.url +  ' / ' + moment(val.publishedAt).format('LLL') + '</p>'
                                 +'</div>'
                             +'</a>'
                     + '</div>'
