@@ -4,13 +4,26 @@ anychart.onDocumentReady(function () {
 
       var arrayCovid = data.data;
 
+      var newArrayCovid = JSON.stringify(arrayCovid, function (key, value) {
+
+        if (key=="date" && value=="2020-08-17") {
+          return value.replace('2020-08-17', '2020-08-16');
+
+        }else {
+          return value
+        };
+
+      });
+
+      var newCovidData = JSON.parse(newArrayCovid);
+   
+      // ------------------------------------------------------------ DONUT PIE 1 
       var dataPie1 = [
-        {x: 'Active', value: arrayCovid[0].active},
-        {x: 'Recovered', value: arrayCovid[0].recovered},
-        {x: 'Deaths', value: arrayCovid[0].deaths}
+        {x: 'Active', value: newCovidData[0].active},
+        {x: 'Recovered', value: newCovidData[0].recovered},
+        {x: 'Deaths', value: newCovidData[0].deaths}
       ];
 
-      // ---------------- DONUT PIE 1 
         var chartPie1 = anychart.pie(dataPie1);
 
         chartPie1.background().fill("#212529");
@@ -61,11 +74,11 @@ anychart.onDocumentReady(function () {
         // initiate chart drawing
         chartPie1.draw();
 
-      // -------------------------- DONUT PIE 2
+      // --------------------------------------------------------------- DONUT PIE 2
         var dataPie2 = [
-          {x: 'New Confirmed', value: arrayCovid[0].new_confirmed},
-          {x: 'New Recovered', value: arrayCovid[0].new_recovered},
-          {x: 'New Deaths', value: arrayCovid[0].new_deaths}
+          {x: 'New Confirmed', value: newCovidData[0].new_confirmed},
+          {x: 'New Recovered', value: newCovidData[0].new_recovered},
+          {x: 'New Deaths', value: newCovidData[0].new_deaths}
         ];
 
         var chartPie2 = anychart.pie(dataPie2);
@@ -115,8 +128,9 @@ anychart.onDocumentReady(function () {
         // initiate chart drawing
         chartPie2.draw();
 
-    // SPLINE AREAS SERIES ------------------------------------------------------
-    var dataSet = anychart.data.set(arrayCovid);
+
+    // ------------------------------------------------------ SPLINE AREAS SERIES Cumulative
+    var dataSet = anychart.data.set(newCovidData);
 
     // map data for the first series, take x from the zero column and value from the first column of data set
     var dataActive = dataSet.mapAs({x:'date', value:'active'});
@@ -186,21 +200,21 @@ anychart.onDocumentReady(function () {
     seriesRecovered.fill('#47af50 0.5').stroke({color: "#0eb345",thickness: 2});
     seriesRecovered.hovered().markers().enabled(true).type('circle');
     seriesRecovered.legendItem().iconType("circle").iconFill('#0eb345');
-/*
+
     chart
       .tooltip()
+      .displayMode("separated")
       .useHtml(true)
       .title({ fontColor: '#fff' })
       .padding([8, 13, 10, 13])
       .format(function () {
-        var active ='<span>'+'<strong>active: </strong>'+  this.getData('active').toLocaleString() + '</span><br/>';
-        var deaths ='<span>'+'<strong>deaths: </strong>'+  this.getData('deaths').toLocaleString() + '</span><br/>';
-        var recovered ='<span>'+'<strong>recovered: </strong>'+  this.getData('recovered').toLocaleString() + '</span><br/>';
+        var active ='<span>'+'<strong>Active: </strong>'+  this.getData('active').toLocaleString() + '</span><br/>';
+        var deaths ='<span>'+'<strong>Deaths: </strong>'+  this.getData('deaths').toLocaleString() + '</span><br/>';
+        var recovered ='<span>'+'<strong>Recovered: </strong>'+  this.getData('recovered').toLocaleString() + '</span>';
         return (
-          active + deaths + recovered + date
+          active + deaths + recovered
         );
       });
-*/
 
     // turn on X Scroller
     chart.xScroller(true);
@@ -226,8 +240,126 @@ anychart.onDocumentReady(function () {
     chart.container('chartCurves');
     // initiate chart drawing
     chart.draw();
-    }
-  );
+
+    //  ------------------------------------------------------ SPLINE AREAS SERIES New Cases
+    var dataSetNew = anychart.data.set(newCovidData);
+
+    // map data for the first series, take x from the zero column and value from the first column of data set
+    var dataNewConfirmed = dataSetNew.mapAs({x:'date', value:'new_confirmed'});
+    var dataNewDeaths = dataSetNew.mapAs({x:'date', value:'new_deaths'});
+    var dataNewRecovered = dataSetNew.mapAs({x:'date', value:'new_recovered'});
+
+    // create area chart
+    var chartNewcases = anychart.area();
+
+    // adding symbols to yAxis labels
+    //chart.yAxis().labels().format('{%Value}%');
+
+    chartNewcases.background().fill("#212529");
+    // turn on chart animation
+    chartNewcases.animation(true);
+
+    chartNewcases.padding([0, 3, 20, 3]);
+
+    //chart.xScale(anychart.scales.dateTime());
+    chartNewcases.xScale().inverted(true);
+
+    // force chart to stack values by Y scale.
+    chartNewcases.yScale().stackMode('value');
+
+    chartNewcases.yAxis().title('Number of New Cases');
+    chartNewcases.xAxis().labels().padding([0, 5, 10, 5]);
+
+    // Get yGrid.
+    var yGrid = chartNewcases.yGrid();
+    yGrid.stroke({color: '#2a2f34', thickness: 1});
+
+    // turn on legend
+    chartNewcases.legend().enabled(true).fontSize(14).padding([0, 0, 10, 0]);
+
+    // set chart title text settings
+    chartNewcases
+      .title()
+      .enabled(true)
+      .useHtml(true)
+      .text('Number of New Cases in the World (Since 2020-01-21)')
+      .padding([0, 0, 20, 0]);
+
+    chartNewcases
+      .credits()
+      .enabled(true)
+      .url('https://www.who.int/emergencies/diseases/novel-coronavirus-2019/situation-reports')
+      .text('Data source: World Health Organization')
+      .logoSrc('https://www.who.int/ResourcePackages/WHO/assets/dist/images/logos/en/h-logo-white.svg');
+
+    // Create first series with mapped data
+    var seriesNewConfirmed = chartNewcases.splineArea(dataNewConfirmed);
+    seriesNewConfirmed.name('New Confirmed');
+    seriesNewConfirmed.fill('#ffc107 0.5').stroke({color: "#f7cf1b",thickness: 2});
+    seriesNewConfirmed.hovered().markers().enabled(true).type('circle');
+    seriesNewConfirmed.legendItem().iconType("circle").iconFill('#ffc107');
+
+    // create 2nd series with mapped data
+    var seriesNewDeaths = chartNewcases.splineArea(dataNewDeaths);
+    seriesNewDeaths.name('New Deaths');
+    seriesNewDeaths.fill('#e64336 0.5').stroke({color: "#f44336",thickness: 2});
+    seriesNewDeaths.hovered().markers().enabled(true).type('circle');
+    seriesNewDeaths.legendItem().iconType("circle").iconFill('#e64336');
+
+    // create 2nd series with mapped data
+    var seriesNewRecovered = chartNewcases.splineArea(dataNewRecovered);
+    seriesNewRecovered.name('New Recovered');
+    seriesNewRecovered.fill('#47af50 0.5').stroke({color: "#0eb345",thickness: 2});
+    seriesNewRecovered.hovered().markers().enabled(true).type('circle');
+    seriesNewRecovered.legendItem().iconType("circle").iconFill('#0eb345');
+
+    chartNewcases
+      .tooltip()
+      .displayMode("separated")
+      .useHtml(true)
+      .title({ fontColor: '#fff' })
+      .padding([8, 13, 10, 13])
+      .format(function () {
+        var newConfirmed ='<span>'+'<strong>Active: </strong>'+  this.getData('new_confirmed').toLocaleString() + '</span><br/>';
+        var newDeaths ='<span>'+'<strong>Deaths: </strong>'+  this.getData('new_deaths').toLocaleString() + '</span><br/>';
+        var newRecovered ='<span>'+'<strong>Recovered: </strong>'+  this.getData('new_recovered').toLocaleString() + '</span>';
+        return (
+          newConfirmed + newDeaths + newRecovered
+        );
+      });
+
+    // turn on X Scroller
+    chartNewcases.xScroller(true);
+    // set the fill color
+    chartNewcases.xScroller().fill("#212529");
+    // set the selected fill color
+    chartNewcases.xScroller().selectedFill("#2a2f34");
+    // set the stroke of the bar
+    chartNewcases.xScroller().outlineStroke("#495057", 1);
+
+    // remove two element from the menu
+    chartNewcases.contextMenu().itemsFormatter(function(items){
+      delete items["select-marquee-start"];
+      delete items["save-data-as"];
+      delete items["share-with"];
+      delete items["full-screen-separator"];
+      delete items["about"];
+    return items;
+    });
+
+    chartNewcases.interactivity().hoverMode('by-x');
+    // set container id for the chart
+    chartNewcases.container('chartCurvesNewCases');
+    // initiate chart drawing
+    chartNewcases.draw();
+
+
+
+
+
+
+  }
+);
 
 //***********************************************************************
   var covApiData = 'https://disease.sh/v3/covid-19/continents';
@@ -329,5 +461,6 @@ anychart.onDocumentReady(function () {
 
 
 
-
 });
+
+

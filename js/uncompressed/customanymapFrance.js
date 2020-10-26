@@ -8,6 +8,7 @@ anychart.onDocumentReady(function () {
       'https://coronavirusapi-france.now.sh/AllLiveData',
       function (data) {
         var arrayCovidInfos = data.allLiveFranceData;
+        
             arrayCovidInfos.forEach(o => {
               Object.assign(o, 
               { 
