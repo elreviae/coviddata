@@ -44,7 +44,10 @@ var displayDate=function(cell){
     return moment(celldateValue).format("MM/DD/YY-h:mm A");
 };
 
-var proxy = "https://cors-anywhere.herokuapp.com/"; //Using proxy to avoid Cors multi-origins error. 
+
+
+
+//var proxy = "https://cors-anywhere.herokuapp.com/"; //Using proxy to avoid Cors multi-origins error. 
 var covApiFr = 'https://coronavirusapi-france.now.sh/AllLiveData';
 
 var covFranceTable = new Tabulator("#covidTableFrance", {
@@ -67,7 +70,7 @@ var covFranceTable = new Tabulator("#covidTableFrance", {
     height: 750,
     // minHeight:400,
     // maxHeight:"100%",
-    placeholder:"Data Loading",
+    placeholder:"Data Not available",
     virtualDomBuffer: 300,
     pagination:"local", //enable local pagination.
     paginationSize:15, // this option can take any positive integer value
@@ -75,7 +78,7 @@ var covFranceTable = new Tabulator("#covidTableFrance", {
     layout:"fitDataStretch",
     // responsiveLayout:"collapse",
     tooltips:false,
-    resizableRows:true,
+    resizableRows:false,
     initialSort:[
                     {column:"nouvellesHospitalisations", dir:"desc"},
                 ],
@@ -104,17 +107,21 @@ var covFranceTable = new Tabulator("#covidTableFrance", {
 
 $.getJSON(covApiFr, function(response){
     var jsonData = response.allLiveFranceData;
-    // covFranceTable.setData(jsonData)
     if(response.allLiveFranceData[101].code=='FRA'){
         delete response.allLiveFranceData[101];
         covFranceTable.setData(jsonData);
-    }else{
+    }else {
         covFranceTable.setData(jsonData);
     };
+    
     if(response.allLiveFranceData[102].code=='FRA'){
         delete response.allLiveFranceData[102];
         covFranceTable.setData(jsonData);
     }else{
         covFranceTable.setData(jsonData);
     };
+    
  });
+
+    
+
