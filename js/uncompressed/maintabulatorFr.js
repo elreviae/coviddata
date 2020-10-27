@@ -78,7 +78,7 @@ var covFranceTable = new Tabulator("#covidTableFrance", {
     layout:"fitDataStretch",
     // responsiveLayout:"collapse",
     tooltips:false,
-    resizableRows:false,
+    resizableRows:true,
     initialSort:[
                     {column:"nouvellesHospitalisations", dir:"desc"},
                 ],
