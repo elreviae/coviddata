@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <title>Covid-19 Dashboard Tracker</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -11,7 +11,6 @@
     <link href="css/anychart-ui.min.css" type="text/css" rel="stylesheet">
     <link href="css/anychart-font.min.css" type="text/css" rel="stylesheet">
     <link href="css/tabulator_midnight.min.css" rel="stylesheet">
-
 
     <body class="bg-dashboard">
         <!-- Top container -->
@@ -39,7 +38,6 @@
         <!-- Overlay effect when opening sidebar on small screens -->
         <div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
 
- 
         <!-- !PAGE CONTENT! -->
         <div class="w3-main main-custom">
             <!-- Header -->
@@ -51,7 +49,6 @@
                 <div class="w3-quarter">
                     <div class="w3-container w3-padding-16 dark-element">
                         <h4 class="w3-large">New hospital admissions</h4>
-                        <!-- <div class="w3-left"><i class="fa fa-comment w3-xxxlarge"></i></div> -->
                         <div class="w3-right">
                             <h3 class="w3-xlarge w3-text-light-blue" id="nouvellesHospitalisations"></h3>
                         </div>
@@ -61,7 +58,6 @@
                 <div class="w3-quarter">
                     <div class="w3-container w3-padding-16 dark-element">
                         <h4 class="w3-large">Actual hospitalizations</h4>
-                        <!-- <div class="w3-left"><i class="fa fa-share-alt w3-xxxlarge"></i></div> -->
                         <div class="w3-right">
                             <h3 class="w3-xlarge w3-text-blue" id="hospitalises"></h3>
                         </div>
@@ -71,7 +67,6 @@
                 <div class="w3-quarter">
                     <div class="w3-container w3-padding-16 dark-element">
                         <h4 class="w3-large">New hospital intensive care</h4>
-                        <!-- <div class="w3-left"><i class="fa fa-eye w3-xxxlarge"></i></div> -->
                         <div class="w3-right">
                             <h3 class="w3-xlarge w3-text-orange" id="nouvellesReanimations"></h3>
                         </div>
@@ -82,7 +77,6 @@
                 <div class="w3-quarter">
                     <div class="w3-container w3-padding-16 dark-element">
                         <h4 class="w3-large">Actual intensive care</h4>
-                        <!-- <div class="w3-left"><i class="fa fa-users w3-xxxlarge"></i></div> -->
                         <div class="w3-right">
                             <h3 class="w3-xlarge w3-text-deep-orange" id="reanimation"></h3>
                         </div>
@@ -151,10 +145,19 @@
                 </div>
             </div>
 
+            <!-- <div class="w3-row-padding w3-margin-bottom">
+                <header class="w3-container ">
+                    <h5 class="w3-large"><i class="fas fa-chart-line w3-text-blue"></i> France data historical time series since the Covid-19 pandemic began. Last update: <span id="latestUpdateCurve" class="w3-text-blue"></span></h5>
+                </header>
+                <div class="w3-col">
+                    <div class="w3-container w3-padding-16 dark-element">
+                        <div id="chartCurvesFrance" class="chartsBlock2"></div>
+                   </div>
+                </div>
+            </div>  -->
  
-           
-              <!-- Footer -->
-              <footer class="w3-container w3-padding-16 footer-custom">
+            <!-- Footer -->
+            <footer class="w3-container w3-padding-16 footer-custom">
                 <h4>CREDITS</h4>
                 <p>Created by Maxime DES TOUCHES - 2020 . <a href="https://github.com/elreviae" target="_blank">Github</a></p>
             </footer>
@@ -172,12 +175,15 @@
         <script src="js/proj4.js"></script>
         <script src="js/dark_earth.min.js"></script>
         <script src="js/moment-with-locales.min.js"></script>
-        <script src="js/customanymapFrance.min.js"></script>
+        <!-- <script src="js/customanymapFrance.min.js"></script> -->
+        <script src="js/uncompressed/customanymapFrance.js"></script>
         <script src="js/tabulator.min.js"></script>
         <script src="js/jspdf.min.js"></script>
         <script src="js/autotable.js"></script>
         <script src="js/xlsx.full.min.js"></script>
-        <script src="js/maintabulatorFr.min.js"></script>
+        <script src="js/uncompressed/maintabulatorFr.js"></script>
+        <!-- <script src="js/maintabulatorFr.min.js"></script> -->
+        <script src="js/uncompressed/customchartsFrance.js"></script>
         <script src="js/sidebar.js"></script>
         <script>
             //https://github.com/florianzemma/CoronavirusAPI-France
@@ -194,13 +200,17 @@
                     var nouvellesReanimations = responseData.FranceGlobalLiveData[0].nouvellesReanimations;
                     var casConfirmesEhpad = responseData.FranceGlobalLiveData[0].casConfirmesEhpad;
                     var decesEhpad = responseData.FranceGlobalLiveData[0].decesEhpad;
-                    if(latestUpdate==null){ $('#latestUpdate').html(noData)}else{ $('#latestUpdate').html(latestUpdate)}
+                    if(latestUpdate==null){
+                        $('#latestUpdate').html(noData); $('#latestUpdateCurve').html(noData);
+                    }else{
+                        $('#latestUpdate').html(latestUpdate); $('#latestUpdateCurve').html(latestUpdate)
+                    }
                     if(casConfirmes==null){ $('#casConfirmes').html(noData)}else{ $('#casConfirmes').html(casConfirmes.toLocaleString())}
                     if(deces==null){ $('#deces').html(noData)}else{ $('#deces').html(deces.toLocaleString())}
                     if(gueris==null){ $('#gueris').html(noData)}else{ $('#gueris').html(gueris.toLocaleString())}
                     if(hospitalises==null){ $('#hospitalises').html(noData)}else{ $('#hospitalises').html(hospitalises.toLocaleString())}
                     if(reanimation==null){ $('#reanimation').html(noData)}else{ $('#reanimation').html(reanimation.toLocaleString())}
-                    if(nouvellesHospitalisations==null){ $('#nouvellesHospitalisations').html(noData)}else{  $('#nouvellesHospitalisations').html(nouvellesHospitalisations.toLocaleString()) }
+                    if(nouvellesHospitalisations==null){ $('#nouvellesHospitalisations').html(noData)}else{ $('#nouvellesHospitalisations').html(nouvellesHospitalisations.toLocaleString()) }
                     if(nouvellesReanimations==null){ $('#nouvellesReanimations').html(noData)}else{  $('#nouvellesReanimations').html(nouvellesReanimations.toLocaleString())}
                     if(casConfirmesEhpad==null){ $('#casConfirmesEhpad').html(noData)}else{ $('#casConfirmesEhpad').html(casConfirmesEhpad.toLocaleString())}
                     if(decesEhpad==null){ $('#decesEhpad').html(noData)}else{$('#decesEhpad').html(decesEhpad.toLocaleString())}
@@ -263,6 +273,6 @@
             covFranceTable.download("xlsx", "covidDataFrance2020.xlsx", {sheetName:"covid-19 France Data"});
         });
         </script>
-   
+     
     </body>
 </html>

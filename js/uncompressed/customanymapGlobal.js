@@ -12,7 +12,7 @@ anychart.onDocumentReady(function () {
                 'lat': o.coordinates.latitude,
                 'long': o.coordinates.longitude,
               });
-              delete o.countryInfo;
+              // delete o.countryInfo;
           });
 
         var dataSet = anychart.data.set(arrayglobalCovidInfos);

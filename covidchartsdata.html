@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <title>Covid-19 Dashboard Tracker</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -12,15 +12,14 @@
     <link href="css/anychart-font.min.css" type="text/css" rel="stylesheet">
 
     <body class="bg-dashboard">
-
         <!-- Top container -->
         <div class="w3-bar w3-top w3-large navbar-custom">
             <button class="w3-bar-item w3-button w3-hide-large w3-hover-none w3-hover-text-light-grey" onclick="w3_open();"><i class="fa fa-bars"></i>  Menu</button>
             <a href="index.html" ><span class="w3-bar-item w3-left w3-text-amber w3-xlarge"><i class="fas fa-circle-notch"></i> CovidData</span></a>
         </div>
 
-         <!-- Sidebar/menu -->
-         <nav class="w3-sidebar w3-collapse sidebar-custom w3-animate-left" id="dashSidebar">
+        <!-- Sidebar/menu -->
+        <nav class="w3-sidebar w3-collapse sidebar-custom w3-animate-left" id="dashSidebar">
             <div class="w3-container w3-margin-top">
                 <h5 class="dashboardTitle">Covid Data Dashboard</h5>
             </div>
@@ -59,13 +58,7 @@
                    </div>
                 </div>
             </div>
-            <!-- <div class="w3-row-padding w3-margin-bottom">
-                <div class="w3-col">
-                    <div class="w3-container w3-padding-16 dark-element">
-                        <div id="chartCurvesNewCases" class="chartsBlock2"></div>
-                   </div>
-                </div>
-            </div> -->
+
             <div class="w3-row-padding w3-margin-bottom">
                 <div class="w3-col">
                     <div class="w3-container w3-padding-16 dark-element">
@@ -101,7 +94,8 @@
         <script src="js/anychart-exports.min.js"></script>
         <script src="js/dark_earth.min.js"></script>
         <script src="js/anychart-data-adapter.min.js"></script>
-        <script src="js/customchartsData.min.js"></script>
+        <!-- <script src="js/customchartsData.min.js"></script> -->
+        <script src="js/uncompressed/customchartsData.js"></script>
         <script src="js/sidebar.js"></script>
         <script>
             var jsonData = 'https://corona-api.com/timeline';

@@ -203,7 +203,7 @@ anychart.onDocumentReady(function () {
 
     chart
       .tooltip()
-      .displayMode("separated")
+      .displayMode("single")
       .useHtml(true)
       .title({ fontColor: '#fff' })
       .padding([8, 13, 10, 13])
