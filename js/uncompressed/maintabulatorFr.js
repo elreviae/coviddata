@@ -1,8 +1,3 @@
-// function paramLookup(cell){
-//     var value = cell.getElement().classList.add("w3-metro-darken");
-//     return value;
-// }
-
 var cellFormatNewHospitalAdmiss =function(cell, formatterParams){ 
     let value = cell.getValue();
     if(value > 0 && value <= 49){
@@ -54,7 +49,6 @@ var cellFormatActualHospitalAdmiss =function(cell, formatterParams){
         return value.toLocaleString();
     }else if (value > 2500) {
         cell.getElement().classList.add("w3-text-blue");
-        cell.getElement().style.font = "normal bold 15px arial,serif";
         return value.toLocaleString();
     }else if (value == null) {
         cell.getElement().classList.add("w3-text-red");
@@ -63,7 +57,6 @@ var cellFormatActualHospitalAdmiss =function(cell, formatterParams){
         return value.toLocaleString();
     }
 };
-
 
 var cellFormatActualHospIntensCare =function(cell, formatterParams){ 
     let value = cell.getValue();
@@ -78,7 +71,6 @@ var cellFormatActualHospIntensCare =function(cell, formatterParams){
         return value.toLocaleString();
     }else if (value > 1000) {
         cell.getElement().classList.add("w3-text-deep-orange");
-        cell.getElement().style.font = "normal bold 15px arial,serif";
         return value.toLocaleString();
     }else if (value == null) {
         cell.getElement().classList.add("w3-text-red");
@@ -108,29 +100,15 @@ var cellFormatString = function(cell, formatterParams){
     }
 };
 
-
 // var displayDate=function(cell){
 //     var celldateValue = cell.getValue();
 //     return moment(celldateValue).format("MM/DD/YY-h:mm A");
 // };
 
-
-
-
 //var proxy = "https://cors-anywhere.herokuapp.com/"; //Using proxy to avoid Cors multi-origins error. 
 var covApiFr = 'https://coronavirusapi-france.now.sh/AllLiveData';
 
 var covFranceTable = new Tabulator("#covidTableFrance", {
-    // ajaxURL: proxy + covApiFr, //ajax URL
-    // ajaxResponse:function(url, params, response){
-    //     //url - the URL of the request
-    //     //params - the parameters passed with the request
-    //     //response - the JSON object returned in the body of the response.
-    //     if(response.allLiveFranceData[101].code=='FRA'){delete response.allLiveFranceData[101];}else{return response.allLiveFranceData};
-    //     if(response.allLiveFranceData[102].code=='FRA'){delete response.allLiveFranceData[102];}else{return response.allLiveFranceData};
-    //     // delete response.allLiveFranceData[102];
-    //      //return the tableData property of a response json object
-    // },
     downloadConfig:{
         columnHeaders:true, //do not include column headers in downloaded table
         columnGroups:false, //do not include column groups in column headers for downloaded table
@@ -148,7 +126,7 @@ var covFranceTable = new Tabulator("#covidTableFrance", {
     layout:"fitDataStretch",
     // responsiveLayout:"collapse",
     tooltips:false,
-    resizableRows:true,
+    resizableRows:false,
     initialSort:[
                     {column:"reanimation", dir:"desc"},
                 ],
@@ -173,10 +151,9 @@ var covFranceTable = new Tabulator("#covidTableFrance", {
         // }
     ],
 });
-// covFranceTable.setFilter("code", "keywords", "REG- DEP-");
 
 $.getJSON(covApiFr, function(response){
-    var jsonData = response.allLiveFranceData;
+    let jsonData = response.allLiveFranceData;
     if(response.allLiveFranceData[101].code=='FRA'){
         delete response.allLiveFranceData[101];
         covFranceTable.setData(jsonData);

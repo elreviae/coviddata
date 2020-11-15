@@ -15,7 +15,7 @@
             <a href="index.html" ><span class="w3-bar-item w3-left w3-text-amber w3-xlarge"><i class="fas fa-circle-notch"></i> CovidData</span></a>
         </div>
 
-             <!-- Sidebar/menu -->
+            <!-- Sidebar/menu -->
           <nav class="w3-sidebar w3-collapse sidebar-custom w3-animate-left" id="dashSidebar">
             <div class="w3-container w3-margin-top">
                 <h5 class="dashboardTitle">Covid Data Dashboard</h5>
@@ -23,7 +23,7 @@
             <div class="w3-bar-block">
                 <a href="#" class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i>  Close Menu</a>
                 <a href="index.html" class="w3-bar-item w3-button w3-padding w3-hover-amber"><i class="fas fa-pills"></i> Data Overview</a>
-                <a href="covidworldmaps.html" class="w3-bar-item w3-button w3-padding w3-hover-pink"><i class="fas fa-globe-europe"></i> World Maps</a>
+                <a href="covidworldmaps.html" class="w3-bar-item w3-button w3-padding w3-hover-teal"><i class="fas fa-globe-europe"></i> World Maps</a>
                 <a href="covidchartsdata.html" class="w3-bar-item w3-button w3-padding w3-hover-light-green"><i class="fas fa-chart-bar"></i>  Data Charts</a>
                 <a href="covidfrance.html" class="w3-bar-item w3-button w3-padding w3-hover-blue"><i class="fas fa-flag"></i> Data France</a>
                 <a href="covidnews.html" class="w3-bar-item w3-button w3-padding w3-hover-cyan"><i class="fas fa-newspaper"></i>  News about Covid</a>
@@ -34,7 +34,6 @@
         <!-- Overlay effect when opening sidebar on small screens -->
         <div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
 
-      
         <!-- !PAGE CONTENT! -->
         <div class="w3-main main-custom">
             <!-- Header -->
@@ -42,11 +41,9 @@
                 <h5 class="w3-large"><i class="fas fa-newspaper w3-text-cyan"></i> Some worldwide news & articles about the Covid-19 pandemic.</h5>
             </header>
 
-            
             <div id="articles" class="w3-row-padding"></div>
 
-           
-
+        
             <!-- Footer -->
             <footer class="w3-container w3-padding-16 footer-custom">
                 <h4>CREDITS</h4>
@@ -60,12 +57,10 @@
         <script src="js/moment-with-locales.min.js"></script>
         <script src="js/sidebar.js"></script>
         <script>
-          var proxy = "https://cors-anywhere.herokuapp.com/"; //Using proxy to avoid Cors multi-origins error. 
-          //var covidNews = 'http://newsapi.org/v2/everything?q=coronavirus&language=en&apiKey=17ce54c9b99b4e2a9f98c1dfbf692a6f&sortBy=publishedAt';
+           //var proxy = "https://cors-anywhere.herokuapp.com/"; //Using proxy to avoid Cors multi-origins error. 
             var covidNews = 'https://gnews.io/api/v4/search?q=covid&sortby=publishedAt&lang=en&token=a73c5492ee7efd45a7e5819a507e4135'
-          
           $.getJSON(covidNews, function(data){
-            var noData = 'Not Available ...';
+            let noData = 'Not Available ...';
             $.each(data.articles, function( key, val ) {
                 $('#articles').append(
                     '<div class="w3-panel">'

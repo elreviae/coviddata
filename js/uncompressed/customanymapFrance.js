@@ -3,7 +3,7 @@ anychart.onDocumentReady(function () {
 
     // Creates Map Chart
     var map = anychart.map();
-
+   
     anychart.data.loadJsonFile(
       'https://coronavirusapi-france.now.sh/AllLiveData',
       function (data) {
@@ -61,7 +61,7 @@ anychart.onDocumentReady(function () {
           });
 
           // map.padding([5, 0, 5, 0]);
-
+         
           map.geoData('anychart.maps.france');
 
           map
@@ -157,6 +157,7 @@ anychart.onDocumentReady(function () {
           map.colorRange(true);
 
           map.interactivity().selectionMode('none');
+         
 
           map
             .tooltip()
@@ -198,7 +199,8 @@ anychart.onDocumentReady(function () {
             // set container id for the map
             map.container('containerMapFrance');
             // initiate map drawing
-            map.background('none');
+
+            map.background('#212529');
             // set render mode: true - async
             map.draw();
 

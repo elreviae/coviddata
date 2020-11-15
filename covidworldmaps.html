@@ -26,7 +26,7 @@
             <div class="w3-bar-block">
                 <a href="#" class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i>  Close Menu</a>
                 <a href="index.html" class="w3-bar-item w3-button w3-padding w3-hover-amber"><i class="fas fa-pills"></i> Data Overview</a>
-                <a href="covidworldmaps.html" class="w3-bar-item w3-button w3-padding w3-hover-pink"><i class="fas fa-globe-europe"></i> World Maps</a>
+                <a href="covidworldmaps.html" class="w3-bar-item w3-button w3-padding w3-hover-teal"><i class="fas fa-globe-europe"></i> World Maps</a>
                 <a href="covidchartsdata.html" class="w3-bar-item w3-button w3-padding w3-hover-light-green"><i class="fas fa-chart-bar"></i>  Data Charts</a>
                 <a href="covidfrance.html" class="w3-bar-item w3-button w3-padding w3-hover-blue"><i class="fas fa-flag"></i> Data France</a>
                 <a href="covidnews.html" class="w3-bar-item w3-button w3-padding w3-hover-cyan"><i class="fas fa-newspaper"></i>  News about Covid</a>
@@ -41,27 +41,27 @@
         <div class="w3-main main-custom">
             
             <header class="w3-container">
-                <h5 class="w3-large"><i class="fas fa-globe w3-text-pink"></i> World maps reported Cases by Country, Territory, or Conveyance.</h5>
+                <h5 class="w3-large"><i class="fas fa-globe w3-text-teal"></i> World maps reported Cases by Country, Territory, or Conveyance.</h5>
                 <p class="w3-small">Double click on the map to zoom or use control buttons. Right click on the map for context menu.</p>
             </header>
      
             <div class="w3-row w3-margin-bottom">
                 <div class="w3-container w3-padding-16">
-                    <div id="tabMaps" class="w3-bar dark-element">
-                        <button class="w3-bar-item w3-button active mapTabs" onclick="openMap('worldActiveCritical')">Active & Critical Cases Map</button>
-                        <button class="w3-bar-item w3-button mapTabs" onclick="openMap('worldGlobalCases')">Global Cumulative Cases Map</button>
+                    <div id="tabMaps" class="w3-bar">
+                        <button class="w3-bar-item w3-button w3-round w3-mobile w3-hover-teal w3-border w3-border-teal w3-margin-right active mapTabs" onclick="openMap('worldActiveCritical')">Active & Critical Cases Map</button>
+                        <button class="w3-bar-item w3-button w3-round w3-mobile w3-hover-teal w3-border w3-border-teal mapTabs" onclick="openMap('worldGlobalCases')">Global Cumulative Cases Map</button>
                     </div>
                 </div>
                   
                 <div id="worldActiveCritical" class="w3-container worldMap">
-                    <p class="w3-medium">Covid-19 World map of actual active & critical cases. Last update: <span id="latestUpdateActive" class="w3-text-pink"></span></p>
+                    <h5 class="w3-large">Covid-19 World map of actual active & critical cases. Last update: <span id="latestUpdateActive" class="w3-text-teal"></span></h5>
                     <div class="w3-padding-16 dark-element">
                         <div id="containerMap"></div>
                     </div>
                 </div>
                   
                 <div id="worldGlobalCases" class="w3-container worldMap" style="display:none">
-                <p class="w3-medium">Covid-19 World map of cumulative global cases since the beginning of the pandemic. Last update: <span id="latestUpdateGlobal" class="w3-text-pink"></span></p>
+                    <h5 class="w3-large">Covid-19 World map of cumulative global cases since the beginning of the pandemic. Last update: <span id="latestUpdateGlobal" class="w3-text-teal"></span></h5>
                     <div class=" w3-padding-16 dark-element">
                         <div id="containerGlobalMap"></div>
                     </div>
@@ -89,8 +89,7 @@
         <script src="js/proj4.js"></script>
         <script src="js/dark_earth.min.js"></script>
         <script src="js/moment-with-locales.min.js"></script>
-        <!-- <script src="js/customanymapGlobal.min.js"></script> -->
-        <script src="js/uncompressed/customanymapGlobal.js"></script>
+        <script src="js/customanymapGlobal.min.js"></script>
         <script src="js/customanymapCountries.min.js"></script>
         <script src="js/sidebar.js"></script>
         <script>

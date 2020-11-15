@@ -27,7 +27,7 @@
             <div class="w3-bar-block">
                 <a href="#" class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i>  Close Menu</a>
                 <a href="index.html" class="w3-bar-item w3-button w3-padding w3-hover-amber"><i class="fas fa-pills"></i> Data Overview</a>
-                <a href="covidworldmaps.html" class="w3-bar-item w3-button w3-padding w3-hover-pink"><i class="fas fa-globe-europe"></i> World Maps</a>
+                <a href="covidworldmaps.html" class="w3-bar-item w3-button w3-padding w3-hover-teal"><i class="fas fa-globe-europe"></i> World Maps</a>
                 <a href="covidchartsdata.html" class="w3-bar-item w3-button w3-padding w3-hover-light-green"><i class="fas fa-chart-bar"></i>  Data Charts</a>
                 <a href="covidfrance.html" class="w3-bar-item w3-button w3-padding w3-hover-blue"><i class="fas fa-flag"></i> Data France</a>
                 <a href="covidnews.html" class="w3-bar-item w3-button w3-padding w3-hover-cyan"><i class="fas fa-newspaper"></i>  News about Covid</a>
@@ -49,6 +49,7 @@
                 <div class="w3-quarter">
                     <div class="w3-container w3-padding-16 dark-element">
                         <h4 class="w3-large">New hospital admissions</h4>
+                        <div class="w3-left"><i class="fas fa-hospital w3-xxxlarge "></i></div>
                         <div class="w3-right">
                             <h3 class="w3-xlarge w3-text-light-blue" id="nouvellesHospitalisations"></h3>
                         </div>
@@ -58,6 +59,7 @@
                 <div class="w3-quarter">
                     <div class="w3-container w3-padding-16 dark-element">
                         <h4 class="w3-large">Actual hospitalizations</h4>
+                        <div class="w3-left"><i class="fas fa-procedures w3-xxxlarge"></i></div>
                         <div class="w3-right">
                             <h3 class="w3-xlarge w3-text-blue" id="hospitalises"></h3>
                         </div>
@@ -67,6 +69,7 @@
                 <div class="w3-quarter">
                     <div class="w3-container w3-padding-16 dark-element">
                         <h4 class="w3-large">New hospital intensive care</h4>
+                        <div class="w3-left"><i class="fas fa-plus-square w3-xxxlarge"></i></div>
                         <div class="w3-right">
                             <h3 class="w3-xlarge w3-text-orange" id="nouvellesReanimations"></h3>
                         </div>
@@ -77,6 +80,7 @@
                 <div class="w3-quarter">
                     <div class="w3-container w3-padding-16 dark-element">
                         <h4 class="w3-large">Actual intensive care</h4>
+                        <div class="w3-left"><i class="fas fa-exclamation-triangle w3-xxxlarge"></i></div>
                         <div class="w3-right">
                             <h3 class="w3-xlarge w3-text-deep-orange" id="reanimation"></h3>
                         </div>
@@ -108,7 +112,7 @@
                                 </div>
                             </div>
                             <div class="w3-container dark-element-borderBottom">
-                                <h3 class="w3-large">Total Deaths</h3>
+                                <h3 class="w3-large">Total Deaths (without EHPAD)</h3>
                                 <div class="w3-right">
                                     <h4 class="w3-xlarge w3-text-red" id="deces"></h4>
                                 </div>
@@ -134,6 +138,8 @@
                         <h5 class="w3-large"><i class="fas fa-table w3-text-blue"></i> Reported French Cases by Counties and Regions. </h5>
                         <div class="w3-bar">
                             <select id="filterField" class="w3-bar-item w3-mobile w3-select dark-element-withfont w3-round w3-margin-right"></select>
+                            <button id="filter-dep" class="w3-bar-item w3-button w3-round w3-mobile w3-hover-blue w3-border w3-border-blue w3-margin-right">Display Counties</button>
+                            <button id="filter-reg" class="w3-bar-item w3-button w3-round w3-mobile w3-hover-blue w3-border w3-border-blue w3-margin-right">Display Regions</button>
                             <button id="filter-clear" class="w3-bar-item w3-button w3-round w3-mobile w3-hover-aqua w3-border w3-border-aqua w3-margin-right">Clear Filters</button>
                             <button id="pdfDownload" class="w3-bar-item w3-button w3-round w3-mobile w3-hover-red w3-border w3-border-red w3-margin-right">Generate PDF</button>
                             <button id="xlsxDownload" class="w3-bar-item w3-button w3-round w3-mobile w3-hover-green w3-border w3-border-green">Generate Excel</button>
@@ -145,16 +151,17 @@
                 </div>
             </div>
 
-            <!-- <div class="w3-row-padding w3-margin-bottom">
-                <header class="w3-container ">
+            <div class="w3-row-padding w3-margin-bottom">
+                <header class="w3-container">
                     <h5 class="w3-large"><i class="fas fa-chart-line w3-text-blue"></i> France data historical time series since the Covid-19 pandemic began. Last update: <span id="latestUpdateCurve" class="w3-text-blue"></span></h5>
+                    <p class="w3-small">Right click on chart for context menu.</p>
                 </header>
                 <div class="w3-col">
                     <div class="w3-container w3-padding-16 dark-element">
                         <div id="chartCurvesFrance" class="chartsBlock2"></div>
                    </div>
                 </div>
-            </div>  -->
+            </div> 
  
             <!-- Footer -->
             <footer class="w3-container w3-padding-16 footer-custom">
@@ -171,40 +178,34 @@
         <script src="js/anychart-exports.min.js"></script>
         <script src="js/anychart-map.min.js"></script>
         <script src="js/anychart-data-adapter.min.js"></script>
-        <script src="js/france.js"></script>
+        <script src="js/france.min.js"></script>
         <script src="js/proj4.js"></script>
         <script src="js/dark_earth.min.js"></script>
         <script src="js/moment-with-locales.min.js"></script>
-        <!-- <script src="js/customanymapFrance.min.js"></script> -->
-        <script src="js/uncompressed/customanymapFrance.js"></script>
+        <script src="js/customanymapFrance.min.js"></script>
         <script src="js/tabulator.min.js"></script>
         <script src="js/jspdf.min.js"></script>
         <script src="js/autotable.js"></script>
         <script src="js/xlsx.full.min.js"></script>
-        <script src="js/uncompressed/maintabulatorFr.js"></script>
-        <!-- <script src="js/maintabulatorFr.min.js"></script> -->
-        <script src="js/uncompressed/customchartsFrance.js"></script>
+        <script src="js/maintabulatorFr.min.js"></script>
+        <script src="js/customchartsFrance.min.js"></script>
         <script src="js/sidebar.js"></script>
         <script>
             //https://github.com/florianzemma/CoronavirusAPI-France
             var franceGlobal = 'https://coronavirusapi-france.now.sh/FranceLiveGlobalData';
             $.getJSON(franceGlobal, function(responseData){
-                    var noData = 'Not Available ...';
-                    var latestUpdate = moment(responseData.FranceGlobalLiveData[0].date).format('LLL');
-                    var casConfirmes = responseData.FranceGlobalLiveData[0].casConfirmes;
-                    var deces = responseData.FranceGlobalLiveData[0].deces;
-                    var gueris = responseData.FranceGlobalLiveData[0].gueris;
-                    var hospitalises = responseData.FranceGlobalLiveData[0].hospitalises;
-                    var reanimation = responseData.FranceGlobalLiveData[0].reanimation;
-                    var nouvellesHospitalisations = responseData.FranceGlobalLiveData[0].nouvellesHospitalisations;
-                    var nouvellesReanimations = responseData.FranceGlobalLiveData[0].nouvellesReanimations;
-                    var casConfirmesEhpad = responseData.FranceGlobalLiveData[0].casConfirmesEhpad;
-                    var decesEhpad = responseData.FranceGlobalLiveData[0].decesEhpad;
-                    if(latestUpdate==null){
-                        $('#latestUpdate').html(noData); $('#latestUpdateCurve').html(noData);
-                    }else{
-                        $('#latestUpdate').html(latestUpdate); $('#latestUpdateCurve').html(latestUpdate)
-                    }
+                    let noData = 'Not Available ...';
+                    let latestUpdate = moment(responseData.FranceGlobalLiveData[0].date).format('LLL');
+                    let casConfirmes = responseData.FranceGlobalLiveData[0].casConfirmes;
+                    let deces = responseData.FranceGlobalLiveData[0].deces;
+                    let gueris = responseData.FranceGlobalLiveData[0].gueris;
+                    let hospitalises = responseData.FranceGlobalLiveData[0].hospitalises;
+                    let reanimation = responseData.FranceGlobalLiveData[0].reanimation;
+                    let nouvellesHospitalisations = responseData.FranceGlobalLiveData[0].nouvellesHospitalisations;
+                    let nouvellesReanimations = responseData.FranceGlobalLiveData[0].nouvellesReanimations;
+                    let casConfirmesEhpad = responseData.FranceGlobalLiveData[0].casConfirmesEhpad;
+                    let decesEhpad = responseData.FranceGlobalLiveData[0].decesEhpad;
+                    if(latestUpdate==null){$('#latestUpdate').html(noDataTimeline);}else{$('#latestUpdate').html(latestUpdate);}
                     if(casConfirmes==null){ $('#casConfirmes').html(noData)}else{ $('#casConfirmes').html(casConfirmes.toLocaleString())}
                     if(deces==null){ $('#deces').html(noData)}else{ $('#deces').html(deces.toLocaleString())}
                     if(gueris==null){ $('#gueris').html(noData)}else{ $('#gueris').html(gueris.toLocaleString())}
@@ -215,6 +216,13 @@
                     if(casConfirmesEhpad==null){ $('#casConfirmesEhpad').html(noData)}else{ $('#casConfirmesEhpad').html(casConfirmesEhpad.toLocaleString())}
                     if(decesEhpad==null){ $('#decesEhpad').html(noData)}else{$('#decesEhpad').html(decesEhpad.toLocaleString())}
           });
+
+          $.getJSON('https://corona-api.com/countries/fr', function(responseDataTimeline){
+                let noDataTimeline = 'Not Available ...';
+                let latestUpdateTimeline = moment(responseDataTimeline.data.updated_at).format('LLL');
+                if(latestUpdateTimeline==null){ $('#latestUpdateCurve').html(noDataTimeline);}else{ $('#latestUpdateCurve').html(latestUpdateTimeline)}
+          });
+         
         </script>
         <script>
             $.getJSON(covApiFr, function(json){
@@ -224,6 +232,13 @@
                     $('#filterField').append($('<option>').text(obj.nom).attr('value', obj.code));
                 });
             });
+            $("#filter-dep").click(function(){
+               covFranceTable.setFilter("code", "like", "DEP-");
+            });
+            $("#filter-reg").click(function(){
+               covFranceTable.setFilter("code", "like", "REG-");
+            });
+           
             $("#filterField").change(function(){
                covFranceTable.setFilter("code", "keywords", $(this).val());
             });

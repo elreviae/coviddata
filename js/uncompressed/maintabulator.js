@@ -1,9 +1,5 @@
-function paramLookup(cell){
-    var value = cell.getElement().classList.add("w3-metro-darken");
-    return value;
-}
 var cellFormatNewDeaths =function(cell, formatterParams){ 
-    var value = cell.getValue();
+    let value = cell.getValue();
     if(value > 0 && value <= 49){
         cell.getElement().classList.add("w3-metro-dark-red");
         return '+' + value.toLocaleString();
@@ -13,12 +9,15 @@ var cellFormatNewDeaths =function(cell, formatterParams){
     }else if (value >= 100 && value <= 500000) {
         cell.getElement().classList.add("w3-black", "w3-text-red");
         return '+' + value.toLocaleString();
+    }else if (value == null) {
+        cell.getElement().classList.add("w3-text-red");
+        return 'Data not available';
     }else {
         return value.toLocaleString();
     }
 };
 var cellFormatNewCases =function(cell, formatterParams){ 
-    var value = cell.getValue();
+    let value = cell.getValue();
     if(value > 0 && value <= 499){
         cell.getElement().classList.add("w3-metro-yellow");
         return '+' + value.toLocaleString();
@@ -28,12 +27,15 @@ var cellFormatNewCases =function(cell, formatterParams){
     }else if (value >= 1500 && value <= 500000) {
         cell.getElement().classList.add("w3-black", "w3-text-orange");
         return '+' + value.toLocaleString();
+    }else if (value == null) {
+        cell.getElement().classList.add("w3-text-red");
+        return 'Data not available';
     }else {
         return value.toLocaleString();
     }
 };
 var cellFormatNewRecov =function(cell, formatterParams){ 
-    var value = cell.getValue();
+    let value = cell.getValue();
     if(value > 0 && value <= 499){
         cell.getElement().classList.add("w3-metro-light-green");
         return '+' + value.toLocaleString();
@@ -43,18 +45,89 @@ var cellFormatNewRecov =function(cell, formatterParams){
     }else if (value >= 1500 && value <= 500000) {
         cell.getElement().classList.add("w3-metro-dark-green", "w3-text-lime");
         return '+' + value.toLocaleString();
+    }else if (value == null) {
+        cell.getElement().classList.add("w3-text-red");
+        return 'Data not available';
     }else {
         return value.toLocaleString();
     }
 };
+
+var cellFormatActiveCases =function(cell, formatterParams){ 
+    let value = cell.getValue();
+    if(value > 0 && value <= 4999){
+        cell.getElement().classList.add("w3-text-aqua");
+        return value.toLocaleString();
+    }else if (value >= 5000 && value <= 99999) {
+        cell.getElement().classList.add("w3-text-cyan");
+        return value.toLocaleString();
+    }else if (value >= 100000 && value <= 499999) {
+        cell.getElement().classList.add("w3-text-light-blue");
+        return value.toLocaleString();
+    }else if (value > 500000) {
+        cell.getElement().classList.add("w3-text-blue");
+        return value.toLocaleString();
+    }else if (value == null) {
+        cell.getElement().classList.add("w3-text-red");
+        return 'Data not available';
+    }else {
+        return value.toLocaleString();
+    }
+};
+
+
+var cellFormatIntenseCare =function(cell, formatterParams){ 
+    let value = cell.getValue();
+    if(value > 0 && value <= 999){
+        cell.getElement().classList.add("w3-text-yellow");
+        return value.toLocaleString();
+    }else if (value >= 1000 && value <= 2499) {
+        cell.getElement().classList.add("w3-text-amber");
+        return value.toLocaleString();
+    }else if (value >= 2500 && value <= 4999) {
+        cell.getElement().classList.add("w3-text-orange");
+        return value.toLocaleString();
+    }else if (value > 5000) {
+        cell.getElement().classList.add("w3-text-deep-orange");
+        return value.toLocaleString();
+    }else if (value == null) {
+        cell.getElement().classList.add("w3-text-red");
+        return 'Data not available';
+    }else {
+        return value.toLocaleString();
+    }
+};
+
 var cellFormatterToLocString = function(cell, formatterParams){
-    var value = cell.getValue();
-    return value.toLocaleString();
+    let value = cell.getValue();
+    if (value == null) {
+        cell.getElement().classList.add("w3-text-red");
+        return 'Data not available';
+    }else {
+        return value.toLocaleString();
+    }
 };
-var displayDate=function(cell){
-    var celldateValue = cell.getValue();
-    return moment(celldateValue).format("MM/DD/YY-h:mm A");
+
+var cellFormatString = function(cell, formatterParams){
+    let value = cell.getValue();
+    if (value == null) {
+        cell.getElement().classList.add("w3-text-red");
+        return 'Data not available';
+    }else {
+        return value;
+    }
 };
+
+
+// var displayDate=function(cell){
+//     let celldateValue = cell.getValue();
+//     if (celldateValue == null) {
+//         cell.getElement().classList.add("w3-text-red");
+//         return 'Data not available';
+//     }else {
+//         return moment(celldateValue).format("MM/DD/YY-h:mm A");
+//     }
+// };
 
 
 var covTable = new Tabulator("#covTable", {
@@ -75,7 +148,7 @@ var covTable = new Tabulator("#covTable", {
     layout:"fitDataStretch",
     // responsiveLayout:"collapse",
     tooltips:false,
-    resizableRows:true,
+    resizableRows:false,
     initialSort:[
                     {column:"todayCases", dir:"desc"},
                 ],
@@ -86,8 +159,8 @@ var covTable = new Tabulator("#covTable", {
                     height:"30px",
             }
         },
-        {title:"Codes", field:"countryInfo.iso2", hozAlign:"center", sorter:"string", headerFilter:"input", headerFilterPlaceholder:"Search"},
-        {title:"Country, Other", field:"country", hozAlign:"center", sorter:"string", headerFilter:"input", headerFilterPlaceholder:"Search"},
+        {title:"Codes", field:"countryInfo.iso2", hozAlign:"center", sorter:"string", headerFilter:"input", headerFilterPlaceholder:"Search", formatter:cellFormatString},
+        {title:"Country, Other", field:"country", hozAlign:"center", sorter:"string", headerFilter:"input", headerFilterPlaceholder:"Search", formatter:cellFormatString},
         {title:"Latest Cases",
             columns: [
                 {title:"New cases", field:"todayCases", hozAlign:"center", sorter:"number", formatter:cellFormatNewCases},
@@ -95,19 +168,19 @@ var covTable = new Tabulator("#covTable", {
                 {title:"New recovered", field:"todayRecovered", hozAlign:"center", sorter:"number", formatter:cellFormatNewRecov},
             ]
         },
-        {title:"Active Cases", field:"active", hozAlign:"center", sorter:"number", formatter:"money", formatterParams:{thousand:" ", precision:false}},
-        {title:"Critical, Serious", field:"critical", hozAlign:"center", sorter:"number",formatter:"money", formatterParams:{thousand:" ", precision:false}},
-        {title:"Total Confirmed", field:"cases", hozAlign:"center", sorter:"number",formatter:"money", formatterParams:{thousand:" ", precision:false}},
-        {title:"Total Deaths", field:"deaths", hozAlign:"center", sorter:"number", formatter:"money", formatterParams:{thousand:" ", precision:false}},
-        {title:"Total Recovered", field:"recovered", hozAlign:"center", sorter:"number", formatter:"money", formatterParams:{thousand:" ", precision:false}},
-        {title:"Total Tests", field:"tests", hozAlign:"center", sorter:"number", formatter: "money", formatterParams:{thousand:" ", precision:false} },
-        {title:"Population", field:"population", hozAlign:"center", sorter:"number", formatter: "money", formatterParams:{thousand:" ", precision:false}},
-        {title:"Last Update", field:"updated", hozAlign:"center", sorter:"string", formatter:displayDate,
-            accessorDownload: function(value){
-                return moment(value).format("MM/DD/YY-h:mm A");
-            },
-            visible:false
-        }
+        {title:"Active Cases", field:"active", hozAlign:"center", sorter:"number", formatter:cellFormatActiveCases},
+        {title:"Critical, Serious", field:"critical", hozAlign:"center", sorter:"number",formatter:cellFormatIntenseCare},
+        {title:"Total Confirmed", field:"cases", hozAlign:"center", sorter:"number", formatter:cellFormatterToLocString},
+        {title:"Total Deaths", field:"deaths", hozAlign:"center", sorter:"number", formatter:cellFormatterToLocString},
+        {title:"Total Recovered", field:"recovered", hozAlign:"center", sorter:"number", formatter:cellFormatterToLocString},
+        {title:"Total Tests", field:"tests", hozAlign:"center", sorter:"number", formatter:cellFormatterToLocString },
+        {title:"Population", field:"population", hozAlign:"center", sorter:"number", formatter:cellFormatterToLocString},
+        // {title:"Last Update", field:"updated", hozAlign:"center", sorter:"string", formatter:displayDate,
+        //     accessorDownload: function(value){
+        //         return moment(value).format("MM/DD/YY-h:mm A");
+        //     },
+        //     visible:false
+        // }
     ],
 });
 // var proxy = "https://cors-anywhere.herokuapp.com/"; //Using proxy to avoid Cors multi-origins error. 

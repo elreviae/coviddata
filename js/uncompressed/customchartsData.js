@@ -19,9 +19,9 @@ anychart.onDocumentReady(function () {
    
       // ------------------------------------------------------------ DONUT PIE 1 
       var dataPie1 = [
-        {x: 'Active', value: newCovidData[0].active},
-        {x: 'Recovered', value: newCovidData[0].recovered},
-        {x: 'Deaths', value: newCovidData[0].deaths}
+        {x: 'Cumul. Active', value: newCovidData[0].active},
+        {x: 'Cumul. Recovered', value: newCovidData[0].recovered},
+        {x: 'Cumul. Deaths', value: newCovidData[0].deaths}
       ];
 
         var chartPie1 = anychart.pie(dataPie1);
@@ -149,11 +149,11 @@ anychart.onDocumentReady(function () {
 
     chart.padding([0, 3, 20, 3]);
 
-    //chart.xScale(anychart.scales.dateTime());
+    // chart.xScale(anychart.scales.dateTime());
     chart.xScale().inverted(true);
 
     // force chart to stack values by Y scale.
-    chart.yScale().stackMode('value');
+    // chart.yScale().stackMode('value');
 
     chart.yAxis().title('Number of Cases');
     chart.xAxis().labels().padding([0, 5, 10, 5]);
@@ -183,21 +183,21 @@ anychart.onDocumentReady(function () {
     // Create first series with mapped data
     var seriesActive = chart.splineArea(dataActive);
     seriesActive.name('Active');
-    seriesActive.fill('#218eec 0.5').stroke({color: "#80c8e4",thickness: 2});
+    seriesActive.fill('#218eec 0.1').stroke({color: "#80c8e4",thickness: 2});
     seriesActive.hovered().markers().enabled(true).type('circle');
     seriesActive.legendItem().iconType("circle").iconFill('#218eec');
     
     // create 2nd series with mapped data
     var seriesDeaths = chart.splineArea(dataDeaths);
     seriesDeaths.name('Deaths');
-    seriesDeaths.fill('#e64336 0.5').stroke({color: "#f44336",thickness: 2});
+    seriesDeaths.fill('#e64336 0.1').stroke({color: "#f44336",thickness: 2});
     seriesDeaths.hovered().markers().enabled(true).type('circle');
     seriesDeaths.legendItem().iconType("circle").iconFill('#e64336');
 
     // create 2nd series with mapped data
     var seriesRecovered = chart.splineArea(dataRecovered);
     seriesRecovered.name('Recovered');
-    seriesRecovered.fill('#47af50 0.5').stroke({color: "#0eb345",thickness: 2});
+    seriesRecovered.fill('#47af50 0.1').stroke({color: "#0eb345",thickness: 2});
     seriesRecovered.hovered().markers().enabled(true).type('circle');
     seriesRecovered.legendItem().iconType("circle").iconFill('#0eb345');
 

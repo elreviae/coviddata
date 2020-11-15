@@ -14,7 +14,8 @@ html,body,h1,h2,h3,h4,h5, p {font-family: "Open Sans", sans-serif; font-size: 0.
 .tabulator .tabulator-header {background-color:#212529 !important; border: 1px solid #495057; }
 .tabulator-col, .tabulator-sortable {background-color:#343a40 !important; }
 .tabulator-row .tabulator-cell {border-right: 1px solid #495057 !important;border-bottom: 1px solid #495057 !important; font-weight: normal;}
-#covidTableFrance .tabulator-row {min-height: 38px;}
+#covidTableFrance .tabulator-row .tabulator-cell{padding:0.65em !important;}
+#covTable .tabulator-row .tabulator-cell{padding:0.3em !important;}
 .tabulator .tabulator-header .tabulator-col .tabulator-col-content .tabulator-col-title {white-space: normal;}
 .tabulator-col .tabulator-sortable {height: 50px;}
 .tabulator .tabulator-header .tabulator-col {border-right: 1px solid #495057;}
@@ -28,7 +29,8 @@ html,body,h1,h2,h3,h4,h5, p {font-family: "Open Sans", sans-serif; font-size: 0.
 .chartsBlock2{width:100%;height:600px;margin: 0;padding: 0;}
 
 .mapTabs{border-right: 1px solid #495057 !important;}
-.active, .btn:hover {background-color: #e91e63;}
+.active {background-color:#009688; color:#eeeeee} 
+/* .btn:hover {background-color: #ffffff;} */
 #containerMap{width:100%;height:600px;margin:0;padding:0;}
 #containerGlobalMap{width:100%;height:600px;margin:0;padding:0;}
 #containerMapFrance{width:100%;height:600px;margin:0;padding:0;}
