@@ -37,13 +37,13 @@ var cellFormatNewCases =function(cell, formatterParams){
 var cellFormatNewRecov =function(cell, formatterParams){ 
     let value = cell.getValue();
     if(value > 0 && value <= 499){
-        cell.getElement().classList.add("w3-metro-light-green");
+        cell.getElement().classList.add("w3-metro-dark-green", "w3-text-lime");
         return '+' + value.toLocaleString();
     }else if (value >= 500 && value <= 1499) {
         cell.getElement().classList.add("w3-metro-green");
         return '+' + value.toLocaleString();
     }else if (value >= 1500 && value <= 500000) {
-        cell.getElement().classList.add("w3-metro-dark-green", "w3-text-lime");
+        cell.getElement().classList.add("w3-metro-light-green");
         return '+' + value.toLocaleString();
     }else if (value == null) {
         cell.getElement().classList.add("w3-text-red");
@@ -117,17 +117,6 @@ var cellFormatString = function(cell, formatterParams){
         return value;
     }
 };
-
-
-// var displayDate=function(cell){
-//     let celldateValue = cell.getValue();
-//     if (celldateValue == null) {
-//         cell.getElement().classList.add("w3-text-red");
-//         return 'Data not available';
-//     }else {
-//         return moment(celldateValue).format("MM/DD/YY-h:mm A");
-//     }
-// };
 
 
 var covTable = new Tabulator("#covTable", {
