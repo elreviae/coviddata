@@ -105,18 +105,16 @@
         <script>
         var vaccinAPI = 'https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/latest/owid-covid-latest.json';
         $.getJSON(vaccinAPI, function(vaccindatajson) {
-                var object =  vaccindatajson;
-                var vaccinResultData = Object.keys(object).reduce(function (result, key) {
+                let object =  vaccindatajson;
+                let vaccinResultData = Object.keys(object).reduce(function (result, key) {
                     return result.concat(key, object[key]);
                 }, []);
                 // console.log(vaccinResultData);
                 let noData = 'Not Available ...';
                 let latestUpdate = moment(vaccinResultData[1].last_updated_date).format('MMMM Do YYYY');
-                if(latestUpdate==null){ $('#latestUpdate').html(noData)}else{ $('#latestUpdate').html(latestUpdate)}
-        });
-        $.getJSON(vaccinAPI, function(vaccindatajson) {
                 let total_vaccinations = vaccindatajson.OWID_WRL.total_vaccinations;
                 let population = vaccindatajson.OWID_WRL.population;
+                if(latestUpdate==null){ $('#latestUpdate').html(noData)}else{ $('#latestUpdate').html(latestUpdate)}
                 if(total_vaccinations==null){ $('#totalVaccinations').html(noData)}else{ $('#totalVaccinations').html(total_vaccinations.toLocaleString()) }
                 if(population==null){ $('#worldPopulation').html(noData)}else{ $('#worldPopulation').html(population.toLocaleString()) }
         });
@@ -135,18 +133,16 @@
                     };
                 });
             });
+
             $("#filterField").change(function(){
                 vaccinTable.setFilter("location", "like", $(this).val());
             });
-            
-            
             // Clear filters on click
             $("#filter-clear").click(function(){
                 $("#filterField").val("");
                 vaccinTable.clearFilter();
                 vaccinTable.clearHeaderFilter();
             });
-            
             window.addEventListener('resize', function(){
                vaccinTable.redraw(true);
             });
@@ -184,6 +180,7 @@
                 },
             });
         });
+
         $("#xlsxDownload").click(function(){
             vaccinTable.download("xlsx", "Covid-Vaccinations-Data.xlsx", {sheetName:"Covid-19 Vaccinations Data"});
         });

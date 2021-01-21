@@ -223,7 +223,6 @@
                 let latestUpdateTimeline = moment(responseDataTimeline.data.updated_at).format('LLL');
                 if(latestUpdateTimeline==null){ $('#latestUpdateCurve').html(noDataTimeline);}else{ $('#latestUpdateCurve').html(latestUpdateTimeline)}
           });
-         
         </script>
         <script>
             $.getJSON(covApiFr, function(json){

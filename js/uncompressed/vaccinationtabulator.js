@@ -1,24 +1,25 @@
-// R > 1, l'épidémie se développe.
-// R < 1, l'épidémie régresse.
-var cellFormatReproductionRate =function(cell, formatterParams){ 
+var cellFormatReproductionRate = function(cell, formatterParams){ 
     let value = cell.getValue();
-    if(value > 1){
+    if(value >= 1){
         cell.getElement().classList.add("w3-black", "w3-text-red");
-        return '<i class="fas fa-sort-up arrowUpDown"></i>'+ value.toLocaleString();
-    }else if (value >= 0.5 && value <= 1) {
+        return '<i class="fas fa-sort-up arrowUpDown"></i>'+ value;
+    }else if ( value <= 0.99 && value >= 0.5  ) {
         cell.getElement().classList.add("w3-metro-dark-orange");
-        return '<i class="fas fa-sort-down arrowUpDown"></i>' + value.toLocaleString();
-    }else if (value < 0.5) {
+        return '<i class="fas fa-sort-down arrowUpDown"></i>' + value;
+    }else if ( value < 0.49 && value > 0) {
         cell.getElement().classList.add("w3-metro-orange");
-        return '<i class="fas fa-sort-down arrowUpDown"></i>' + value.toLocaleString();
+        return '<i class="fas fa-sort-down arrowUpDown"></i>' + value;
+    }else if ( value == 0) {
+        cell.getElement().classList.add("w3-metro-yellow");
+        return value;
     }else if (value == null) {
         cell.getElement().classList.add("w3-text-red");
         return 'Data not available';
     }else {
-        return value.toLocaleString();
+        return value;
     }
 };
-var cellFormatNewVaccinations =function(cell, formatterParams){ 
+var cellFormatNewVaccinations = function(cell, formatterParams){ 
     let value = cell.getValue();
     if(value > 0 && value <= 49999){
         cell.getElement().classList.add("w3-metro-dark-blue");
@@ -44,13 +45,13 @@ var cellFormatTotalVaccinations =function(cell, formatterParams){
     if(value > 0 && value <= 9999){
         cell.getElement().classList.add("w3-metro-dark-green");
         return value.toLocaleString();
-    }else if (value >= 10000 && value <= 99999) {
+    }else if (value >= 10000 && value <= 499999) {
         cell.getElement().classList.add("w3-metro-green");
         return value.toLocaleString();
-    }else if (value >= 100000 && value <= 499999) {
+    }else if (value >= 500000 && value <= 4999999) {
         cell.getElement().classList.add("w3-metro-light-green");
         return  value.toLocaleString();
-    }else if (value > 500000) {
+    }else if (value > 5000000) {
         cell.getElement().classList.add("w3-lime");
         return value.toLocaleString();
     }else if (value == null) {
@@ -82,7 +83,6 @@ var cellFormatNewTests =function(cell, formatterParams){
         return value.toLocaleString();
     }
 };
-
 
 var cellFormatTotalTests =function(cell, formatterParams){ 
     let value = cell.getValue();
@@ -126,6 +126,16 @@ var cellFormatString = function(cell, formatterParams){
     }
 };
 
+var cellFormatPercent = function(cell, formatterParams){
+    let value = cell.getValue();
+    if (value == null) {
+        cell.getElement().classList.add("w3-text-red");
+        return 'Data not available';
+    }else {
+        return value + ' %';
+    }
+};
+
 var vaccinTable = new Tabulator("#vaccinTable", {
     rowFormatter:function(row){
         var data = row.getData(); //get data object for row
@@ -144,7 +154,6 @@ var vaccinTable = new Tabulator("#vaccinTable", {
     virtualDomBuffer: 300,
     pagination:"local", //enable local pagination.
     paginationSize:15, // this option can take any positive integer value
-    reactiveData:true,
     layout:"fitDataStretch",
     tooltips:false,
     resizableRows:false,
@@ -152,11 +161,11 @@ var vaccinTable = new Tabulator("#vaccinTable", {
                     {column:"total_vaccinations", dir:"desc"},
                 ],
     columns:[
-        {title:"Continent", field:"continent", hozAlign:"center", sorter:"string", headerFilter:"select", headerFilterParams:{values:true}, headerFilterPlaceholder:"Select"},
-        {title:"Location", field:"location", hozAlign:"center", sorter:"string", headerFilter:"input", headerFilterPlaceholder:"Search"},
+        {title:"Continent", field:"continent", hozAlign:"center", sorter:"string", headerFilter:"select", headerFilterParams:{values:true}, headerFilterPlaceholder:"Select", formatter:cellFormatString},
+        {title:"Location", field:"location", hozAlign:"center", sorter:"string", headerFilter:"input", headerFilterPlaceholder:"Search", formatter:cellFormatString},
         {title:"Vaccinations",
             columns: [
-                {title:"New vaccinations", field:"new_vaccinations", hozAlign:"center", sorter:"number",formatter:cellFormatNewVaccinations},
+                {title:"New vaccinations", field:"new_vaccinations", hozAlign:"center", sorter:"number", formatter:cellFormatNewVaccinations},
                 {title:"Total vaccinations", field:"total_vaccinations", hozAlign:"center", sorter:"number", formatter:cellFormatTotalVaccinations},
             ]
         },
@@ -166,13 +175,13 @@ var vaccinTable = new Tabulator("#vaccinTable", {
                 {title:"Total tests", field:"total_tests", hozAlign:"center", sorter:"number", formatter:cellFormatTotalTests},
             ]
         },
-        {title:"Reproduction rate (R)", field:"reproduction_rate", hozAlign:"center", sorter:"number", formatter:cellFormatReproductionRate},
+        {title:"Reproduction rate (R)", field:"reproduction_rate", hozAlign:"center", formatter:cellFormatReproductionRate},
         {title:"Population", field:"population", hozAlign:"center", sorter:"number", formatter:cellFormatterToLocString},
         {title:"Age Informations",
             columns: [
                 {title:"Median Age", field:"median_age", hozAlign:"center", sorter:"number", formatter:cellFormatterToLocString},
-                {title:"% Aged 65 Older", field:"aged_65_older", hozAlign:"center", sorter:"number", formatter:cellFormatterToLocString },
-                {title:"% Aged 70 Older", field:"aged_70_older", hozAlign:"center", sorter:"number", formatter:cellFormatterToLocString },
+                {title:"% Aged 65 Older", field:"aged_65_older", hozAlign:"center", sorter:"number", formatter:cellFormatPercent },
+                {title:"% Aged 70 Older", field:"aged_70_older", hozAlign:"center", sorter:"number", formatter:cellFormatPercent },
             ]
         }
         // {title:"Last Update", field:"last_updated_date", hozAlign:"center", sorter:"string", formatter:displayDate,
@@ -188,14 +197,15 @@ var vaccinTable = new Tabulator("#vaccinTable", {
 // https://github.com/owid/covid-19-data/blob/master/public/data/owid-covid-codebook.csv
 var vaccinAPI = 'https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/latest/owid-covid-latest.json';
 $.getJSON(vaccinAPI, function(vaccindata) {
-    let object =  vaccindata;
-    let vaccinResultData = Object.keys(object).reduce(function (result, key) {
-        return result.concat(key, object[key]);
+    if (vaccindata.location == 'World'){ delete vaccindata.location['World'];}
+    if(vaccindata.location == 'International') {delete vaccindata.location['International'];}
+
+    let vaccinResultData = Object.keys(vaccindata).reduce(function (result, key) {
+        return result.concat(key, vaccindata[key]);
     }, []);
 
-        console.log(vaccinResultData);
-        vaccinTable.setData(vaccinResultData);
-    
+    console.log(vaccinResultData);
+    vaccinTable.setData(vaccinResultData);
 });
 
 

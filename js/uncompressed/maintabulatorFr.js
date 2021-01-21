@@ -100,12 +100,6 @@ var cellFormatString = function(cell, formatterParams){
     }
 };
 
-// var displayDate=function(cell){
-//     var celldateValue = cell.getValue();
-//     return moment(celldateValue).format("MM/DD/YY-h:mm A");
-// };
-
-//var proxy = "https://cors-anywhere.herokuapp.com/"; //Using proxy to avoid Cors multi-origins error. 
 var covApiFr = 'https://coronavirusapi-france.now.sh/AllLiveData';
 
 var covFranceTable = new Tabulator("#covidTableFrance", {
@@ -116,15 +110,11 @@ var covFranceTable = new Tabulator("#covidTableFrance", {
     },
     cellVertAlign:"middle",
     height: 750,
-    // minHeight:400,
-    // maxHeight:"100%",
     placeholder:"Data Not available",
     virtualDomBuffer: 300,
     pagination:"local", //enable local pagination.
     paginationSize:15, // this option can take any positive integer value
-    reactiveData:true,
     layout:"fitDataStretch",
-    // responsiveLayout:"collapse",
     tooltips:false,
     resizableRows:false,
     initialSort:[
@@ -144,11 +134,7 @@ var covFranceTable = new Tabulator("#covidTableFrance", {
         {title:"Total Deaths", field:"deces", hozAlign:"center", sorter:"number", formatter:cellFormatterToLocString},
         {title:"Total Recovered", field:"gueris", hozAlign:"center", sorter:"number", formatter:cellFormatterToLocString},
         {title:"Sources", field:"source.nom", hozAlign:"center", sorter:"string"},
-        // {title:"Last Update", field:"date", hozAlign:"center", sorter:"string", formatter:displayDate,
-        //     accessorDownload: function(value){
-        //         return moment(value).format("MM/DD/YY-h:mm A");
-        //     }
-        // }
+    
     ],
 });
 

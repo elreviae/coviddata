@@ -127,15 +127,11 @@ var covTable = new Tabulator("#covTable", {
     },
     cellVertAlign:"middle",
     height: 750,
-    // minHeight:400,
-    // maxHeight:"100%",
     placeholder:"Data Loading",
     virtualDomBuffer: 300,
     pagination:"local", //enable local pagination.
     paginationSize:15, // this option can take any positive integer value
-    reactiveData:true,
     layout:"fitDataStretch",
-    // responsiveLayout:"collapse",
     tooltips:false,
     resizableRows:false,
     initialSort:[

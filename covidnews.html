@@ -58,7 +58,6 @@
         <script src="js/moment-with-locales.min.js"></script>
         <script src="js/sidebar.js"></script>
         <script>
-           //var proxy = "https://cors-anywhere.herokuapp.com/"; //Using proxy to avoid Cors multi-origins error. 
             var covidNews = 'https://gnews.io/api/v4/search?q=covid&sortby=publishedAt&lang=en&token=a73c5492ee7efd45a7e5819a507e4135'
           $.getJSON(covidNews, function(data){
             let noData = 'Not Available ...';
