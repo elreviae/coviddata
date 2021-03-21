@@ -40,7 +40,7 @@ var cellFormatNewVaccinations = function(cell, formatterParams){
         return value.toLocaleString();
     }
 };
-var cellFormatTotalVaccinations =function(cell, formatterParams){ 
+var cellFormatPeopleVaccinated =function(cell, formatterParams){ 
     let value = cell.getValue();
     if(value > 0 && value <= 9999){
         cell.getElement().classList.add("w3-metro-dark-green");
@@ -51,7 +51,31 @@ var cellFormatTotalVaccinations =function(cell, formatterParams){
     }else if (value >= 500000 && value <= 4999999) {
         cell.getElement().classList.add("w3-metro-light-green");
         return  value.toLocaleString();
-    }else if (value > 5000000) {
+    }else if (value >= 5000000 && value <= 9999999) {
+        cell.getElement().classList.add("w3-metro-yellow");
+        return  value.toLocaleString();
+    }else if (value > 10000000) {
+        cell.getElement().classList.add("w3-sand");
+        return value.toLocaleString();
+    }else if (value == null) {
+        cell.getElement().classList.add("w3-text-red");
+        return 'Data not available';
+    }else {
+        return value.toLocaleString();
+    }
+};
+var cellFormatTotalVaccinations =function(cell, formatterParams){ 
+    let value = cell.getValue();
+    if(value > 0 && value <= 99999){
+        cell.getElement().classList.add("w3-metro-dark-green");
+        return value.toLocaleString();
+    }else if (value >= 100000 && value <= 999999) {
+        cell.getElement().classList.add("w3-metro-green");
+        return value.toLocaleString();
+    }else if (value >= 1000000 && value <= 9999999) {
+        cell.getElement().classList.add("w3-metro-light-green");
+        return  value.toLocaleString();
+    }else if (value > 10000000) {
         cell.getElement().classList.add("w3-lime");
         return value.toLocaleString();
     }else if (value == null) {
@@ -115,7 +139,15 @@ var cellFormatterToLocString = function(cell, formatterParams){
         return value.toLocaleString();
     }
 };
-
+var cellFormatContinent = function(cell, formatterParams){
+    let value = cell.getValue();
+    if (value == null) {
+        // cell.getElement().classList.add("w3-text-red");
+        return 'Continent';
+    }else {
+        return value;
+    }
+};
 var cellFormatString = function(cell, formatterParams){
     let value = cell.getValue();
     if (value == null) {
@@ -139,7 +171,7 @@ var cellFormatPercent = function(cell, formatterParams){
 var vaccinTable = new Tabulator("#vaccinTable", {
     rowFormatter:function(row){
         var data = row.getData(); //get data object for row
-        if(data.location == "World" || data.location == "International" ){
+        if(data.location == "World" || data.location == "International" || data.continent == null ){
             row.delete();
         };
     },
@@ -161,11 +193,13 @@ var vaccinTable = new Tabulator("#vaccinTable", {
                     {column:"total_vaccinations", dir:"desc"},
                 ],
     columns:[
-        {title:"Continent", field:"continent", hozAlign:"center", sorter:"string", headerFilter:"select", headerFilterParams:{values:true}, headerFilterPlaceholder:"Select", formatter:cellFormatString},
+        {title:"Continent", field:"continent", hozAlign:"center", sorter:"string", headerFilter:"select", headerFilterParams:{values:true}, headerFilterPlaceholder:"Select", formatter:cellFormatContinent},
         {title:"Location", field:"location", hozAlign:"center", sorter:"string", headerFilter:"input", headerFilterPlaceholder:"Search", formatter:cellFormatString},
         {title:"Vaccinations",
             columns: [
                 {title:"New vaccinations", field:"new_vaccinations", hozAlign:"center", sorter:"number", formatter:cellFormatNewVaccinations},
+                {title:"People vaccinated", field:"people_vaccinated", hozAlign:"center", sorter:"number", formatter:cellFormatPeopleVaccinated},
+                {title:"People Fully vaccinated", field:"people_fully_vaccinated", hozAlign:"center", sorter:"number", formatter:cellFormatPeopleVaccinated},
                 {title:"Total vaccinations", field:"total_vaccinations", hozAlign:"center", sorter:"number", formatter:cellFormatTotalVaccinations},
             ]
         },
@@ -199,12 +233,10 @@ var vaccinAPI = 'https://raw.githubusercontent.com/owid/covid-19-data/master/pub
 $.getJSON(vaccinAPI, function(vaccindata) {
     if (vaccindata.location == 'World'){ delete vaccindata.location['World'];}
     if(vaccindata.location == 'International') {delete vaccindata.location['International'];}
-
     let vaccinResultData = Object.keys(vaccindata).reduce(function (result, key) {
         return result.concat(key, vaccindata[key]);
     }, []);
-
-    console.log(vaccinResultData);
+    // console.log(vaccinResultData);
     vaccinTable.setData(vaccinResultData);
 });
 
