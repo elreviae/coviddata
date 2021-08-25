@@ -101,35 +101,35 @@
                     <div class="w3-third">
                         <div class="w3-container dark-element">
                             <div class="w3-container dark-element-borderBottom">
-                                <h3 class="w3-large">Total Confirmed</h3>
+                                <h3 class="w3-large">New Deaths</h3>
                                 <div class="w3-right">
-                                    <h4 class="w3-xlarge w3-text-amber" id="casConfirmes"></h4>
+                                    <h4 class="w3-xlarge w3-text-red" id="newdeces"></h4>
                                 </div>
                             </div>
                             <div class="w3-container dark-element-borderBottom">
-                                <h3 class="w3-large">Total Recovered</h3>
+                                <h3 class="w3-large">New Confirmed Cases</h3>
                                 <div class="w3-right">
-                                    <h4 class="w3-xlarge w3-text-green" id="gueris"></h4>
+                                    <h4 class="w3-xlarge w3-text-purple" id="nouveauxCasConf"></h4>
                                 </div>
                             </div>
                             <div class="w3-container dark-element-borderBottom">
-                                <h3 class="w3-large">Total Deaths (without EHPAD)</h3>
+                                <h3 class="w3-large">Latest Tests (Over 7 days)</h3>
                                 <div class="w3-right">
-                                    <h4 class="w3-xlarge w3-text-red" id="deces"></h4>
+                                    <h4 class="w3-xlarge w3-text-amber" id="tests_last7"></h4>
                                 </div>
                             </div>
-                            <div class="w3-container dark-element-borderBottom">
+                            <div class="w3-container">
+                                <h3 class="w3-large">Saturation Rate Reanimation</h3>
+                                <div class="w3-right">
+                                    <h4 class="w3-xlarge w3-text-green" id="taux_saturation_rea"></h4>
+                                </div>
+                            </div>
+                            <!-- <div class="w3-container dark-element-borderBottom">
                                 <h3 class="w3-large">Total Confirmed EHPAD</h3>
                                 <div class="w3-right">
                                     <h4 class="w3-xlarge w3-text-pink" id="casConfirmesEhpad"></h4>
                                 </div>
-                            </div>
-                            <div class="w3-container">
-                                <h3 class="w3-large">Total Deaths EHPAD</h3>
-                                <div class="w3-right">
-                                    <h4 class="w3-xlarge w3-text-purple" id="decesEhpad"></h4>
-                                </div>
-                            </div>
+                            </div> -->
                        </div>
                     </div>
                 </div>
@@ -193,29 +193,33 @@
         <script src="js/sidebar.js"></script>
         <script>
             //https://github.com/florianzemma/CoronavirusAPI-France
-            var franceGlobal = 'https://coronavirusapi-france.now.sh/FranceLiveGlobalData';
+            var franceGlobal = 'https://raw.githubusercontent.com/rozierguillaume/covid-19/master/data/france/stats/stats.json'; 
+           // https://coronavirusapi-france.now.sh/FranceLiveGlobalData
             $.getJSON(franceGlobal, function(responseData){
                     let noData = 'Not Available ...';
-                    let latestUpdate = moment(responseData.FranceGlobalLiveData[0].date).format('LLL');
-                    let casConfirmes = responseData.FranceGlobalLiveData[0].casConfirmes;
-                    let deces = responseData.FranceGlobalLiveData[0].deces;
-                    let gueris = responseData.FranceGlobalLiveData[0].gueris;
-                    let hospitalises = responseData.FranceGlobalLiveData[0].hospitalises;
-                    let reanimation = responseData.FranceGlobalLiveData[0].reanimation;
-                    let nouvellesHospitalisations = responseData.FranceGlobalLiveData[0].nouvellesHospitalisations;
-                    let nouvellesReanimations = responseData.FranceGlobalLiveData[0].nouvellesReanimations;
-                    let casConfirmesEhpad = responseData.FranceGlobalLiveData[0].casConfirmesEhpad;
-                    let decesEhpad = responseData.FranceGlobalLiveData[0].decesEhpad;
+                    let latestUpdate = responseData.rea.date + '/' + moment().format('YYYY');
+                    let tests_last7 = responseData.tests_last7.valeur;
+                    let newdeces = responseData.incid_dc.valeur;
+                    let taux_saturation_rea = responseData.taux_saturation_rea.valeur + '%';
+                    let hospitalises = responseData.hosp.valeur;
+                    let reanimation = responseData.rea.valeur;
+                    let nouvellesHospitalisations = responseData.hosp_new.valeur;
+                    let nouvellesReanimations = responseData.rea_new.valeur;
+            
                     if(latestUpdate==null){$('#latestUpdate').html(noDataTimeline);}else{$('#latestUpdate').html(latestUpdate);}
-                    if(casConfirmes==null){ $('#casConfirmes').html(noData)}else{ $('#casConfirmes').html(casConfirmes.toLocaleString())}
-                    if(deces==null){ $('#deces').html(noData)}else{ $('#deces').html(deces.toLocaleString())}
-                    if(gueris==null){ $('#gueris').html(noData)}else{ $('#gueris').html(gueris.toLocaleString())}
+                    if(tests_last7==null){ $('#tests_last7').html(noData)}else{ $('#tests_last7').html(tests_last7.toLocaleString())}
+                    if(newdeces==null){ $('#newdeces').html(noData)}else{ $('#newdeces').html(newdeces.toLocaleString())}
+                    if(taux_saturation_rea==null){ $('#taux_saturation_rea').html(noData)}else{ $('#taux_saturation_rea').html(taux_saturation_rea.toLocaleString())}
                     if(hospitalises==null){ $('#hospitalises').html(noData)}else{ $('#hospitalises').html(hospitalises.toLocaleString())}
                     if(reanimation==null){ $('#reanimation').html(noData)}else{ $('#reanimation').html(reanimation.toLocaleString())}
                     if(nouvellesHospitalisations==null){ $('#nouvellesHospitalisations').html(noData)}else{ $('#nouvellesHospitalisations').html(nouvellesHospitalisations.toLocaleString()) }
                     if(nouvellesReanimations==null){ $('#nouvellesReanimations').html(noData)}else{  $('#nouvellesReanimations').html(nouvellesReanimations.toLocaleString())}
-                    if(casConfirmesEhpad==null){ $('#casConfirmesEhpad').html(noData)}else{ $('#casConfirmesEhpad').html(casConfirmesEhpad.toLocaleString())}
-                    if(decesEhpad==null){ $('#decesEhpad').html(noData)}else{$('#decesEhpad').html(decesEhpad.toLocaleString())}
+          });
+          var nouveauxCas = 'https://raw.githubusercontent.com/rozierguillaume/covid-19/master/data/france/stats/vue-ensemble.json';
+          $.getJSON(nouveauxCas, function(responseData){
+                    let noData = 'Not Available ...';
+                    let nouveauxCasConf = '+ ' + responseData.cas.toLocaleString();
+                    if(nouveauxCasConf==null){ $('#nouveauxCasConf').html(noData)}else{ $('#nouveauxCasConf').html(nouveauxCasConf.toLocaleString())}
           });
 
           $.getJSON('https://corona-api.com/countries/fr', function(responseDataTimeline){
