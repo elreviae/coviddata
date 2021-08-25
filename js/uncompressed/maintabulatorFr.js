@@ -101,7 +101,7 @@ var cellFormatString = function(cell, formatterParams){
 };
 
 var covApiFr = 'https://coronavirusapi-france.now.sh/AllLiveData';
-
+// https://raw.githubusercontent.com/rozierguillaume/covid-19/master/data/france/stats/incidence_departements.json
 var covFranceTable = new Tabulator("#covidTableFrance", {
     downloadConfig:{
         columnHeaders:true, //do not include column headers in downloaded table
