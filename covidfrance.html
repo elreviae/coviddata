@@ -182,13 +182,14 @@
         <script src="js/jspdf.min.js"></script>
         <script src="js/autotable.js"></script>
         <script src="js/xlsx.full.min.js"></script>
-        <script src="js/maintabulatorFr.min.js"></script>
+        <!-- <script src="js/maintabulatorFr.min.js"></script> -->
+        <script src="js/uncompressed/maintabulatorFr.js"></script>
         <script src="js/customchartsFrance.min.js"></script>
         <script src="js/sidebar.js"></script>
         <script>
-            //https://github.com/florianzemma/CoronavirusAPI-France
+
+            // https://covidtracker.fr/dashboard-departements/
             var franceGlobal = 'https://raw.githubusercontent.com/rozierguillaume/covid-19/master/data/france/stats/stats.json'; 
-           // https://coronavirusapi-france.now.sh/FranceLiveGlobalData
             $.getJSON(franceGlobal, function(responseData){
                     let noData = 'Not Available ...';
                     let latestUpdate = responseData.rea.date + '/' + moment().format('YYYY');
