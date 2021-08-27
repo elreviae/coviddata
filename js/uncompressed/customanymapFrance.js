@@ -5,60 +5,73 @@ anychart.onDocumentReady(function () {
     var map = anychart.map();
    
     anychart.data.loadJsonFile(
-      'https://coronavirusapi-france.now.sh/AllLiveData',
+      // 'https://coronavirusapi-france.now.sh/AllLiveData',
+      'https://raw.githubusercontent.com/rozierguillaume/covid-19/master/data/france/stats/incidence_regions.json',
       function (data) {
-        var arrayCovidInfos = data.allLiveFranceData;
+        // var arrayCovidInfos = data.allLiveFranceData;
+        var arrayCovidInfos = data.donnees_regions;
         
-            arrayCovidInfos.forEach(o => {
-              Object.assign(o, 
-              { 
-                'id': o.code,
-              });
-              delete o.code;
-          });
+          //   arrayCovidInfos.forEach(o => {
+          //     Object.assign(o, 
+          //     { 
+          //       'id': o.code,
+          //     });
+          //     delete o.code;
+          // });
 
           var newArrayCovidInfos = JSON.stringify(arrayCovidInfos, function (key, value) {
-            if (key == "id") {
+            // if (key == "id") {
+            //   return value.
+            //   replace('REG-01', 'FR.GUA')
+            //  .replace('REG-02', 'FR.MQ')
+            //  .replace('REG-03', 'FR.GF')
+            //  .replace('REG-04', 'FR.LRE')
+            //  .replace('REG-06', 'FR.MAY')
+            //  .replace('REG-11', 'FR.IDF')
+            //  .replace('REG-24', 'FR.CVL')
+            //  .replace('REG-27', 'FR.BFC')
+            //  .replace('REG-28', 'FR.NOR')
+            //  .replace('REG-32', 'FR.HDF')
+            //  .replace('REG-44', 'FR.GES')
+            //  .replace('REG-52', 'FR.PDL')
+            //  .replace('REG-53', 'FR.BRE')
+            //  .replace('REG-75', 'FR.NAQ')
+            //  .replace('REG-76', 'FR.OCC')
+            //  .replace('REG-84', 'FR.ARA')
+            //  .replace('REG-93', 'FR.PAC')
+            //  .replace('REG-94', 'FR.COR');
+            // }else {
+            //   return value
+            // }
+            
+            if (key == 'Auvergne-Rhône-Alpes') {
               return value.
-              replace('REG-01', 'FR.GUA')
-             .replace('REG-02', 'FR.MQ')
-             .replace('REG-03', 'FR.GF')
-             .replace('REG-04', 'FR.LRE')
-             .replace('REG-06', 'FR.MAY')
-             .replace('REG-11', 'FR.IDF')
-             .replace('REG-24', 'FR.CVL')
-             .replace('REG-27', 'FR.BFC')
-             .replace('REG-28', 'FR.NOR')
-             .replace('REG-32', 'FR.HDF')
-             .replace('REG-44', 'FR.GES')
-             .replace('REG-52', 'FR.PDL')
-             .replace('REG-53', 'FR.BRE')
-             .replace('REG-75', 'FR.NAQ')
-             .replace('REG-76', 'FR.OCC')
-             .replace('REG-84', 'FR.ARA')
-             .replace('REG-93', 'FR.PAC')
-             .replace('REG-94', 'FR.COR');
+              replace('Auvergne-Rhône-Alpes', 'FR.ARA');
+              
             }else {
               return value
             }
+
+
           });
-          
+          console.log(newArrayCovidInfos);
           var newCovidData = JSON.parse(newArrayCovidInfos);
-          // console.log(newCovidData);
+          
+          
           var dataSet = anychart.data.set(newCovidData);
 
           var mappingActualHospAdmiss = dataSet.mapAs({
-            name: 'name',
-            id: 'id',
-            value: 'hospitalises'
+            // name: 'name',
+            // id: 'id',
+            value: 'incidence_cas'
           });
 
-          var mappingActualHospIntensCare = dataSet.mapAs({
-            name: 'name',
-            id: 'id',
-            size: 'reanimation',
-            value: 'reanimation'
-          });
+          // var mappingActualHospIntensCare = dataSet.mapAs({
+          //   name: 'name',
+          //   id: 'id',
+          //   size: 'reanimation',
+          //   value: 'reanimation'
+          // });
 
           // map.padding([5, 0, 5, 0]);
          
@@ -82,7 +95,7 @@ anychart.onDocumentReady(function () {
             .paginator(false);
 
           // Creates bubble seriesActive
-          var actualHospIntensCare = map.bubble(mappingActualHospIntensCare);
+          // var actualHospIntensCare = map.bubble(mappingActualHospIntensCare);
           // Sets series1 settings
           actualHospIntensCare
             .name('Actual Hospital Intensive Care')
@@ -159,25 +172,25 @@ anychart.onDocumentReady(function () {
           map.interactivity().selectionMode('none');
          
 
-          map
-            .tooltip()
-            .title(false)
-            .useHtml(true)
-            // .title({ fontColor: '#fff' })
-            // .padding([8, 13, 10, 13])
-            .format(function () {
-              var nom ='<h4 class="w3-text-white">' +  this.getData('nom') + '</h4>';
-              var nouvellesHospitalisations = '<br/><span>' +'<strong>New Hospital Admissions: </strong>'+ this.getData('nouvellesHospitalisations').toLocaleString() + '</span>';
-              var nouvellesReanimations ='<br/><span>'+ '<strong>New Hospital Intensive Care: </strong>'+ this.getData('nouvellesReanimations').toLocaleString() + '</span>';
-              var actualHosp ='<span>'+'<strong>Actual Hospital Admissions: </strong>' +  this.getData('hospitalises').toLocaleString() + '</span>';
-              var actualReanim ='<br/><span>'+ '<strong>Actual Hospital Intensive Care : </strong>' + this.getData('reanimation').toLocaleString() + '</span>';
-              var deces ='<br/><span>'+ '<strong>Cumul. Deaths: </strong>'+ this.getData('deces').toLocaleString() + '</span>';
-              var gueris = '<br/><span>'+ '<strong>Cumul. Recovered: </strong>'+ this.getData('gueris').toLocaleString() + '</span>';
+          // map
+          //   .tooltip()
+          //   .title(false)
+          //   .useHtml(true)
+          //   // .title({ fontColor: '#fff' })
+          //   // .padding([8, 13, 10, 13])
+          //   .format(function () {
+          //     var nom ='<h4 class="w3-text-white">' +  this.getData('nom') + '</h4>';
+          //     var nouvellesHospitalisations = '<br/><span>' +'<strong>New Hospital Admissions: </strong>'+ this.getData('nouvellesHospitalisations').toLocaleString() + '</span>';
+          //     var nouvellesReanimations ='<br/><span>'+ '<strong>New Hospital Intensive Care: </strong>'+ this.getData('nouvellesReanimations').toLocaleString() + '</span>';
+          //     var actualHosp ='<span>'+'<strong>Actual Hospital Admissions: </strong>' +  this.getData('hospitalises').toLocaleString() + '</span>';
+          //     var actualReanim ='<br/><span>'+ '<strong>Actual Hospital Intensive Care : </strong>' + this.getData('reanimation').toLocaleString() + '</span>';
+          //     var deces ='<br/><span>'+ '<strong>Cumul. Deaths: </strong>'+ this.getData('deces').toLocaleString() + '</span>';
+          //     var gueris = '<br/><span>'+ '<strong>Cumul. Recovered: </strong>'+ this.getData('gueris').toLocaleString() + '</span>';
               
-              return (
-                nom + actualHosp + actualReanim + nouvellesHospitalisations + nouvellesReanimations + deces + gueris
-              );
-            });
+          //     return (
+          //       nom + actualHosp + actualReanim + nouvellesHospitalisations + nouvellesReanimations + deces + gueris
+          //     );
+          //   });
 
             // remove two element from the menu
             map.contextMenu().itemsFormatter(function(items){

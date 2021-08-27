@@ -177,7 +177,7 @@
         <script src="js/proj4.js"></script>
         <script src="js/dark_earth.min.js"></script>
         <script src="js/moment-with-locales.min.js"></script>
-        <script src="js/customanymapFrance.min.js"></script>
+        <!-- <script src="js/uncompressed/customanymapFrance.js"></script> -->
         <script src="js/tabulator.min.js"></script>
         <script src="js/jspdf.min.js"></script>
         <script src="js/autotable.js"></script>
@@ -227,19 +227,23 @@
             $.getJSON(covApiFr, function(json){
                 $('#filterField').empty();
                 $('#filterField').append($('<option disabled selected>').text("Select an area"));
-                $.each(json.allLiveFranceData, function(key, obj) {
-                    $('#filterField').append($('<option>').text(obj.nom).attr('value', obj.code));
+                $.each(json.records, function(key, obj) {
+                    $('#filterField').append($('<option>').text(obj.fields.nom_dep_min).attr('value', obj.fields.dep_code));
                 });
             });
             $("#filter-dep").click(function(){
-               covFranceTable.setFilter("code", "like", "DEP-");
+            //    covFranceTable.setFilter("fields.dep_code", "like", "fields.nom_dep_min");
+                covFranceTable.toggleColumn("fields.dep_code");
+                covFranceTable.toggleColumn("fields.nom_dep_min");
             });
             $("#filter-reg").click(function(){
-               covFranceTable.setFilter("code", "like", "REG-");
+            //    covFranceTable.setFilter("fields.reg_code", ">", 0);
+                covFranceTable.toggleColumn("fields.reg_code");
+                covFranceTable.toggleColumn("fields.region_min");
             });
            
             $("#filterField").change(function(){
-               covFranceTable.setFilter("code", "keywords", $(this).val());
+               covFranceTable.setFilter("fields.dep_code", "keywords", $(this).val());
             });
             // Clear filters on click
             $("#filter-clear").click(function(){

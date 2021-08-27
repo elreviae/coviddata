@@ -100,8 +100,9 @@ var cellFormatString = function(cell, formatterParams){
     }
 };
 
-var covApiFr = 'https://coronavirusapi-france.now.sh/AllLiveData';
-// https://raw.githubusercontent.com/rozierguillaume/covid-19/master/data/france/stats/incidence_departements.json
+// var covApiFr = 'https://coronavirusapi-france.now.sh/AllLiveData';
+var covApiFr = 'https://data.opendatasoft.com/api/records/1.0/search/?dataset=donnees-hospitalieres-covid-19-dep-france%40public&q=&lang=FR&rows=101&sort=date&facet=countrycode_iso_3166_1_alpha3&facet=region_min&facet=nom_dep_min&facet=sex&refine.sex=Tous&timezone=Europe%2FParis';
+// SCHEMA API : https://data.opendatasoft.com/explore/dataset/donnees-hospitalieres-covid-19-dep-france%40public/information/?disjunctive.countrycode_iso_3166_1_alpha3&disjunctive.nom_dep_min&rows=101&q=&timezone=Europe%2FParis&sort=date&lang=FR&refine.sex=Tous
 var covFranceTable = new Tabulator("#covidTableFrance", {
     downloadConfig:{
         columnHeaders:true, //do not include column headers in downloaded table
@@ -118,41 +119,46 @@ var covFranceTable = new Tabulator("#covidTableFrance", {
     tooltips:false,
     resizableRows:false,
     initialSort:[
-                    {column:"reanimation", dir:"desc"},
+                    {column:"fields.day_hosp", dir:"desc"},
                 ],
     columns:[
-        {title:"Code", field:"code", hozAlign:"center", sorter:"string",  headerFilter:"input", headerFilterPlaceholder:"Search", formatter:cellFormatString },
-        {title:"Departement, Region Name", field:"nom", hozAlign:"center", sorter:"string", headerFilter:"input", headerFilterPlaceholder:"Search", formatter:cellFormatString},
+        {title:"Reg. Code", field:"fields.reg_code", hozAlign:"center", sorter:"string",  headerFilter:"input", headerFilterPlaceholder:"Search", formatter:cellFormatString },
+        {title:"Reg. Name", field:"fields.region_min", hozAlign:"center", sorter:"string",  headerFilter:"input", headerFilterPlaceholder:"Search", formatter:cellFormatString },
+        {title:"Dep. Code", field:"fields.dep_code", hozAlign:"center", sorter:"string",  headerFilter:"input", headerFilterPlaceholder:"Search", formatter:cellFormatString },
+        {title:"Departement", field:"fields.nom_dep_min", hozAlign:"center", sorter:"string", headerFilter:"input", headerFilterPlaceholder:"Search", formatter:cellFormatString},
         {title:"Latest French Cases",
             columns: [
-                {title:"New Hospital admissions", field:"nouvellesHospitalisations", hozAlign:"center", sorter:"number", formatter:cellFormatNewHospitalAdmiss },
-                {title:"New Hospital intensive care", field:"nouvellesReanimations", hozAlign:"center", sorter:"number", formatter:cellFormatNewHospIntensCare},
+                {title:"New Hospital admissions", field:"fields.day_hosp", hozAlign:"center", sorter:"number", formatter:cellFormatNewHospitalAdmiss },
+                {title:"New Hospital intensive care", field:"fields.day_intcare_new", hozAlign:"center", sorter:"number", formatter:cellFormatNewHospIntensCare},
+                {title:"New Recovered", field:"fields.day_out_new", hozAlign:"center", sorter:"number", formatter:cellFormatNewHospIntensCare},
+                {title:"New Deaths", field:"fields.day_out_new", hozAlign:"center", sorter:"number", formatter:cellFormatterToLocString},
             ]
         },
-        {title:"Actual Hospital admissions", field:"hospitalises", hozAlign:"center", sorter:"number", formatter:cellFormatActualHospitalAdmiss },
-        {title:"Actual Hospital intensive care", field:"reanimation", hozAlign:"center", sorter:"number", formatter:cellFormatActualHospIntensCare},
-        {title:"Total Deaths", field:"deces", hozAlign:"center", sorter:"number", formatter:cellFormatterToLocString},
-        {title:"Total Recovered", field:"gueris", hozAlign:"center", sorter:"number", formatter:cellFormatterToLocString},
-        {title:"Sources", field:"source.nom", hozAlign:"center", sorter:"string"},
+        // {title:"Actual Hospital admissions", field:"hospitalises", hozAlign:"center", sorter:"number", formatter:cellFormatActualHospitalAdmiss },
+        // {title:"Actual Hospital intensive care", field:"reanimation", hozAlign:"center", sorter:"number", formatter:cellFormatActualHospIntensCare},
+        {title:"Total Deaths", field:"fields.tot_death", hozAlign:"center", sorter:"number", formatter:cellFormatActualHospIntensCare},
+        {title:"Total Recovered", field:"fields.tot_out", hozAlign:"center", sorter:"number", formatter:cellFormatActualHospitalAdmiss},
+        {title:"Date", field:"fields.date", hozAlign:"center", sorter:"string"},
     
     ],
 });
 
 $.getJSON(covApiFr, function(response){
-    let jsonData = response.allLiveFranceData;
-    if(response.allLiveFranceData[101].code=='FRA'){
-        delete response.allLiveFranceData[101];
-        covFranceTable.setData(jsonData);
-    }else {
-        covFranceTable.setData(jsonData);
-    };
+    let jsonData = response.records;
+    covFranceTable.setData(jsonData);
+    // if(response.allLiveFranceData[101].code=='FRA'){
+    //     delete response.allLiveFranceData[101];
+    //     covFranceTable.setData(jsonData);
+    // }else {
+    //     covFranceTable.setData(jsonData);
+    // };
     
-    if(response.allLiveFranceData[102].code=='FRA'){
-        delete response.allLiveFranceData[102];
-        covFranceTable.setData(jsonData);
-    }else{
-        covFranceTable.setData(jsonData);
-    };    
+    // if(response.allLiveFranceData[102].code=='FRA'){
+    //     delete response.allLiveFranceData[102];
+    //     covFranceTable.setData(jsonData);
+    // }else{
+    //     covFranceTable.setData(jsonData);
+    // };    
  });
 
     
