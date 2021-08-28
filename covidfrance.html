@@ -45,14 +45,13 @@
             <header class="w3-container">
                 <h5 class="w3-large"><i class="fas fa-chart-line w3-text-blue"></i> Cumulative & Actual French cases COVID-19 Coronavirus Pandemic. Last update: <span id="latestUpdate" class="w3-text-blue"></span></h5>
             </header>
-
             <div class="w3-row-padding w3-margin-bottom"> 
                 <div class="w3-quarter">
                     <div class="w3-container w3-padding-16 dark-element">
                         <h4 class="w3-large">New hospital admissions</h4>
                         <div class="w3-left"><i class="fas fa-hospital w3-xxxlarge "></i></div>
                         <div class="w3-right">
-                            <h3 class="w3-xlarge w3-text-light-blue" id="nouvellesHospitalisations"></h3>
+                            <h3 class="w3-xlarge w3-text-light-blue" id="count_new_hosp"></h3>
                         </div>
                         <div class="w3-clear"></div>
                     </div>
@@ -62,7 +61,7 @@
                         <h4 class="w3-large">Actual hospitalizations</h4>
                         <div class="w3-left"><i class="fas fa-procedures w3-xxxlarge"></i></div>
                         <div class="w3-right">
-                            <h3 class="w3-xlarge w3-text-blue" id="hospitalises"></h3>
+                            <h3 class="w3-xlarge w3-text-blue" id="tot_hosp"></h3>
                         </div>
                         <div class="w3-clear"></div>
                     </div>
@@ -72,7 +71,7 @@
                         <h4 class="w3-large">New hospital intensive care</h4>
                         <div class="w3-left"><i class="fas fa-plus-square w3-xxxlarge"></i></div>
                         <div class="w3-right">
-                            <h3 class="w3-xlarge w3-text-orange" id="nouvellesReanimations"></h3>
+                            <h3 class="w3-xlarge w3-text-orange" id="count_new_icu"></h3>
                         </div>
                         <div class="w3-clear"></div>
                         
@@ -83,7 +82,7 @@
                         <h4 class="w3-large">Actual intensive care</h4>
                         <div class="w3-left"><i class="fas fa-exclamation-triangle w3-xxxlarge"></i></div>
                         <div class="w3-right">
-                            <h3 class="w3-xlarge w3-text-deep-orange" id="reanimation"></h3>
+                            <h3 class="w3-xlarge w3-text-deep-orange" id="tot_icu"></h3>
                         </div>
                         <div class="w3-clear"></div>
                     </div>
@@ -98,30 +97,25 @@
                             <div id="containerMapFrance"></div>
                        </div>
                     </div>
+     
                     <div class="w3-third">
                         <div class="w3-container dark-element">
                             <div class="w3-container dark-element-borderBottom">
-                                <h3 class="w3-large">New Deaths</h3>
+                                <h3 class="w3-large">Total Deaths in Hospitals</h3>
                                 <div class="w3-right">
-                                    <h4 class="w3-xlarge w3-text-red" id="newdeces"></h4>
+                                    <h4 class="w3-xlarge w3-text-red" id="tot_death_hosp"></h4>
                                 </div>
                             </div>
                             <div class="w3-container dark-element-borderBottom">
-                                <h3 class="w3-large">New Confirmed Cases</h3>
+                                <h3 class="w3-large">Total Confirmed Cases</h3>
                                 <div class="w3-right">
-                                    <h4 class="w3-xlarge w3-text-purple" id="nouveauxCasConf"></h4>
-                                </div>
-                            </div>
-                            <div class="w3-container dark-element-borderBottom">
-                                <h3 class="w3-large">Latest Tests (Over 7 days)</h3>
-                                <div class="w3-right">
-                                    <h4 class="w3-xlarge w3-text-amber" id="tests_last7"></h4>
+                                    <h4 class="w3-xlarge w3-text-purple" id="tot_positive"></h4>
                                 </div>
                             </div>
                             <div class="w3-container">
-                                <h3 class="w3-large">Saturation Rate Reanimation</h3>
+                                <h3 class="w3-large">Total Recovered</h3>
                                 <div class="w3-right">
-                                    <h4 class="w3-xlarge w3-text-green" id="taux_saturation_rea"></h4>
+                                    <h4 class="w3-xlarge w3-text-green" id="tot_recovered"></h4>
                                 </div>
                             </div>
                        </div>
@@ -133,8 +127,8 @@
                         <h5 class="w3-large"><i class="fas fa-table w3-text-blue"></i> Reported French Cases by Counties and Regions. </h5>
                         <div class="w3-bar">
                             <select id="filterField" class="w3-bar-item w3-mobile w3-select dark-element-withfont w3-round w3-margin-right"></select>
-                            <button id="filter-dep" class="w3-bar-item w3-button w3-round w3-mobile w3-hover-blue w3-border w3-border-blue w3-margin-right">Display Counties</button>
-                            <button id="filter-reg" class="w3-bar-item w3-button w3-round w3-mobile w3-hover-blue w3-border w3-border-blue w3-margin-right">Display Regions</button>
+                            <!-- <button id="filter-dep" class="w3-bar-item w3-button w3-round w3-mobile w3-hover-blue w3-border w3-border-blue w3-margin-right">Display Counties</button>
+                            <button id="filter-reg" class="w3-bar-item w3-button w3-round w3-mobile w3-hover-blue w3-border w3-border-blue w3-margin-right">Display Regions</button> -->
                             <button id="filter-clear" class="w3-bar-item w3-button w3-round w3-mobile w3-hover-aqua w3-border w3-border-aqua w3-margin-right">Clear Filters</button>
                             <button id="pdfDownload" class="w3-bar-item w3-button w3-round w3-mobile w3-hover-red w3-border w3-border-red w3-margin-right">Generate PDF</button>
                             <button id="xlsxDownload" class="w3-bar-item w3-button w3-round w3-mobile w3-hover-green w3-border w3-border-green">Generate Excel</button>
@@ -177,7 +171,7 @@
         <script src="js/proj4.js"></script>
         <script src="js/dark_earth.min.js"></script>
         <script src="js/moment-with-locales.min.js"></script>
-        <!-- <script src="js/uncompressed/customanymapFrance.js"></script> -->
+        <script src="js/uncompressed/customanymapFrance.js"></script>
         <script src="js/tabulator.min.js"></script>
         <script src="js/jspdf.min.js"></script>
         <script src="js/autotable.js"></script>
@@ -188,34 +182,38 @@
         <script src="js/sidebar.js"></script>
         <script>
 
-            // https://covidtracker.fr/dashboard-departements/
-            var franceGlobal = 'https://raw.githubusercontent.com/rozierguillaume/covid-19/master/data/france/stats/stats.json'; 
+       
+            var franceGlobal = 'https://data.opendatasoft.com/api/records/1.0/search/?dataset=covid19-france-vue-ensemble%40public&q=&rows=1&sort=date&facet=date'; 
             $.getJSON(franceGlobal, function(responseData){
+                $.each(responseData.records, function(key, obj) {
+                    let fieldsData = obj.fields;
                     let noData = 'Not Available ...';
-                    let latestUpdate = responseData.rea.date + '/' + moment().format('YYYY');
-                    let tests_last7 = responseData.tests_last7.valeur;
-                    let newdeces = responseData.incid_dc.valeur;
-                    let taux_saturation_rea = responseData.taux_saturation_rea.valeur + '%';
-                    let hospitalises = responseData.hosp.valeur;
-                    let reanimation = responseData.rea.valeur;
-                    let nouvellesHospitalisations = responseData.hosp_new.valeur;
-                    let nouvellesReanimations = responseData.rea_new.valeur;
-            
+                    let latestUpdate = moment(obj.record_timestamp).format('LLL');
+                    let tot_recovered = fieldsData.tot_recovered;
+                    let tot_positive = fieldsData.tot_positive;
+                    let tot_death_hosp = fieldsData.tot_death_hosp;
+                    let tot_hosp = fieldsData.tot_hosp;
+                    let count_new_icu = fieldsData.count_new_icu;
+                    let tot_icu = fieldsData.tot_icu;
+                    let count_new_hosp = fieldsData.count_new_hosp;
+
                     if(latestUpdate==null){$('#latestUpdate').html(noDataTimeline);}else{$('#latestUpdate').html(latestUpdate);}
-                    if(tests_last7==null){ $('#tests_last7').html(noData)}else{ $('#tests_last7').html(tests_last7.toLocaleString())}
-                    if(newdeces==null){ $('#newdeces').html(noData)}else{ $('#newdeces').html(newdeces.toLocaleString())}
-                    if(taux_saturation_rea==null){ $('#taux_saturation_rea').html(noData)}else{ $('#taux_saturation_rea').html(taux_saturation_rea.toLocaleString())}
-                    if(hospitalises==null){ $('#hospitalises').html(noData)}else{ $('#hospitalises').html(hospitalises.toLocaleString())}
-                    if(reanimation==null){ $('#reanimation').html(noData)}else{ $('#reanimation').html(reanimation.toLocaleString())}
-                    if(nouvellesHospitalisations==null){ $('#nouvellesHospitalisations').html(noData)}else{ $('#nouvellesHospitalisations').html(nouvellesHospitalisations.toLocaleString()) }
-                    if(nouvellesReanimations==null){ $('#nouvellesReanimations').html(noData)}else{  $('#nouvellesReanimations').html(nouvellesReanimations.toLocaleString())}
+                    if(tot_recovered==null){ $('#tot_recovered').html(noData)}else{ $('#tot_recovered').html(tot_recovered.toLocaleString())}
+                    if(tot_positive==null){ $('#tot_positive').html(noData)}else{ $('#tot_positive').html(tot_positive.toLocaleString())}
+                    if(tot_death_hosp==null){ $('#tot_death_hosp').html(noData)}else{ $('#tot_death_hosp').html(tot_death_hosp.toLocaleString())}
+                    if(tot_hosp==null){ $('#tot_hosp').html(noData)}else{ $('#tot_hosp').html(tot_hosp.toLocaleString())}
+                    if(count_new_icu==null){ $('#count_new_icu').html(noData)}else{ $('#count_new_icu').html('+ ' + count_new_icu.toLocaleString())}
+                    if(tot_icu==null){ $('#tot_icu').html(noData)}else{ $('#tot_icu').html(tot_icu.toLocaleString()) }
+                    if(count_new_hosp==null){ $('#count_new_hosp').html(noData)}else{  $('#count_new_hosp').html('+ ' + count_new_hosp.toLocaleString())}
+                });
           });
-          var nouveauxCas = 'https://raw.githubusercontent.com/rozierguillaume/covid-19/master/data/france/stats/vue-ensemble.json';
-          $.getJSON(nouveauxCas, function(responseData){
-                    let noData = 'Not Available ...';
-                    let nouveauxCasConf = '+ ' + responseData.cas.toLocaleString();
-                    if(nouveauxCasConf==null){ $('#nouveauxCasConf').html(noData)}else{ $('#nouveauxCasConf').html(nouveauxCasConf.toLocaleString())}
-          });
+
+        //   var nouveauxCas = 'https://raw.githubusercontent.com/rozierguillaume/covid-19/master/data/france/stats/vue-ensemble.json';
+        //   $.getJSON(nouveauxCas, function(responseData){
+        //             let noData = 'Not Available ...';
+        //             let nouveauxCasConf = '+ ' + responseData.cas.toLocaleString();
+        //             if(nouveauxCasConf==null){ $('#nouveauxCasConf').html(noData)}else{ $('#nouveauxCasConf').html(nouveauxCasConf.toLocaleString())}
+        //   });
 
           $.getJSON('https://corona-api.com/countries/fr', function(responseDataTimeline){
                 let noDataTimeline = 'Not Available ...';
@@ -231,16 +229,16 @@
                     $('#filterField').append($('<option>').text(obj.fields.nom_dep_min).attr('value', obj.fields.dep_code));
                 });
             });
-            $("#filter-dep").click(function(){
-            //    covFranceTable.setFilter("fields.dep_code", "like", "fields.nom_dep_min");
-                covFranceTable.toggleColumn("fields.dep_code");
-                covFranceTable.toggleColumn("fields.nom_dep_min");
-            });
-            $("#filter-reg").click(function(){
-            //    covFranceTable.setFilter("fields.reg_code", ">", 0);
-                covFranceTable.toggleColumn("fields.reg_code");
-                covFranceTable.toggleColumn("fields.region_min");
-            });
+            // $("#filter-dep").click(function(){
+            // //    covFranceTable.setFilter("fields.dep_code", "like", "fields.nom_dep_min");
+            //     covFranceTable.toggleColumn("fields.dep_code");
+            //     covFranceTable.toggleColumn("fields.nom_dep_min");
+            // });
+            // $("#filter-reg").click(function(){
+            // //    covFranceTable.setFilter("fields.reg_code", ">", 0);
+            //     covFranceTable.toggleColumn("fields.reg_code");
+            //     covFranceTable.toggleColumn("fields.region_min");
+            // });
            
             $("#filterField").change(function(){
                covFranceTable.setFilter("fields.dep_code", "keywords", $(this).val());

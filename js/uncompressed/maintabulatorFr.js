@@ -36,7 +36,46 @@ var cellFormatNewHospIntensCare =function(cell, formatterParams){
     }
 };
 
-var cellFormatActualHospitalAdmiss =function(cell, formatterParams){ 
+
+var cellFormatNewRecovered =function(cell, formatterParams){ 
+    let value = cell.getValue();
+    if(value > 0 && value <= 9){
+        cell.getElement().classList.add("w3-metro-light-green");
+        return '+' + value.toLocaleString();
+    }else if (value >= 10 && value <= 49) {
+        cell.getElement().classList.add("w3-metro-green");
+        return '+' + value.toLocaleString();
+    }else if (value >= 50 && value <= 500) {
+        cell.getElement().classList.add("w3-metro-dark-green", "w3-text-white");
+        return '+' + value.toLocaleString();
+    }else if (value == null) {
+        cell.getElement().classList.add("w3-text-red");
+        return 'Data not available';
+    }else {
+        return value.toLocaleString();
+    }
+};
+
+var cellFormatNewDeaths =function(cell, formatterParams){ 
+    let value = cell.getValue();
+    if(value > 0 && value <= 9){
+        cell.getElement().classList.add("w3-metro-light-purple");
+        return '+' + value.toLocaleString();
+    }else if (value >= 10 && value <= 49) {
+        cell.getElement().classList.add("w3-metro-dark-red");
+        return '+' + value.toLocaleString();
+    }else if (value >= 50 && value <= 500) {
+        cell.getElement().classList.add("w3-black");
+        return '+' + value.toLocaleString();
+    }else if (value == null) {
+        cell.getElement().classList.add("w3-text-red");
+        return 'Data not available';
+    }else {
+        return value.toLocaleString();
+    }
+};
+
+var cellFormatTotalDeaths =function(cell, formatterParams){ 
     let value = cell.getValue();
     if(value > 0 && value <= 499){
         cell.getElement().classList.add("w3-text-aqua");
@@ -58,7 +97,7 @@ var cellFormatActualHospitalAdmiss =function(cell, formatterParams){
     }
 };
 
-var cellFormatActualHospIntensCare =function(cell, formatterParams){ 
+var cellFormatTotalRecovered =function(cell, formatterParams){ 
     let value = cell.getValue();
     if(value > 0 && value <= 149){
         cell.getElement().classList.add("w3-text-yellow");
@@ -100,8 +139,7 @@ var cellFormatString = function(cell, formatterParams){
     }
 };
 
-// var covApiFr = 'https://coronavirusapi-france.now.sh/AllLiveData';
-var covApiFr = 'https://data.opendatasoft.com/api/records/1.0/search/?dataset=donnees-hospitalieres-covid-19-dep-france%40public&q=&lang=FR&rows=101&sort=date&facet=countrycode_iso_3166_1_alpha3&facet=region_min&facet=nom_dep_min&facet=sex&refine.sex=Tous&timezone=Europe%2FParis';
+var covApiFr = 'https://data.opendatasoft.com/api/records/1.0/search/?dataset=donnees-hospitalieres-covid-19-dep-france%40public&q=&rows=101&sort=date&facet=date&facet=countrycode_iso_3166_1_alpha3&facet=region_min&facet=nom_dep_min&facet=sex&refine.sex=Tous';
 // SCHEMA API : https://data.opendatasoft.com/explore/dataset/donnees-hospitalieres-covid-19-dep-france%40public/information/?disjunctive.countrycode_iso_3166_1_alpha3&disjunctive.nom_dep_min&rows=101&q=&timezone=Europe%2FParis&sort=date&lang=FR&refine.sex=Tous
 var covFranceTable = new Tabulator("#covidTableFrance", {
     downloadConfig:{
@@ -122,22 +160,20 @@ var covFranceTable = new Tabulator("#covidTableFrance", {
                     {column:"fields.day_hosp", dir:"desc"},
                 ],
     columns:[
-        {title:"Reg. Code", field:"fields.reg_code", hozAlign:"center", sorter:"string",  headerFilter:"input", headerFilterPlaceholder:"Search", formatter:cellFormatString },
+        {title:"Reg. Code", field:"fields.reg_code", hozAlign:"center", sorter:"string",  headerFilter:"input", headerFilterPlaceholder:"Search", formatter:cellFormatString, visible:false },
         {title:"Reg. Name", field:"fields.region_min", hozAlign:"center", sorter:"string",  headerFilter:"input", headerFilterPlaceholder:"Search", formatter:cellFormatString },
-        {title:"Dep. Code", field:"fields.dep_code", hozAlign:"center", sorter:"string",  headerFilter:"input", headerFilterPlaceholder:"Search", formatter:cellFormatString },
         {title:"Departement", field:"fields.nom_dep_min", hozAlign:"center", sorter:"string", headerFilter:"input", headerFilterPlaceholder:"Search", formatter:cellFormatString},
+        {title:"Dep. Code", field:"fields.dep_code", hozAlign:"center", sorter:"string",  headerFilter:"input", headerFilterPlaceholder:"Search", formatter:cellFormatString },
         {title:"Latest French Cases",
             columns: [
-                {title:"New Hospital admissions", field:"fields.day_hosp", hozAlign:"center", sorter:"number", formatter:cellFormatNewHospitalAdmiss },
-                {title:"New Hospital intensive care", field:"fields.day_intcare_new", hozAlign:"center", sorter:"number", formatter:cellFormatNewHospIntensCare},
-                {title:"New Recovered", field:"fields.day_out_new", hozAlign:"center", sorter:"number", formatter:cellFormatNewHospIntensCare},
-                {title:"New Deaths", field:"fields.day_out_new", hozAlign:"center", sorter:"number", formatter:cellFormatterToLocString},
+                {title:"New Hospital admissions", field:"fields.day_hosp", hozAlign:"center", sorter:"number", topCalc:"sum", formatter:cellFormatNewHospitalAdmiss },
+                {title:"New Hospital intensive care", field:"fields.day_intcare_new", hozAlign:"center", sorter:"number", topCalc:"sum", formatter:cellFormatNewHospIntensCare},
+                {title:"New Recovered", field:"fields.day_out_new", hozAlign:"center", sorter:"number", topCalc:"sum", formatter:cellFormatNewRecovered},
+                {title:"New Deaths", field:"fields.day_out_new", hozAlign:"center", sorter:"number", topCalc:"sum", formatter:cellFormatNewDeaths},
             ]
         },
-        // {title:"Actual Hospital admissions", field:"hospitalises", hozAlign:"center", sorter:"number", formatter:cellFormatActualHospitalAdmiss },
-        // {title:"Actual Hospital intensive care", field:"reanimation", hozAlign:"center", sorter:"number", formatter:cellFormatActualHospIntensCare},
-        {title:"Total Deaths", field:"fields.tot_death", hozAlign:"center", sorter:"number", formatter:cellFormatActualHospIntensCare},
-        {title:"Total Recovered", field:"fields.tot_out", hozAlign:"center", sorter:"number", formatter:cellFormatActualHospitalAdmiss},
+        {title:"Total Deaths", field:"fields.tot_death", hozAlign:"center", sorter:"number", topCalc:"sum", formatter:cellFormatTotalDeaths},
+        {title:"Total Recovered", field:"fields.tot_out", hozAlign:"center", sorter:"number", topCalc:"sum", formatter:cellFormatTotalRecovered},
         {title:"Date", field:"fields.date", hozAlign:"center", sorter:"string"},
     
     ],
