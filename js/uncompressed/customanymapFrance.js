@@ -6,10 +6,10 @@ anychart.onDocumentReady(function () {
    
     anychart.data.loadJsonFile(
       // 'https://coronavirusapi-france.now.sh/AllLiveData',
-      'https://data.opendatasoft.com/api/records/1.0/search/?dataset=covid-19-france-vaccinations-region%40public&q=&rows=20&facet=date&facet=reg_code&facet=reg_name',
+      'https://raw.githubusercontent.com/rozierguillaume/covid-19/master/data/france/stats/incidence_regions.json',
       function (data) {
         // var arrayCovidInfos = data.allLiveFranceData;
-        var arrayCovidInfos = data.records;
+        var regionsCovidInfos = data;
 
             // arrayCovidInfos.forEach(o => {
             //   Object.assign(o, 
@@ -21,43 +21,43 @@ anychart.onDocumentReady(function () {
 
 
 
-            for(var i = 0; i<arrayCovidInfos.length; i++){
+            // for(var i = 0; i<arrayCovidInfos.length; i++){
 
-              var newArrayCovidInfos = arrayCovidInfos[i].fields;
+            //   var newArrayCovidInfos = arrayCovidInfos[i].fields;
 
-            }
+            // }
 
 
         
 
-          var newArrayCovidInfos = JSON.stringify(arrayCovidInfos, function (key, value) {
-            if (key == "reg_code") {
-              return value.
-              replace('01', 'FR.GUA')
-             .replace('02', 'FR.MQ')
-             .replace('03', 'FR.GF')
-             .replace('04', 'FR.LRE')
-             .replace('06', 'FR.MAY')
-             .replace('11', 'FR.IDF')
-             .replace('24', 'FR.CVL')
-             .replace('27', 'FR.BFC')
-             .replace('28', 'FR.NOR')
-             .replace('32', 'FR.HDF')
-             .replace('44', 'FR.GES')
-             .replace('52', 'FR.PDL')
-             .replace('53', 'FR.BRE')
-             .replace('75', 'FR.NAQ')
-             .replace('76', 'FR.OCC')
-             .replace('84', 'FR.ARA')
-             .replace('93', 'FR.PAC')
-             .replace('94', 'FR.COR');
-            }else {
-              return value
-            }
-          });
+          // var newArrayCovidInfos = JSON.stringify(regionsCovidInfos, function (key, value) {
+          //   if (key == "reg_code") {
+          //     return value
+          //   .replace('01', 'FR.GUA')
+          //    .replace('02', 'FR.MQ')
+          //    .replace('03', 'FR.GF')
+          //    .replace('04', 'FR.LRE')
+          //    .replace('06', 'FR.MAY')
+          //    .replace('11', 'FR.IDF')
+          //    .replace('24', 'FR.CVL')
+          //    .replace('27', 'FR.BFC')
+          //    .replace('28', 'FR.NOR')
+          //    .replace('32', 'FR.HDF')
+          //    .replace('44', 'FR.GES')
+          //    .replace('52', 'FR.PDL')
+          //    .replace('53', 'FR.BRE')
+          //    .replace('75', 'FR.NAQ')
+          //    .replace('76', 'FR.OCC')
+          //    .replace('84', 'FR.ARA')
+          //    .replace('93', 'FR.PAC')
+          //    .replace('94', 'FR.COR');
+          //   }else {
+          //     return value
+          //   }
+          // });
           
-          var newCovidData = JSON.parse(newArrayCovidInfos);
-          console.log(newCovidData);
+          // var newCovidData = JSON.parse(newArrayCovidInfos);
+          // console.log(newCovidData);
 
 
           var dataSet = anychart.data.set(newCovidData);

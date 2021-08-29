@@ -36,7 +36,6 @@ var cellFormatNewHospIntensCare =function(cell, formatterParams){
     }
 };
 
-
 var cellFormatNewRecovered =function(cell, formatterParams){ 
     let value = cell.getValue();
     if(value > 0 && value <= 9){
@@ -181,20 +180,7 @@ var covFranceTable = new Tabulator("#covidTableFrance", {
 
 $.getJSON(covApiFr, function(response){
     let jsonData = response.records;
-    covFranceTable.setData(jsonData);
-    // if(response.allLiveFranceData[101].code=='FRA'){
-    //     delete response.allLiveFranceData[101];
-    //     covFranceTable.setData(jsonData);
-    // }else {
-    //     covFranceTable.setData(jsonData);
-    // };
-    
-    // if(response.allLiveFranceData[102].code=='FRA'){
-    //     delete response.allLiveFranceData[102];
-    //     covFranceTable.setData(jsonData);
-    // }else{
-    //     covFranceTable.setData(jsonData);
-    // };    
+    covFranceTable.setData(jsonData); 
  });
 
     

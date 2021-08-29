@@ -92,10 +92,10 @@
             <div class="w3-container" style="margin:0 -16px" >
                 <div class="w3-row-padding w3-margin-bottom">
                     <div class="w3-twothird">
-                        <div class="w3-container dark-element">
+                        <!-- <div class="w3-container dark-element">
                             <p class="w3-small">Double click on the map to zoom or use control buttons. Right click on the map for context menu.</p>
                             <div id="containerMapFrance"></div>
-                       </div>
+                       </div> -->
                     </div>
      
                     <div class="w3-third">
@@ -165,20 +165,20 @@
         <script src="js/anychart-base.min.js"></script>
         <script src="js/anychart-ui.min.js"></script>
         <script src="js/anychart-exports.min.js"></script>
-        <script src="js/anychart-map.min.js"></script>
+        <!-- <script src="js/anychart-map.min.js"></script> -->
         <script src="js/anychart-data-adapter.min.js"></script>
-        <script src="js/france.min.js"></script>
+        <!-- <script src="js/france.min.js"></script> -->
         <script src="js/proj4.js"></script>
         <script src="js/dark_earth.min.js"></script>
         <script src="js/moment-with-locales.min.js"></script>
-        <script src="js/uncompressed/customanymapFrance.js"></script>
+        <!-- <script src="js/uncompressed/customanymapFrance.js"></script> -->
         <script src="js/tabulator.min.js"></script>
         <script src="js/jspdf.min.js"></script>
         <script src="js/autotable.js"></script>
         <script src="js/xlsx.full.min.js"></script>
         <!-- <script src="js/maintabulatorFr.min.js"></script> -->
         <script src="js/uncompressed/maintabulatorFr.js"></script>
-        <script src="js/customchartsFrance.min.js"></script>
+        <script src="js/uncompressed/customchartsFrance.js"></script>
         <script src="js/sidebar.js"></script>
         <script>
 
@@ -208,12 +208,8 @@
                 });
           });
 
-        //   var nouveauxCas = 'https://raw.githubusercontent.com/rozierguillaume/covid-19/master/data/france/stats/vue-ensemble.json';
-        //   $.getJSON(nouveauxCas, function(responseData){
-        //             let noData = 'Not Available ...';
-        //             let nouveauxCasConf = '+ ' + responseData.cas.toLocaleString();
-        //             if(nouveauxCasConf==null){ $('#nouveauxCasConf').html(noData)}else{ $('#nouveauxCasConf').html(nouveauxCasConf.toLocaleString())}
-        //   });
+
+          
 
           $.getJSON('https://corona-api.com/countries/fr', function(responseDataTimeline){
                 let noDataTimeline = 'Not Available ...';

@@ -1,7 +1,8 @@
 anychart.onDocumentReady(function () {
   
   anychart.theme('darkEarth');
-   // create area chart
+
+  // --------------------------------- FRANCE HISTORICAL COVID 19 create area chart
    var chartCurveFR = anychart.area();
 
     var jsonDataFr = 'https://corona-api.com/countries/fr';
