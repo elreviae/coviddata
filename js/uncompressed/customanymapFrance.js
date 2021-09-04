@@ -3,14 +3,21 @@ anychart.onDocumentReady(function () {
 
     // Creates Map Chart
     var map = anychart.map();
-   
-    anychart.data.loadJsonFile(
-      // 'https://coronavirusapi-france.now.sh/AllLiveData',
-      'https://raw.githubusercontent.com/rozierguillaume/covid-19/master/data/france/stats/incidence_regions.json',
+    var urlApi = 'https://public.opendatasoft.com/api/records/1.0/search/?dataset=covid-19-france-vaccinations-age-sexe-dep&q=&lang=fr&rows=101&sort=date&facet=date&facet=variable&facet=variable_label&facet=dep_name&facet=reg_code&facet=reg_name&facet=dep_area_code&refine.variable_label=Tous+%C3%A2ges'
+    anychart.data.loadJsonFile(urlApi,
       function (data) {
         // var arrayCovidInfos = data.allLiveFranceData;
-        var regionsCovidInfos = data;
+        var infosCovidInfos = data.records;
 
+        var pushCovidInfo = [];
+        for (var i=0; i < infosCovidInfos.length; i++){
+          var obj = infosCovidInfos[i];
+          for (var key in obj){
+            pushCovidInfo.push(obj[key]);
+          };
+        };
+
+ 
             // arrayCovidInfos.forEach(o => {
             //   Object.assign(o, 
             //   { 
@@ -19,76 +26,63 @@ anychart.onDocumentReady(function () {
             //   delete o.reg_code;
             // });
 
-
-
-            // for(var i = 0; i<arrayCovidInfos.length; i++){
-
-            //   var newArrayCovidInfos = arrayCovidInfos[i].fields;
-
-            // }
-
-
-        
-
-          // var newArrayCovidInfos = JSON.stringify(regionsCovidInfos, function (key, value) {
-          //   if (key == "reg_code") {
-          //     return value
-          //   .replace('01', 'FR.GUA')
-          //    .replace('02', 'FR.MQ')
-          //    .replace('03', 'FR.GF')
-          //    .replace('04', 'FR.LRE')
-          //    .replace('06', 'FR.MAY')
-          //    .replace('11', 'FR.IDF')
-          //    .replace('24', 'FR.CVL')
-          //    .replace('27', 'FR.BFC')
-          //    .replace('28', 'FR.NOR')
-          //    .replace('32', 'FR.HDF')
-          //    .replace('44', 'FR.GES')
-          //    .replace('52', 'FR.PDL')
-          //    .replace('53', 'FR.BRE')
-          //    .replace('75', 'FR.NAQ')
-          //    .replace('76', 'FR.OCC')
-          //    .replace('84', 'FR.ARA')
-          //    .replace('93', 'FR.PAC')
-          //    .replace('94', 'FR.COR');
-          //   }else {
-          //     return value
-          //   }
-          // });
+          var newArrayCovidInfos = JSON.stringify( pushCovidInfo, function (key, value) {
+            if (key == "reg_code") {
+              return value
+             .replace('01', 'FR.GUA')
+             .replace('02', 'FR.MQ')
+             .replace('03', 'FR.GF')
+             .replace('04', 'FR.LRE')
+             .replace('06', 'FR.MAY')
+             .replace('11', 'FR.IDF')
+             .replace('24', 'FR.CVL')
+             .replace('27', 'FR.BFC')
+             .replace('28', 'FR.NOR')
+             .replace('32', 'FR.HDF')
+             .replace('44', 'FR.GES')
+             .replace('52', 'FR.PDL')
+             .replace('53', 'FR.BRE')
+             .replace('75', 'FR.NAQ')
+             .replace('76', 'FR.OCC')
+             .replace('84', 'FR.ARA')
+             .replace('93', 'FR.PAC')
+             .replace('94', 'FR.COR');
+            }else {
+              return value
+            }
+          });
           
-          // var newCovidData = JSON.parse(newArrayCovidInfos);
-          // console.log(newCovidData);
-
+        
+          var newCovidData = JSON.parse(newArrayCovidInfos);
 
           var dataSet = anychart.data.set(newCovidData);
 
-          var total_vaccines = dataSet.mapAs({
-            // name: 'reg_name',
-            id: 'reg_code',
-            value: 'total_vaccines'
-          });
-
-          var regPopTot = dataSet.mapAs({
+    
+          var n_cum_complet = dataSet.mapAs({ // Nombre cumulé de vaccinations complètes (doses n°2) administrées du début de la vaccination jusqu'à ce jour inclus
             name: 'reg_name',
             id: 'reg_code',
-            size: 'reg_pop_tot',
-            value: 'reg_pop_tot'
+            size: 'n_cum_complet',
+            value: 'n_cum_complet'
+          });
+
+          var n_cum_dose1 = dataSet.mapAs({ // Nombre cumulé de doses n°1 administrées du début de la vaccination jusqu'à ce jour inclus
+            name: 'reg_name',
+            id: 'reg_code',
+            value: 'n_cum_dose1' 
           });
           
       
-
           map.padding([5, 0, 5, 0]);
          
           map.geoData('anychart.maps.france');
 
-          // map
-          // .credits()
-          // .enabled(true)
-          // .url('https://github.com/opencovid19-fr')
-          // .text('Data source: opencovid19-fr')
-          // .logoSrc('https://avatars3.githubusercontent.com/u/62096497?s=200&v=4');
+          map
+          .credits()
+          .enabled(true)
+          .url('https://public.opendatasoft.com/explore/dataset/covid-19-france-vaccinations-age-sexe-dep/information/?disjunctive.variable_label&sort=date')
+          .text('Data source: Santé Publique France')
+          .logoSrc('https://static.data.gouv.fr/avatars/79/7e94cd7a8d43d39544d4018666e646.png');
 
-      
           map
             .legend()
             .enabled(true)
@@ -98,35 +92,35 @@ anychart.onDocumentReady(function () {
             .padding(10, 0, 10, 0)
             .paginator(false);
 
-          // // Creates bubble seriesActive
-          // var actualtotalVaccines = map.bubble(total_vaccines);
-          // // Sets series1 settings
-          // actualtotalVaccines
-          //   .name('total_vaccines')
-          //   .fill('#ee1111 0.7')
-          //   .stroke('1 #ff9c80 0.7');
-          // actualtotalVaccines
-          //   .legendItem()
-          //   .iconType('circle')
-          //   .iconFill('#ee1111 0.7')
-          //   .iconStroke('1 #ff9c80 0.7');
+          // Creates bubble seriesActive
+          var cumulVaccindose1 = map.bubble(n_cum_dose1);
+          // Sets series1 settings
+          cumulVaccindose1
+            .name('total_vaccines')
+            .fill('#ee1111 0.7')
+            .stroke('1 #ff9c80 0.7');
+          cumulVaccindose1
+            .legendItem()
+            .iconType('circle')
+            .iconFill('#ee1111 0.7')
+            .iconStroke('1 #ff9c80 0.7');
 
-          // Sets bubble max size settings
-          // map.minBubbleSize('1%').maxBubbleSize('7%');
+          //Sets bubble max size settings
+          map.minBubbleSize('0.5%').maxBubbleSize('5%');
 
          // Creates choropleth for serie
-        var choropRegPopTot = map.choropleth(regPopTot);
+        var choropCumuldose2 = map.choropleth(n_cum_complet);
         // Sets choropleth serie settings
-        choropRegPopTot
-          .name('Actual Hospital Admissions')
+        choropCumuldose2
+          .name('n_complet')
           .geoIdField('id')
           .stroke('1 #4b4b4b 0.8');
-        choropRegPopTot
+        choropCumuldose2
           .legendItem()
           .iconType('circle')
           .iconFill('#d61ee9 0.7');
 
-        choropRegPopTot.hovered().fill('#222222 0.8').stroke('1 #ee1111 0.8').size(15);
+          choropCumuldose2.hovered().fill('#222222 0.8').stroke('1 #ee1111 0.8').size(15);
 
           var colorScale = anychart.scales.ordinalColor();
           // Set colors.
@@ -143,16 +137,14 @@ anychart.onDocumentReady(function () {
             '#f50031'
           ]);
           colorScale.ranges([
-              {less:5},
-              {from:5, to:25},
-              {from:25, to:50},
-              {from:50, to:150},
-              {from:150, to:250},
-              {from:250, to:500},
-              {from:500, to:1000},
-              {from:1000, to:1500},
-              {from:1500, to: 2500},
-              {greater: 2500}
+              {less:9999},
+              {from:10000, to:49999},
+              {from:50000, to:149999},
+              {from:150000, to:499999},
+              {from:500000, to:999999},
+              {from:1000000, to:4999999},
+              {from:5000000, to:9999999},
+              {greater: 10000000}
           ]);
 
           var colorRange = map.colorRange();
@@ -170,7 +162,7 @@ anychart.onDocumentReady(function () {
               .fontSize(11)
               .padding(3, 0, 0, 0);
 
-          choropRegPopTot.colorScale(colorScale);
+          choropCumuldose2.colorScale(colorScale);
 
           map.colorRange(true);
           map.interactivity().selectionMode('none');

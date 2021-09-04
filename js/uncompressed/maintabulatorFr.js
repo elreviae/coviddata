@@ -151,12 +151,12 @@ var covFranceTable = new Tabulator("#covidTableFrance", {
     placeholder:"Data Not available",
     virtualDomBuffer: 300,
     pagination:"local", //enable local pagination.
-    paginationSize:15, // this option can take any positive integer value
-    layout:"fitDataStretch",
+    paginationSize:14, // this option can take any positive integer value
+    layout:"fitColumns",
     tooltips:false,
     resizableRows:false,
     initialSort:[
-                    {column:"fields.day_hosp", dir:"desc"},
+                    {column:"fields.day_hosp_new", dir:"desc"},
                 ],
     columns:[
         {title:"Reg. Code", field:"fields.reg_code", hozAlign:"center", sorter:"string",  headerFilter:"input", headerFilterPlaceholder:"Search", formatter:cellFormatString, visible:false },
@@ -165,15 +165,15 @@ var covFranceTable = new Tabulator("#covidTableFrance", {
         {title:"Dep. Code", field:"fields.dep_code", hozAlign:"center", sorter:"string",  headerFilter:"input", headerFilterPlaceholder:"Search", formatter:cellFormatString },
         {title:"Latest French Cases",
             columns: [
-                {title:"New Hospital admissions", field:"fields.day_hosp", hozAlign:"center", sorter:"number", topCalc:"sum", formatter:cellFormatNewHospitalAdmiss },
+                {title:"New Hospital admissions", field:"fields.day_hosp_new", hozAlign:"center", sorter:"number", topCalc:"sum", formatter:cellFormatNewHospitalAdmiss },
                 {title:"New Hospital intensive care", field:"fields.day_intcare_new", hozAlign:"center", sorter:"number", topCalc:"sum", formatter:cellFormatNewHospIntensCare},
                 {title:"New Recovered", field:"fields.day_out_new", hozAlign:"center", sorter:"number", topCalc:"sum", formatter:cellFormatNewRecovered},
-                {title:"New Deaths", field:"fields.day_out_new", hozAlign:"center", sorter:"number", topCalc:"sum", formatter:cellFormatNewDeaths},
+                {title:"New Deaths", field:"fields.day_death_new", hozAlign:"center", sorter:"number", topCalc:"sum", formatter:cellFormatNewDeaths},
             ]
         },
         {title:"Total Deaths", field:"fields.tot_death", hozAlign:"center", sorter:"number", topCalc:"sum", formatter:cellFormatTotalDeaths},
         {title:"Total Recovered", field:"fields.tot_out", hozAlign:"center", sorter:"number", topCalc:"sum", formatter:cellFormatTotalRecovered},
-        {title:"Date", field:"fields.date", hozAlign:"center", sorter:"string"},
+        // {title:"Date", field:"fields.date", hozAlign:"center", sorter:"string"},
     
     ],
 });

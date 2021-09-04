@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="css/w3.css">
     <link rel="stylesheet" href="css/w3-colors-metro.css">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&display=swap" rel="stylesheet"> 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="css/customcss.css" rel="stylesheet">
     <link href="css/anychart-ui.min.css" type="text/css" rel="stylesheet">
     <link href="css/anychart-font.min.css" type="text/css" rel="stylesheet">
@@ -26,10 +26,10 @@
             </div>
             <div class="w3-bar-block">
                 <a href="#" class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i>  Close Menu</a>
-                <a href="index.html" class="w3-bar-item w3-button w3-padding w3-hover-amber"><i class="fas fa-pills"></i> Data Overview</a>
+                <a href="index.html" class="w3-bar-item w3-button w3-padding w3-hover-amber"><i class="fas fa-pills"></i> World Data Overview</a>
                 <a href="covidworldmaps.html" class="w3-bar-item w3-button w3-padding w3-hover-teal"><i class="fas fa-globe-europe"></i> World Maps</a>
-                <a href="covidvaccinations.html" class="w3-bar-item w3-button w3-padding w3-hover-green"><i class="fas fa-syringe"></i> Data Vaccinations</a>
-                <a href="covidchartsdata.html" class="w3-bar-item w3-button w3-padding w3-hover-light-green"><i class="fas fa-chart-bar"></i>  Data Charts</a>
+                <a href="covidvaccinations.html" class="w3-bar-item w3-button w3-padding w3-hover-green"><i class="fas fa-syringe"></i> World Data Vaccinations</a>
+                <a href="covidchartsdata.html" class="w3-bar-item w3-button w3-padding w3-hover-light-green"><i class="fas fa-chart-bar"></i> World Data Charts</a>
                 <a href="covidfrance.html" class="w3-bar-item w3-button w3-padding w3-hover-blue"><i class="fas fa-flag"></i> Data France</a>
                 <a href="covidnews.html" class="w3-bar-item w3-button w3-padding w3-hover-cyan"><i class="fas fa-newspaper"></i>  News about Covid</a>
                 <a href="about.html" class="w3-bar-item w3-button w3-padding w3-hover-red"><i class="fas fa-info-circle"></i>  About</a>
@@ -89,34 +89,64 @@
                 </div>
             </div>
 
+            <div class="w3-row-padding w3-margin-bottom"> 
+                <div class="w3-quarter">
+                    <div class="w3-container w3-padding-16 dark-element">
+                        <h4 class="w3-large">Total Deaths in Hospitals</h4>
+                        <div class="w3-left"><i class="far fa-hospital w3-xxxlarge "></i></div>
+                        <div class="w3-right">
+                            <h3 class="w3-xlarge w3-text-red" id="tot_death_hosp"></h3>
+                        </div>
+                        <div class="w3-clear"></div>
+                    </div>
+                </div>
+                <div class="w3-quarter">
+                    <div class="w3-container w3-padding-16 dark-element">
+                        <h4 class="w3-large">Total Deaths in EHPAD</h4>
+                        <div class="w3-left"><i class="fas fa-bed w3-xxxlarge"></i></div>
+                        <div class="w3-right">
+                            <h3 class="w3-xlarge w3-text-indigo" id="tot_death_ephad"></h3>
+                        </div>
+                        <div class="w3-clear"></div>
+                    </div>
+                </div>
+                <div class="w3-quarter">
+                    <div class="w3-container w3-padding-16 dark-element">
+                        <h4 class="w3-large">Total Confirmed Cases</h4>
+                        <div class="w3-left"><i class="fas fa-head-side-virus w3-xxxlarge"></i></div>
+                        <div class="w3-right">
+                            <h3 class="w3-xlarge w3-text-purple" id="tot_positive"></h3>
+                        </div>
+                        <div class="w3-clear"></div>
+                        
+                    </div>
+                </div>
+                <div class="w3-quarter">
+                    <div class="w3-container w3-padding-16 dark-element">
+                        <h4 class="w3-large">Total Recovered</h4>
+                        <div class="w3-left"><i class="fas fa-heartbeat w3-xxxlarge"></i></div>
+                        <div class="w3-right">
+                            <h3 class="w3-xlarge w3-text-green" id="tot_recovered"></h3>
+                        </div>
+                        <div class="w3-clear"></div>
+                    </div>
+                </div>
+            </div>
+
             <div class="w3-container" style="margin:0 -16px" >
                 <div class="w3-row-padding w3-margin-bottom">
-                    <div class="w3-twothird">
-                        <!-- <div class="w3-container dark-element">
-                            <p class="w3-small">Double click on the map to zoom or use control buttons. Right click on the map for context menu.</p>
-                            <div id="containerMapFrance"></div>
-                       </div> -->
-                    </div>
-     
-                    <div class="w3-third">
-                        <div class="w3-container dark-element">
-                            <div class="w3-container dark-element-borderBottom">
-                                <h3 class="w3-large">Total Deaths in Hospitals</h3>
-                                <div class="w3-right">
-                                    <h4 class="w3-xlarge w3-text-red" id="tot_death_hosp"></h4>
-                                </div>
-                            </div>
-                            <div class="w3-container dark-element-borderBottom">
-                                <h3 class="w3-large">Total Confirmed Cases</h3>
-                                <div class="w3-right">
-                                    <h4 class="w3-xlarge w3-text-purple" id="tot_positive"></h4>
-                                </div>
-                            </div>
-                            <div class="w3-container">
-                                <h3 class="w3-large">Total Recovered</h3>
-                                <div class="w3-right">
-                                    <h4 class="w3-xlarge w3-text-green" id="tot_recovered"></h4>
-                                </div>
+                    <div class="w3-rest">
+                        <div class="w3-container">
+                            <h5 class="w3-large"><i class="fas fa-syringe w3-text-blue"></i> Reported French cumulative vaccinations by Departements. Last update: <span id="latestUpdateVacc" class="w3-text-blue"></span></h5>
+                            <!-- <p class="w3-small">Double click on the map to zoom or use control buttons. Right click on the map for context menu.</p>
+                            <div id="containerMapFrance"></div> -->
+                            <div class="w3-bar">
+                                <button id="filter-clearVaccTable" class="w3-bar-item w3-button w3-round w3-mobile w3-hover-aqua w3-border w3-border-aqua w3-margin-right">Clear Filters</button>
+                                <button id="pdfDownloadVacc" class="w3-bar-item w3-button w3-round w3-mobile w3-hover-red w3-border w3-border-red w3-margin-right">Generate PDF</button>
+                                <button id="xlsxDownloadVacc" class="w3-bar-item w3-button w3-round w3-mobile w3-hover-green w3-border w3-border-green">Generate Excel</button>
+                            </div> 
+                            <div class="w3-row w3-padding-16 ">
+                                <div id="vaccinTable" class="w3-col"></div>
                             </div>
                        </div>
                     </div>
@@ -124,7 +154,7 @@
 
                 <div class="w3-panel">
                     <div class="w3-container" style="margin:0 -16px">
-                        <h5 class="w3-large"><i class="fas fa-table w3-text-blue"></i> Reported French Cases by Counties and Regions. </h5>
+                        <h5 class="w3-large"><i class="fas fa-table w3-text-blue"></i> Reported French Cases by Counties and Regions. Last update: <span id="latestUpdateTableFr" class="w3-text-blue"></span> </h5>
                         <div class="w3-bar">
                             <select id="filterField" class="w3-bar-item w3-mobile w3-select dark-element-withfont w3-round w3-margin-right"></select>
                             <!-- <button id="filter-dep" class="w3-bar-item w3-button w3-round w3-mobile w3-hover-blue w3-border w3-border-blue w3-margin-right">Display Counties</button>
@@ -165,24 +195,20 @@
         <script src="js/anychart-base.min.js"></script>
         <script src="js/anychart-ui.min.js"></script>
         <script src="js/anychart-exports.min.js"></script>
-        <!-- <script src="js/anychart-map.min.js"></script> -->
+        <script src="js/anychart-map.min.js"></script>
         <script src="js/anychart-data-adapter.min.js"></script>
-        <!-- <script src="js/france.min.js"></script> -->
         <script src="js/proj4.js"></script>
         <script src="js/dark_earth.min.js"></script>
         <script src="js/moment-with-locales.min.js"></script>
-        <!-- <script src="js/uncompressed/customanymapFrance.js"></script> -->
         <script src="js/tabulator.min.js"></script>
         <script src="js/jspdf.min.js"></script>
         <script src="js/autotable.js"></script>
         <script src="js/xlsx.full.min.js"></script>
-        <!-- <script src="js/maintabulatorFr.min.js"></script> -->
-        <script src="js/uncompressed/maintabulatorFr.js"></script>
-        <script src="js/uncompressed/customchartsFrance.js"></script>
+        <script src="js/vaccintableFr.min.js"></script>
+        <script src="js/maintabulatorFr.min.js"></script>
+        <script src="js/customchartsFrance.min.js"></script>
         <script src="js/sidebar.js"></script>
         <script>
-
-       
             var franceGlobal = 'https://data.opendatasoft.com/api/records/1.0/search/?dataset=covid19-france-vue-ensemble%40public&q=&rows=1&sort=date&facet=date'; 
             $.getJSON(franceGlobal, function(responseData){
                 $.each(responseData.records, function(key, obj) {
@@ -192,30 +218,77 @@
                     let tot_recovered = fieldsData.tot_recovered;
                     let tot_positive = fieldsData.tot_positive;
                     let tot_death_hosp = fieldsData.tot_death_hosp;
+                    let tot_death_ephad = fieldsData.tot_death_ephad;
                     let tot_hosp = fieldsData.tot_hosp;
                     let count_new_icu = fieldsData.count_new_icu;
                     let tot_icu = fieldsData.tot_icu;
                     let count_new_hosp = fieldsData.count_new_hosp;
-
-                    if(latestUpdate==null){$('#latestUpdate').html(noDataTimeline);}else{$('#latestUpdate').html(latestUpdate);}
-                    if(tot_recovered==null){ $('#tot_recovered').html(noData)}else{ $('#tot_recovered').html(tot_recovered.toLocaleString())}
-                    if(tot_positive==null){ $('#tot_positive').html(noData)}else{ $('#tot_positive').html(tot_positive.toLocaleString())}
-                    if(tot_death_hosp==null){ $('#tot_death_hosp').html(noData)}else{ $('#tot_death_hosp').html(tot_death_hosp.toLocaleString())}
-                    if(tot_hosp==null){ $('#tot_hosp').html(noData)}else{ $('#tot_hosp').html(tot_hosp.toLocaleString())}
-                    if(count_new_icu==null){ $('#count_new_icu').html(noData)}else{ $('#count_new_icu').html('+ ' + count_new_icu.toLocaleString())}
-                    if(tot_icu==null){ $('#tot_icu').html(noData)}else{ $('#tot_icu').html(tot_icu.toLocaleString()) }
-                    if(count_new_hosp==null){ $('#count_new_hosp').html(noData)}else{  $('#count_new_hosp').html('+ ' + count_new_hosp.toLocaleString())}
+                    if(latestUpdate==null || latestUpdate== ''){$('#latestUpdate').html(noDataTimeline);}else{$('#latestUpdate').html(latestUpdate);}
+                    if(tot_recovered==null || tot_recovered== ''){ $('#tot_recovered').html(noData)}else{ $('#tot_recovered').html(tot_recovered.toLocaleString())}
+                    if(tot_positive==null || tot_positive== ''){ $('#tot_positive').html(noData)}else{ $('#tot_positive').html(tot_positive.toLocaleString())}
+                    if(tot_death_hosp==null || tot_death_hosp== ''){ $('#tot_death_hosp').html(noData)}else{ $('#tot_death_hosp').html(tot_death_hosp.toLocaleString())}
+                    if(tot_death_ephad==null || tot_death_ephad== ''){ $('#tot_death_ephad').html(noData)}else{ $('#tot_death_ephad').html(tot_death_ephad.toLocaleString())}
+                    if(tot_hosp==null || tot_hosp== ''){ $('#tot_hosp').html(noData)}else{ $('#tot_hosp').html(tot_hosp.toLocaleString())}
+                    if(count_new_icu==null || count_new_icu== ''){ $('#count_new_icu').html(noData)}else{ $('#count_new_icu').html('+ ' + count_new_icu.toLocaleString())}
+                    if(tot_icu==null || tot_icu== ''){ $('#tot_icu').html(noData)}else{ $('#tot_icu').html(tot_icu.toLocaleString()) }
+                    if(count_new_hosp==null || count_new_hosp== ''){ $('#count_new_hosp').html(noData)}else{  $('#count_new_hosp').html('+ ' + count_new_hosp.toLocaleString())}
                 });
           });
-
-
-          
-
-          $.getJSON('https://corona-api.com/countries/fr', function(responseDataTimeline){
-                let noDataTimeline = 'Not Available ...';
-                let latestUpdateTimeline = moment(responseDataTimeline.data.updated_at).format('LLL');
-                if(latestUpdateTimeline==null){ $('#latestUpdateCurve').html(noDataTimeline);}else{ $('#latestUpdateCurve').html(latestUpdateTimeline)}
+          var vaccDepApiFr = 'https://public.opendatasoft.com/api/records/1.0/search/?dataset=covid-19-france-vaccinations-age-sexe-dep&q=&lang=fr&rows=101&sort=date&facet=date&facet=variable&facet=variable_label&facet=dep_name&facet=reg_code&facet=reg_name&facet=dep_area_code&refine.variable_label=Tous+%C3%A2ges&timezone=Europe%2FParis';
+          $.getJSON(vaccDepApiFr, function(dataVacc){
+            $.each(dataVacc.records, function(key, obj) {
+                let fieldsData = obj.fields;
+                let noData = 'Not Available ...';
+                let latestUpdateVacc = moment(obj.record_timestamp).format('LLL');
+                if(latestUpdateVacc==null || latestUpdateVacc== ''){$('#latestUpdateVacc').html(noData);}else{$('#latestUpdateVacc').html(latestUpdateVacc);}
+            });
           });
+          $("#filter-clearVaccTable").click(function(){
+                vaccinFranceTable.clearFilter();
+                vaccinFranceTable.clearHeaderFilter();
+            }); 
+            $("#pdfDownloadVacc").click(function(){
+                vaccinFranceTable.downloadToTab("pdf", "CovidData-Vaccinations.pdf", {
+                orientation:"landscape",
+                autoTable:function(doc){
+                    doc.text("CovidData Report Vaccinations France", 5, 15);
+                    //return the autoTable config options object
+                    return {
+                        theme: 'striped',
+                        tableWidth: 'auto',
+                        pageBreak: 'auto',
+                        rowPageBreak: 'auto',
+                        styles: {
+                           cellPadding: 0.5, 
+                           fontSize: 8,
+                        },
+                        headStyles: {
+                           fillColor: [26, 26, 26],
+                        },
+                        footStyles: {
+                            fillColor: [26, 26, 26],
+                        },
+                        bodyStyles: {
+                            fillColor: [102, 102, 102],
+                            textColor: 255,
+                        },
+                        alternateRowStyles: {
+                            fillColor: [68, 68, 68],
+                        },
+                        margin: {top: 20, bottom:20, left:10, right:10},
+                    };
+                },
+            });
+        });
+        $("#xlsxDownloadVacc").click(function(){
+            vaccinFranceTable.download("xlsx", "CovidData-Vaccinations.xlsx", {sheetName:"CovidData Report Vacc Fr"});
+        });
+
+        $.getJSON('https://corona-api.com/countries/fr', function(responseDataTimeline){
+            let noDataTimeline = 'Not Available ...';
+            let latestUpdateTimeline = moment(responseDataTimeline.data.updated_at).format('LLL');
+            if(latestUpdateTimeline==null){ $('#latestUpdateCurve').html(noDataTimeline);}else{ $('#latestUpdateCurve').html(latestUpdateTimeline)}
+        });
         </script>
         <script>
             $.getJSON(covApiFr, function(json){
@@ -223,19 +296,13 @@
                 $('#filterField').append($('<option disabled selected>').text("Select an area"));
                 $.each(json.records, function(key, obj) {
                     $('#filterField').append($('<option>').text(obj.fields.nom_dep_min).attr('value', obj.fields.dep_code));
+                    let fieldsData = obj.fields;
+                    let noData = 'Not Available ...';
+                    let latestUpdateTableFr = moment(obj.record_timestamp).format('LLL');
+                    if(latestUpdateTableFr==null || latestUpdateTableFr== ''){$('#latestUpdateTableFr').html(noData);}else{$('#latestUpdateTableFr').html(latestUpdateTableFr);}
                 });
             });
-            // $("#filter-dep").click(function(){
-            // //    covFranceTable.setFilter("fields.dep_code", "like", "fields.nom_dep_min");
-            //     covFranceTable.toggleColumn("fields.dep_code");
-            //     covFranceTable.toggleColumn("fields.nom_dep_min");
-            // });
-            // $("#filter-reg").click(function(){
-            // //    covFranceTable.setFilter("fields.reg_code", ">", 0);
-            //     covFranceTable.toggleColumn("fields.reg_code");
-            //     covFranceTable.toggleColumn("fields.region_min");
-            // });
-           
+        
             $("#filterField").change(function(){
                covFranceTable.setFilter("fields.dep_code", "keywords", $(this).val());
             });
@@ -246,13 +313,14 @@
                 covFranceTable.clearHeaderFilter();
             });
             window.addEventListener('resize', function(){
-               covFranceTable.redraw(true);
+                vaccinFranceTable.redraw(true);
+                covFranceTable.redraw(true);
             });
             $("#pdfDownload").click(function(){
-               covFranceTable.downloadToTab("pdf", "CovidData.pdf", {
+               covFranceTable.downloadToTab("pdf", "CovidData-Report-France.pdf", {
                 orientation:"landscape",
                 autoTable:function(doc){
-                    doc.text("CovidData Report", 5, 15);
+                    doc.text("CovidData Report France Cases", 5, 15);
                     //return the autoTable config options object
                     return {
                         theme: 'striped',
@@ -282,9 +350,8 @@
             });
         });
         $("#xlsxDownload").click(function(){
-            covFranceTable.download("xlsx", "covidDataFrance2020.xlsx", {sheetName:"covid-19 France Data"});
+            covFranceTable.download("xlsx", "covidDataFrance.xlsx", {sheetName:"CovidData France Report"});
         });
         </script>
-     
     </body>
 </html>
