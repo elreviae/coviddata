@@ -101,8 +101,8 @@ var vaccinFranceTable = new Tabulator("#vaccinTable", {
     columns:[
         {title:"Departement", field:"fields.dep_name", hozAlign:"center", sorter:"string", headerFilter:"select", headerFilterParams:{values:true}, headerFilterPlaceholder:"Select"},
         {title:"Dep. Code", field:"fields.dep_code", hozAlign:"center", sorter:"string",  headerFilter:"input", headerFilterPlaceholder:"Search", formatter:cellFormatterToLocString },
-        {title:"First Vaccinnation Dose", field:"fields.n_cum_dose1", hozAlign:"center", sorter:"number", formatter:cellFormatterToLocString},
-        {title:"First Vaccinnation Progress", field:"fields.n_cum_dose1", hozAlign:"left", sorter:"number", formatter:"progress", formatterParams:{
+        {title:"First Vaccination Dose", field:"fields.n_cum_dose1", hozAlign:"center", sorter:"number", formatter:cellFormatterToLocString},
+        {title:"First Vaccination Progress", field:"fields.n_cum_dose1", hozAlign:"left", sorter:"number", formatter:"progress", formatterParams:{
             min:0,
             max:3000000,
             color:["darkgreen", "green", "limegreen"],
