@@ -1,81 +1,110 @@
 <!DOCTYPE html>
 <html lang="en">
-    <title>Covid-19 Dashboard Tracker</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="css/w3.css">
-    <link rel="stylesheet" href="css/w3-colors-metro.css">
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&display=swap" rel="stylesheet"> 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link href="css/customcss.css" rel="stylesheet">
-    <body class="bg-dashboard">
-        <!-- Top container -->
-        <div class="w3-bar w3-top w3-large navbar-custom">
-            <button class="w3-bar-item w3-button w3-hide-large w3-hover-none w3-hover-text-light-grey" onclick="w3_open();"><i class="fa fa-bars"></i>  Menu</button>
-            <a href="index.html" ><span class="w3-bar-item w3-left w3-text-amber w3-xlarge"><i class="fas fa-circle-notch"></i> CovidData</span></a>
+<title>Covid-19 Dashboard Tracker</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="css/w3.css">
+<link rel="stylesheet" href="css/w3-colors-metro.css">
+<link
+    href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&display=swap"
+    rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link href="css/customcss.css" rel="stylesheet">
+
+<body class="bg-dashboard">
+
+    <div class="w3-bar w3-top w3-large topbar-custom" style="z-index:4">
+        <button class="w3-bar-item w3-button w3-hide-large w3-hover-none w3-hover-text-light-grey"
+            onclick="w3_open();"><i class="fa fa-bars"></i> Menu</button>
+        <a href="index.html"><span class="w3-bar-item w3-right w3-xlarge dashboardTitle"><i class="fas fa-spinner"></i>
+                CovidData</span></a>
+    </div>
+    <!-- Sidebar/menu -->
+    <nav class="w3-sidebar w3-collapse sidebar-custom w3-animate-left w3-round-large w3-card-4 w3-margin"
+        id="dashSidebar">
+        <div class="w3-container w3-margin-top">
+            <h5 class="sidebaritle">Covid Data Dashboard</h5>
         </div>
+        <hr>
+        <div class="w3-bar-block">
+            <a href="#" class="w3-bar-item w3-button w3-padding-16 w3-hide-large bg-closemenu" onclick="w3_close()"
+                title="close menu"><i class="far fa-times-circle w3-large w3-margin-right"></i> Close Menu</a>
 
-            <!-- Sidebar/menu -->
-          <nav class="w3-sidebar w3-collapse sidebar-custom w3-animate-left" id="dashSidebar">
-            <div class="w3-container w3-margin-top">
-                <h5 class="dashboardTitle">Covid Data Dashboard</h5>
-            </div>
-            <div class="w3-bar-block">
-                <a href="#" class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i>  Close Menu</a>
-                <a href="index.html" class="w3-bar-item w3-button w3-padding w3-hover-amber"><i class="fas fa-pills"></i> World Data Overview</a>
-                <a href="covidworldmaps.html" class="w3-bar-item w3-button w3-padding w3-hover-teal"><i class="fas fa-globe-europe"></i> World Maps</a>
-                <a href="covidvaccinations.html" class="w3-bar-item w3-button w3-padding w3-hover-green"><i class="fas fa-syringe"></i> World Data Vaccinations</a>
-                <a href="covidchartsdata.html" class="w3-bar-item w3-button w3-padding w3-hover-light-green"><i class="fas fa-chart-bar"></i> World Data Charts</a>
-                <a href="covidfrance.html" class="w3-bar-item w3-button w3-padding w3-hover-blue"><i class="fas fa-flag"></i> Data France</a>
-                <a href="covidnews.html" class="w3-bar-item w3-button w3-padding w3-hover-cyan"><i class="fas fa-newspaper"></i>  News about Covid</a>
-                <a href="about.html" class="w3-bar-item w3-button w3-padding w3-hover-red"><i class="fas fa-info-circle"></i>  About</a>
-            </div>
-        </nav>
+            <a href="index.html" class="w3-margin-bottom w3-bar-item w3-button w3-padding w3-hover-amber"><i
+                    class="fas fa-pills w3-large w3-margin-right"></i>
+                World Overview</a>
 
-        <!-- Overlay effect when opening sidebar on small screens -->
-        <div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
+            <a href="covidvaccinations.html" class="w3-margin-bottom w3-bar-item w3-button w3-padding w3-hover-green"><i
+                    class="fas fa-syringe w3-large w3-margin-right"></i> World Vaccinations</a>
 
-        <!-- !PAGE CONTENT! -->
-        <div class="w3-main main-custom">
-            <!-- Header -->
-            <header class="w3-container ">
-                <h5 class="w3-large"><i class="fas fa-newspaper w3-text-cyan"></i> Some worldwide news & articles about the Covid-19 pandemic.</h5>
-            </header>
+            <a href="covidworldmaps.html" class="w3-margin-bottom w3-bar-item w3-button w3-padding w3-hover-teal"><i
+                    class="fas fa-globe-europe w3-large w3-margin-right"></i> World Map</a>
 
-            <div id="articles" class="w3-row-padding"></div>
+            <a href="covidchartsdata.html"
+                class="w3-margin-bottom w3-bar-item w3-button w3-padding w3-hover-light-green"><i
+                    class="fas fa-chart-bar w3-large w3-margin-right"></i> World Charts</a>
 
-        
-            <!-- Footer -->
-            <footer class="w3-container w3-padding-16 footer-custom">
-                <h4>CREDITS</h4>
-                <p>Created by Maxime DES TOUCHES - 2020 . <a href="https://github.com/elreviae" target="_blank">Github</a></p>
-            </footer>
+            <a href="covidfrance.html" class="w3-margin-bottom w3-bar-item w3-button w3-padding w3-hover-blue"><i
+                    class="fas fa-flag w3-large w3-margin-right"></i> Covid France</a>
+
+            <a href="covidnews.html" class="w3-margin-bottom w3-bar-item w3-button w3-padding w3-hover-cyan"><i
+                    class="fas fa-newspaper w3-large w3-margin-right"></i> News about Covid</a>
+
+            <a href="about.html" class="w3-margin-bottom w3-bar-item w3-button w3-padding w3-hover-red"><i
+                    class="fas fa-info-circle w3-large w3-margin-right"></i> About</a>
+        </div>
+    </nav>
+
+
+    <!-- Overlay effect when opening sidebar on small screens -->
+    <div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer"
+        title="close side menu" id="myOverlay"></div>
+
+    <!-- !PAGE CONTENT! -->
+    <div class="w3-main main-custom">
+        <!-- Header -->
+        <header class="w3-container ">
+            <h5 class="w3-large"><i class="fas fa-newspaper w3-text-cyan"></i> Some worldwide news & articles about the
+                Covid-19 pandemic.</h5>
+        </header>
+
+        <div id="articles" class="w3-row"></div>
+
+
+        <!-- Footer -->
+        <footer class="w3-container w3-padding-16 footer-custom">
+            <p class="w3-right"><span class="copyrightDate"></span> Made by Maxime des Touches. <a
+                    href="https://github.com/elreviae" target="_blank" class="footerlink">Github</a></p>
+        </footer>
 
         <!-- End page content -->
-        </div>
+    </div>
 
-        <script src="js/jquery-3.5.1.min.js"></script>
-        <script src="js/moment-with-locales.min.js"></script>
-        <script src="js/sidebar.js"></script>
-        <script>
-            var covidNews = 'https://gnews.io/api/v4/search?q=covid&sortby=publishedAt&lang=en&token=a73c5492ee7efd45a7e5819a507e4135'
-          $.getJSON(covidNews, function(data){
+    <script src="js/jquery-3.6.0.min.js"></script>
+    <script src="js/moment-with-locales.min.js"></script>
+    <script src="js/customsite.js"></script>
+    <script>
+        var covidNews = 'https://gnews.io/api/v4/search?q=covid&sortby=publishedAt&lang=en&token=a73c5492ee7efd45a7e5819a507e4135'
+        $.getJSON(covidNews, function (data) {
             let noData = 'Not Available ...';
-            $.each(data.articles, function( key, val ) {
+            $.each(data.articles, function (key, val) {
                 $('#articles').append(
                     '<div class="w3-panel">'
-                        +'<a href='+ val.url + ' target="_blank" class="w3-hover-cyan">'
-                                +'<div class="w3-container w3-padding-16 dark-element">' 
-                                        + '<h3 class="w3-large w3-text-cyan">'+ val.title + '</h3>' 
-                                        + '<img src=' + val.image + '>'
-                                        + '<p>'+ val.description +'</p>'
-                                        + '<p class="newsItalic w3-text-blue-grey">Source: '+ val.source.name + val.source.url +  ' / ' + moment(val.publishedAt).format('LLL') + '</p>'
-                                +'</div>'
-                            +'</a>'
+                    + '<a href=' + val.url + ' target="_blank" class="w3-hover-cyan">'
+                    + '<div class="w3-container w3-padding-16 dark-element w3-round-large w3-card-4 w3-leftbar w3-border-cyan">'
+                    + '<h3 class="w3-large w3-text-cyan">' + val.title + '</h3>'
+                    + '<img src=' + val.image + '>'
+                    + '<p>' + val.description + '</p>'
+                    + '<p class="newsItalic w3-text-blue-grey">Source: ' + val.source.name + val.source.url + ' / ' + moment(val.publishedAt).format('LLL') + '</p>'
+                    + '</div>'
+                    + '</a>'
                     + '</div>'
                 );
             });
         });
-        </script>
-    </body>
+    </script>
+</body>
+
 </html>

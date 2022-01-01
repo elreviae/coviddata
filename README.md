@@ -1,26 +1,37 @@
 # Covid-19 Data dashboard
-Simple & optimised dashboard about the actual situation and the evolution of the Covid-19 in the world.
+Lightweight, simple & optimised dashboard about the actual situation and the evolution of the Covid-19 in the world and especially in France.
 
 ## Web application available online : https://elreviae.github.io/coviddata/
+
+----------------------
+![Screenshot](coviddata-dashboard-1.jpeg)
+
+![Screenshot](coviddata-dashboard-2.jpeg)
+
+![Screenshot](coviddata-dashboard-3.jpeg)
+
+![Screenshot](coviddata-dashboard-4.jpeg)
 
 ----------------------
 
 # This dashboard shows :
 
-- Data Table : Reported daily and global cases, deaths and recovered by country, territory or conveyance.
+- World Overview : Reported daily and global cases, deaths and recovered by country, territory or conveyance.
 
-- Charts : Charts of actual cases & global summed Covid-19 time series data since the pandemic began.
+- World Vaccinations : Reported Vaccination Cases by Country, Territory, or Conveyance.
 
-- World Maps : 
-    - World map of reported cumulative Global Cases, Deaths and Recovered by Country, Province or County.
-    - World map of reported cumulative Global Active Cases, Deaths and Recovered by Country.
+- World Map :  Covid-19 World map of actual active & critical cases
 
-- Data Vaccinations : Reported Vaccination Cases by Country, Territory, or Conveyance.
+- World Charts : 
+    - Data charts of new and total cases. 
+    - Data charts about the total and daily vaccinations in the world.
+    - Data chart about total Covid-19 test per continent.
 
-- France map & Data Tables :
-    - Reported actual & cumulative french cases per county and regions.
+- Covid France :
+    - Cumulative & Actual French cases COVID-19 Coronavirus Pandemic.
+    - Reported French Cases by Counties and Regions.
 
-- News Covid-19 :
+- News about Covid :
     - Reported of some recent news posts or articles about the Covid-19.
 
 ----------------------
@@ -28,9 +39,8 @@ Simple & optimised dashboard about the actual situation and the evolution of the
 # APIs
 - Our World In Data - covid-19-data : https://github.com/owid/covid-19-data/tree/master/public/data
 - disease.sh - Open Disease Data:  https://disease.sh/
-- about-corona.net: https://about-corona.net/
 - coronavirusAPI-France: https://github.com/florianzemma/CoronavirusAPI-France
-- Opencovid19-fr: https://github.com/opencovid19-fr/data
+- opendatasoft.com: https://public.opendatasoft.com
 - newsapi.org: https://newsapi.org
 
 ----------------------

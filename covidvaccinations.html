@@ -1,56 +1,84 @@
 <!DOCTYPE html>
 <html lang="en">
-    <title>Covid-19 Dashboard Tracker</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="css/w3.css">
-    <link rel="stylesheet" href="css/w3-colors-metro.css">
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&display=swap" rel="stylesheet"> 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link href="css/tabulator_midnight.min.css" rel="stylesheet">
-    <link href="css/customcss.css" rel="stylesheet">
+<title>Covid-19 Dashboard Tracker</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="css/w3.css">
+<link rel="stylesheet" href="css/w3-colors-metro.css">
+<link
+    href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&display=swap"
+    rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link href="css/tabulator_midnight4-9.min.css" rel="stylesheet">
+<link href="css/customcss.css" rel="stylesheet">
 
-    <body class="bg-dashboard">
-        <!-- Top container -->
-        <div class="w3-bar w3-top w3-large navbar-custom">
-            <button class="w3-bar-item w3-button w3-hide-large w3-hover-none w3-hover-text-light-grey" onclick="w3_open();"><i class="fa fa-bars"></i>  Menu</button>
-            <a href="index.html" ><span class="w3-bar-item w3-left w3-text-amber w3-xlarge"><i class="fas fa-circle-notch"></i> CovidData</span></a>
+<body class="bg-dashboard">
+
+    <div class="w3-bar w3-top w3-large topbar-custom" style="z-index:4">
+        <button class="w3-bar-item w3-button w3-hide-large w3-hover-none w3-hover-text-light-grey"
+            onclick="w3_open();"><i class="fa fa-bars"></i> Menu</button>
+        <a href="index.html"><span class="w3-bar-item w3-right w3-xlarge dashboardTitle"><i class="fas fa-spinner"></i>
+                CovidData</span></a>
+    </div>
+    <!-- Sidebar/menu -->
+    <nav class="w3-sidebar w3-collapse sidebar-custom w3-animate-left w3-round-large w3-card-4 w3-margin"
+        id="dashSidebar">
+        <div class="w3-container w3-margin-top">
+            <h5 class="sidebaritle">Covid Data Dashboard</h5>
         </div>
+        <hr>
+        <div class="w3-bar-block">
+            <a href="#" class="w3-bar-item w3-button w3-padding-16 w3-hide-large bg-closemenu" onclick="w3_close()"
+                title="close menu"><i class="far fa-times-circle w3-large w3-margin-right"></i> Close Menu</a>
 
-          <!-- Sidebar/menu -->
-          <nav class="w3-sidebar w3-collapse sidebar-custom w3-animate-left" id="dashSidebar">
-            <div class="w3-container w3-margin-top">
-                <h5 class="dashboardTitle">Covid Data Dashboard</h5>
-            </div>
-            <div class="w3-bar-block">
-                <a href="#" class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i>  Close Menu</a>
-                <a href="index.html" class="w3-bar-item w3-button w3-padding w3-hover-amber"><i class="fas fa-pills"></i> World Data Overview</a>
-                <a href="covidworldmaps.html" class="w3-bar-item w3-button w3-padding w3-hover-teal"><i class="fas fa-globe-europe"></i> World Maps</a>
-                <a href="covidvaccinations.html" class="w3-bar-item w3-button w3-padding w3-hover-green"><i class="fas fa-syringe"></i> World Data Vaccinations</a>
-                <a href="covidchartsdata.html" class="w3-bar-item w3-button w3-padding w3-hover-light-green"><i class="fas fa-chart-bar"></i> World Data Charts</a>
-                <a href="covidfrance.html" class="w3-bar-item w3-button w3-padding w3-hover-blue"><i class="fas fa-flag"></i> Data France</a>
-                <a href="covidnews.html" class="w3-bar-item w3-button w3-padding w3-hover-cyan"><i class="fas fa-newspaper"></i>  News about Covid</a>
-                <a href="about.html" class="w3-bar-item w3-button w3-padding w3-hover-red"><i class="fas fa-info-circle"></i>  About</a>
-            </div>
-        </nav>
+            <a href="index.html" class="w3-margin-bottom w3-bar-item w3-button w3-padding w3-hover-amber"><i
+                    class="fas fa-pills w3-large w3-margin-right"></i>
+                World Overview</a>
 
-        <!-- Overlay effect when opening sidebar on small screens -->
-        <div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
+            <a href="covidvaccinations.html" class="w3-margin-bottom w3-bar-item w3-button w3-padding w3-hover-green"><i
+                    class="fas fa-syringe w3-large w3-margin-right"></i> World Vaccinations</a>
 
-        <!-- !PAGE CONTENT! -->
-        <div class="w3-main main-custom">
+            <a href="covidworldmaps.html" class="w3-margin-bottom w3-bar-item w3-button w3-padding w3-hover-teal"><i
+                    class="fas fa-globe-europe w3-large w3-margin-right"></i> World Map</a>
 
-            <!-- Header -->
-            <header class="w3-container">
-                <h5 class="w3-large"><i class="fas fa-chart-line w3-text-light-green"></i> Data on COVID-19 vaccinations about the Coronavirus Pandemic. Last update: <span id="latestUpdate" class="w3-text-light-green"></span></h5>
-            </header>
+            <a href="covidchartsdata.html"
+                class="w3-margin-bottom w3-bar-item w3-button w3-padding w3-hover-light-green"><i
+                    class="fas fa-chart-bar w3-large w3-margin-right"></i> World Charts</a>
+
+            <a href="covidfrance.html" class="w3-margin-bottom w3-bar-item w3-button w3-padding w3-hover-blue"><i
+                    class="fas fa-flag w3-large w3-margin-right"></i> Covid France</a>
+
+            <a href="covidnews.html" class="w3-margin-bottom w3-bar-item w3-button w3-padding w3-hover-cyan"><i
+                    class="fas fa-newspaper w3-large w3-margin-right"></i> News about Covid</a>
+
+            <a href="about.html" class="w3-margin-bottom w3-bar-item w3-button w3-padding w3-hover-red"><i
+                    class="fas fa-info-circle w3-large w3-margin-right"></i> About</a>
+        </div>
+    </nav>
+
+    <!-- Overlay effect when opening sidebar on small screens -->
+    <div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer"
+        title="close side menu" id="myOverlay"></div>
+
+    <!-- !PAGE CONTENT! -->
+    <div class="w3-main main-custom">
+
+        <!-- Header -->
+        <header class="w3-container">
+            <h5 class="w3-large"><i class="fas fa-chart-line w3-text-light-green"></i> Data on COVID-19 vaccinations
+                about the Coronavirus Pandemic. Last update: <span id="latestUpdate" class="w3-text-light-green"></span>
+            </h5>
+        </header>
 
         <div class="w3-row-padding w3-margin-bottom">
             <div class="w3-half">
-                <div class="w3-container w3-padding-16 dark-element">
+                <div
+                    class="w3-container w3-padding-16 dark-element w3-round-large w3-card-4 w3-leftbar w3-border-light-green">
                     <h4 class="w3-large">Total World Vaccinations</h4>
                     <div class="w3-left"><i class="fas fa-syringe w3-xxxlarge"></i></div>
-                    
+
                     <div class="w3-right">
                         <h3 class="w3-xlarge w3-text-light-green" id="totalVaccinations"></h3>
                     </div>
@@ -58,99 +86,111 @@
                 </div>
             </div>
             <div class="w3-half">
-                <div class="w3-container w3-padding-16 dark-element">
+                <div
+                    class="w3-container w3-padding-16 dark-element w3-round-large w3-card-4 w3-leftbar w3-border-light-blue">
                     <h4 class="w3-large">World Population</h4>
                     <div class="w3-left"><i class="fas fa-users w3-xxxlarge"></i></div>
                     <div class="w3-right">
                         <h3 class="w3-xlarge w3-text-light-blue" id="worldPopulation"></h3>
                     </div>
                     <div class="w3-clear"></div>
-                    
+
                 </div>
             </div>
         </div>
 
-            <div class="w3-panel">
-                <div class="w3-container" style="margin:0 -16px" >
-                    <h5 class="w3-large"><i class="fas fa-table w3-text-light-green"></i> Reported Vaccination Cases by Country, Territory, or Conveyance</h5>
-                    <div class="w3-bar">
-                        <select id="filterField" class="w3-bar-item w3-mobile w3-select dark-element-withfont w3-round w3-margin-right"></select>
-                        <button id="filter-clear" class="w3-bar-item w3-button w3-round w3-mobile w3-hover-aqua w3-border w3-border-aqua w3-margin-right">Clear Filters</button>
-                        <button id="pdfDownload" class="w3-bar-item w3-button w3-round w3-mobile w3-hover-red w3-border w3-border-red w3-margin-right">Generate PDF</button>
-                        <button id="xlsxDownload" class="w3-bar-item w3-button w3-round w3-mobile w3-hover-green w3-border w3-border-green">Generate Excel</button>
-                    </div>
-                    <div class="w3-row w3-padding-16 ">
-                        <div id="vaccinTable" class="w3-col"></div>
-                    </div>
-                </div>
-            </div>
+        <div class="w3-panel">
+            <div class="w3-container" style="margin:0 -16px">
+                <h5 class="w3-large"><i class="fas fa-table w3-text-light-green"></i> Reported Vaccination Cases by
+                    Country, Territory, or Conveyance</h5>
 
-            <!-- Footer -->
-            <footer class="w3-container w3-padding-16 footer-custom">
-                <h4>CREDITS</h4>
-                <p>Created by Maxime DES TOUCHES - 2020 . <a href="https://github.com/elreviae" target="_blank">Github</a></p>
-            </footer>
+                <div class="w3-bar">
+                    <select id="filterField"
+                        class="w3-bar-item w3-mobile w3-select dark-element-withfont w3-round w3-margin-right"></select>
+                    <button id="filter-clear"
+                        class="w3-bar-item w3-button w3-round w3-mobile w3-hover-aqua w3-border w3-border-aqua w3-margin-right">Clear
+                        Filters</button>
+                    <button id="pdfDownload"
+                        class="w3-bar-item w3-button w3-round w3-mobile w3-hover-red w3-border w3-border-red w3-margin-right">Generate
+                        PDF</button>
+                    <button id="xlsxDownload"
+                        class="w3-bar-item w3-button w3-round w3-mobile w3-hover-green w3-border w3-border-green">Generate
+                        Excel</button>
+                </div>
+                <div class="w3-row w3-padding-16 ">
+                    <div id="vaccinTable" class="w3-col w3-round-large w3-card-4"></div>
+                </div>
+
+
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="w3-container w3-padding-16 footer-custom">
+            <p class="w3-right"><span class="copyrightDate"></span> Made by Maxime des Touches. <a
+                    href="https://github.com/elreviae" target="_blank" class="footerlink">Github</a></p>
+        </footer>
 
         <!-- End page content -->
-        </div>
+    </div>
 
-        <script src="js/jquery-3.5.1.min.js"></script>
-        <script src="js/moment-with-locales.min.js"></script>
-        <script src="js/tabulator.min.js"></script>
-        <script src="js/jspdf.min.js"></script>
-        <script src="js/autotable.js"></script>
-        <script src="js/xlsx.full.min.js"></script>
-        <script src="js/vaccinationtabulator.min.js"></script>
-        <script src="js/sidebar.js"></script>
-        <script>
+    <script src="js/jquery-3.6.0.min.js"></script>
+    <script src="js/moment-with-locales.min.js"></script>
+    <script src="js/tabulator/tabulator4-9.min.js"></script>
+    <script src="js/tabulator/jspdf.min.js"></script>
+    <script src="js/tabulator/autotable.js"></script>
+    <script src="js/tabulator/xlsx.full.min.js"></script>
+    <script src="js/min/worldVaccinationTable.min.js"></script>
+    <script src="js/customsite.js"></script>
+    <script>
         var vaccinAPI = 'https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/latest/owid-covid-latest.json';
-        $.getJSON(vaccinAPI, function(vaccindatajson) {
-                let object =  vaccindatajson;
-                let vaccinResultData = Object.keys(object).reduce(function (result, key) {
-                    return result.concat(key, object[key]);
-                }, []);
-                // console.log(vaccinResultData);
-                let noData = 'Not Available ...';
-                let latestUpdate = moment(vaccinResultData[1].last_updated_date).format('MMMM Do YYYY');
-                let total_vaccinations = vaccindatajson.OWID_WRL.total_vaccinations;
-                let population = vaccindatajson.OWID_WRL.population;
-                if(latestUpdate==null){ $('#latestUpdate').html(noData)}else{ $('#latestUpdate').html(latestUpdate)}
-                if(total_vaccinations==null){ $('#totalVaccinations').html(noData)}else{ $('#totalVaccinations').html(total_vaccinations.toLocaleString()) }
-                if(population==null){ $('#worldPopulation').html(noData)}else{ $('#worldPopulation').html(population.toLocaleString()) }
+        $.getJSON(vaccinAPI, function (vaccindatajson) {
+            let object = vaccindatajson;
+            let vaccinResultData = Object.keys(object).reduce(function (result, key) {
+                return result.concat(key, object[key]);
+            }, []);
+            let noData = 'Not Available ...';
+            let latestUpdate = moment(vaccinResultData[1].last_updated_date).format('MMMM Do YYYY');
+            let total_vaccinations = vaccindatajson.OWID_WRL.total_vaccinations;
+            let population = vaccindatajson.OWID_WRL.population;
+            if (latestUpdate == null) { $('#latestUpdate').html(noData) } else { $('#latestUpdate').html(latestUpdate) }
+            if (total_vaccinations == null) { $('#totalVaccinations').html(noData) } else { $('#totalVaccinations').html(total_vaccinations.toLocaleString()) }
+            if (population == null) { $('#worldPopulation').html(noData) } else { $('#worldPopulation').html(population.toLocaleString()) }
         });
-        </script>
-        <script>
-            // Recherche Pays
-            $.getJSON(vaccinAPI, function(json){
-                $('#filterField').empty();
-                $('#filterField').append($('<option disabled selected>').text("Select Country or Other"));
-                $.each(json, function(i, obj){
-                    if (obj.location == 'World' || obj.location == 'International'){
-                        delete obj.location['World'];
-                        delete obj.location['International'];
-                    }else{
-                        $('#filterField').append($('<option>').text(obj.location).attr('value', obj.location));
-                    };
-                });
+    </script>
+    <script>
+        // Recherche Pays
+        $.getJSON(vaccinAPI, function (json) {
+            $('#filterField').empty();
+            $('#filterField').append($('<option disabled selected>').text("Select Country or Other"));
+            $.each(json, function (i, obj) {
+                if (obj.location == 'World' || obj.location == 'International') {
+                    delete obj.location['World'];
+                    delete obj.location['International'];
+                } else {
+                    $('#filterField').append($('<option>').text(obj.location).attr('value', obj.location));
+                };
             });
+        });
 
-            $("#filterField").change(function(){
-                vaccinTable.setFilter("location", "like", $(this).val());
-            });
-            // Clear filters on click
-            $("#filter-clear").click(function(){
-                $("#filterField").val("");
-                vaccinTable.clearFilter();
-                vaccinTable.clearHeaderFilter();
-            });
-            window.addEventListener('resize', function(){
-               vaccinTable.redraw(true);
-            });
+        $("#filterField").change(function () {
+            vaccinTable.setFilter("location", "like", $(this).val());
+        });
+        // Clear filters on click
+        $("#filter-clear").click(function () {
+            $("#filterField").val("");
+            vaccinTable.clearFilter();
+            vaccinTable.clearHeaderFilter();
+        });
+        window.addEventListener('resize', function () {
+            vaccinTable.redraw(true);
+        });
 
-            $("#pdfDownload").click(function(){
-                vaccinTable.downloadToTab("pdf", "Covid-Vaccinations-Data.pdf", {
-                orientation:"landscape",
-                autoTable:function(doc){
+        window.jsPDF = window.jspdf.jsPDF
+        $("#pdfDownload").click(function () {
+            vaccinTable.downloadToTab("pdf", "Covid-Vaccinations-Data.pdf", {
+                orientation: "landscape",
+                autoTable: function (doc) {
                     doc.text("CovidData Vaccinations Report", 5, 15);
                     //return the autoTable config options object
                     return {
@@ -159,7 +199,7 @@
                         pageBreak: 'auto',
                         rowPageBreak: 'auto',
                         styles: {
-                            cellPadding: 0.5, 
+                            cellPadding: 0.5,
                             fontSize: 8,
                         },
                         headStyles: {
@@ -175,16 +215,17 @@
                         alternateRowStyles: {
                             fillColor: [68, 68, 68],
                         },
-                        margin: {top: 20, bottom:20, left:10, right:10},
+                        margin: { top: 20, bottom: 20, left: 10, right: 10 },
                     };
                 },
             });
         });
 
-        $("#xlsxDownload").click(function(){
-            vaccinTable.download("xlsx", "Covid-Vaccinations-Data.xlsx", {sheetName:"Covid-19 Vaccinations Data"});
+        $("#xlsxDownload").click(function () {
+            vaccinTable.download("xlsx", "Covid-Vaccinations-Data.xlsx", { sheetName: "Covid-19 Vaccinations Data" });
         });
-        </script>
+    </script>
 
-    </body>
+</body>
+
 </html>
