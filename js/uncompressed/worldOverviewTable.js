@@ -26,7 +26,7 @@ var cellFormatNewCases = function (cell, formatterParams) {
     } else if (value >= 500 && value <= 1499) {
         cell.getElement().classList.add("w3-metro-orange");
         return '+' + value.toLocaleString();
-    } else if (value >= 1500 && value <= 500000) {
+    } else if (value >= 1500 && value <= 800000) {
         cell.getElement().classList.add("w3-black", "w3-text-orange");
         return '+' + value.toLocaleString();
     } else if (value == null) {
